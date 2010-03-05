@@ -1,0 +1,33 @@
+<p>
+  <b>Title:</b>
+  <%=h @tandem_page.title %>
+</p>
+
+<p>
+  <b>Token:</b>
+  <%=h @tandem_page.token %>
+</p>
+
+<p>
+  <b>Layout:</b>
+  <%=h @tandem_page.layout %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%=h @tandem_page.parent_id %>
+</p>
+
+<p>
+  <b>Keywords:</b>
+  <%=h @tandem_page.keywords %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @tandem_page.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_tandem_page_path(@tandem_page) %> |
+<%= link_to 'Back', tandem_pages_path %>

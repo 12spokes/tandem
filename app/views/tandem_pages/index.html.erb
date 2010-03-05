@@ -1,0 +1,30 @@
+<h1>Listing tandem_pages</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Token</th>
+    <th>Layout</th>
+    <th>Parent</th>
+    <th>Keywords</th>
+    <th>Description</th>
+  </tr>
+
+<% @tandem_pages.each do |tandem_page| %>
+  <tr>
+    <td><%=h tandem_page.title %></td>
+    <td><%=h tandem_page.token %></td>
+    <td><%=h tandem_page.layout %></td>
+    <td><%=h tandem_page.parent_id %></td>
+    <td><%=h tandem_page.keywords %></td>
+    <td><%=h tandem_page.description %></td>
+    <td><%= link_to 'Show', tandem_page %></td>
+    <td><%= link_to 'Edit', edit_tandem_page_path(tandem_page) %></td>
+    <td><%= link_to 'Destroy', tandem_page, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New tandem_page', new_tandem_page_path %>
