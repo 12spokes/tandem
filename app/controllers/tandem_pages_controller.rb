@@ -13,7 +13,7 @@ class TandemPagesController < ApplicationController
   # GET /tandem_pages/1
   # GET /tandem_pages/1.xml
   def show
-    @tandem_page = TandemPage.find(params[:id])
+    @tandem_page = params[:token] ? TandemPage.find_by_token(params[:token]) : TandemPage.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

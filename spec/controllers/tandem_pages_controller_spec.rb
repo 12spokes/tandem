@@ -15,9 +15,15 @@ describe TandemPagesController do
   end
 
   describe "GET show" do
-    it "assigns the requested tandem_page as @tandem_page" do
-      TandemPage.stub(:find).with("37").and_return(mock_tandem_page)
+    it "assigns the requested tandem_page as @tandem_page if passed an id" do
+      TandemPage.should_receive(:find).with("37").and_return(mock_tandem_page)
       get :show, :id => "37"
+      assigns[:tandem_page].should equal(mock_tandem_page)
+    end
+    
+    it "assigns the requested tandem_page as @tandem_page if passed a token" do
+      TandemPage.should_receive(:find_by_token).with("super_tandem_page").and_return(mock_tandem_page)
+      get :show, :token => "super_tandem_page"
       assigns[:tandem_page].should equal(mock_tandem_page)
     end
   end
