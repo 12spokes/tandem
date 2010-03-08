@@ -1,0 +1,27 @@
+<h1>New tandem_content</h1>
+
+<% form_for(@tandem_content) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :tandem_page_id %><br />
+    <%= f.text_field :tandem_page_id %>
+  </p>
+  <p>
+    <%= f.label :resource_type %><br />
+    <%= f.text_field :resource_type %>
+  </p>
+  <p>
+    <%= f.label :resource_id %><br />
+    <%= f.text_field :resource_id %>
+  </p>
+  <p>
+    <%= f.label :token %><br />
+    <%= f.text_field :token %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', tandem_contents_path %>
