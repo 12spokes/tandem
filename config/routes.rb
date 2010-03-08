@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :tandem_pages
   map.resources :tandem_contents
+  map.resources :tandem_texts
 end

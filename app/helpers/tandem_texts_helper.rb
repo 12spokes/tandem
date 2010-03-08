@@ -1,0 +1,2 @@
+module TandemTextsHelper
+end
