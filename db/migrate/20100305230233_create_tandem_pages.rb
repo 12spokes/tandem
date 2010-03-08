@@ -4,10 +4,10 @@ class CreateTandemPages < ActiveRecord::Migration
       t.string :title
       t.string :token
       t.string :layout
+      t.string :template
       t.integer :parent_id
       t.string :keywords
       t.string :description
-
       t.timestamps
     end
   end
