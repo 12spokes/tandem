@@ -13,4 +13,12 @@ describe TandemContent do
   it "should create a new instance given valid attributes" do
     TandemContent.create!(@valid_attributes)
   end
+  
+  describe 'associations' do
+    it 'should belong_to a resource' do
+      TandemContent.reflect_on_association(:resource).should_not be_nil
+      TandemContent.reflect_on_association(:resource).macro.should eql(:belongs_to)
+      TandemContent.reflect_on_association(:resource).options.should include(:polymorphic => true)
+    end
+  end
 end
