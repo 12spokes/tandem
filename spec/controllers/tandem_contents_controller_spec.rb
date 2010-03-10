@@ -80,7 +80,7 @@ describe TandemContentsController do
 
     describe "with valid params" do
       it "assigns a newly created tandem_content as @tandem_content" do
-        TandemContent.stub(:new).with({'these' => 'params'}).and_return(mock_tandem_content(:save => true))
+        TandemContent.stub(:new).with(hash_including('these' => 'params')).and_return(mock_tandem_content(:save => true))
         post :create, :tandem_content => {:these => 'params'}, :tandem_page_id => @tandem_page.id.to_s
         assigns[:tandem_content].should equal(mock_tandem_content)
       end
@@ -97,11 +97,16 @@ describe TandemContentsController do
         post :create, :tandem_content => {}, :tandem_page_id => @tandem_page.id.to_s
         assigns[:tandem_page].should == @tandem_page
       end
+      
+      it 'should associate the new TandemContent with the TandemPage' do
+        TandemContent.should_receive(:new).with(hash_including(:tandem_page_id => @tandem_page.id)).and_return(mock_tandem_content(:save => true))
+        post :create, :tandem_content => {}, :tandem_page_id => @tandem_page.id.to_s
+      end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved tandem_content as @tandem_content" do
-        TandemContent.stub(:new).with({'these' => 'params'}).and_return(mock_tandem_content(:save => false))
+        TandemContent.stub(:new).with(hash_including('these' => 'params')).and_return(mock_tandem_content(:save => false))
         post :create, :tandem_content => {:these => 'params'}, :tandem_page_id => @tandem_page.id.to_s
         assigns[:tandem_content].should equal(mock_tandem_content)
       end

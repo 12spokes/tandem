@@ -42,7 +42,7 @@ class TandemContentsController < ApplicationController
   # POST /tandem_contents
   # POST /tandem_contents.xml
   def create
-    @tandem_content = TandemContent.new(params[:tandem_content])
+    @tandem_content = TandemContent.new(params[:tandem_content].merge(:tandem_page_id => @tandem_page.id))
 
     respond_to do |format|
       if @tandem_content.save
