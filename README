@@ -1,7 +1,7 @@
 Tandem
 ======
 
-Introduction goes here.
+A simple Rails plugin that brings basic CMS functionality to any app.  Just drop it in and go.
 
 
 Example
@@ -9,5 +9,16 @@ Example
 
 Example goes here.
 
+
+Notes
+=======
+If you get a "A copy of AuthenticatedSystem has been removed from the module tree but is still active!" error
+This is probably because you're using Restful_Authentication and there's some dependency problems.
+
+Adding the following line to the app's environment.rb fixes it for now.
+
+config.load_once_paths += %W( #{RAILS_ROOT}/lib )
+
+We hope to address this in the future.
 
 Copyright (c) 2010 12 Spokes, released under the MIT license
