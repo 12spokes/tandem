@@ -12,7 +12,11 @@ describe "/tandem_pages/show.html.erb" do
       :description => "value for description"
     )
     
-    @tandem_page.stub!(:tandem_contents).and_return([stub_model(TandemContent), stub_model(TandemContent)])
+    @tandem_text1 = stub_model(TandemText, :content => 'Gurgles.')
+    @tandem_text2 = stub_model(TandemText, :content => 'Giggles.')
+    
+    @tandem_page.stub!(:tandem_contents).and_return([stub_model(TandemContent, :resource_type => 'TandemText', :resource => @tandem_text1), 
+                                                      stub_model(TandemContent, :resource_type => 'TandemText', :resource => @tandem_text2)])
   end
 
   describe 'someone who cannot edit tandem content' do
