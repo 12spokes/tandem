@@ -1,4 +1,6 @@
 class TandemContentsController < ApplicationController
+  before_filter :load_tandem_page
+  
   # GET /tandem_contents
   # GET /tandem_contents.xml
   def index
@@ -45,7 +47,7 @@ class TandemContentsController < ApplicationController
     respond_to do |format|
       if @tandem_content.save
         flash[:notice] = 'TandemContent was successfully created.'
-        format.html { redirect_to(@tandem_content) }
+        format.html { redirect_to([@tandem_page, @tandem_content]) }
         format.xml  { render :xml => @tandem_content, :status => :created, :location => @tandem_content }
       else
         format.html { render :action => "new" }
@@ -62,7 +64,7 @@ class TandemContentsController < ApplicationController
     respond_to do |format|
       if @tandem_content.update_attributes(params[:tandem_content])
         flash[:notice] = 'TandemContent was successfully updated.'
-        format.html { redirect_to(@tandem_content) }
+        format.html { redirect_to([@tandem_page, @tandem_content]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,8 +80,13 @@ class TandemContentsController < ApplicationController
     @tandem_content.destroy
 
     respond_to do |format|
-      format.html { redirect_to(tandem_contents_url) }
+      format.html { redirect_to(tandem_page_tandem_contents_url(@tandem_page)) }
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def load_tandem_page
+      @tandem_page = TandemPage.find(params[:tandem_page_id])
+    end
 end

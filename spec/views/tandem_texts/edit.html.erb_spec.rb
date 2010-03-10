@@ -1,4 +1,4 @@
-require 'spec_helper'
+require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe "/tandem_texts/edit.html.erb" do
   include TandemTextsHelper

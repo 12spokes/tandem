@@ -1,4 +1,4 @@
-require 'spec_helper'
+require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe "/tandem_contents/show.html.erb" do
   include TandemContentsHelper
@@ -9,6 +9,8 @@ describe "/tandem_contents/show.html.erb" do
       :resource_id => 1,
       :token => "value for token"
     )
+    
+    assigns[:tandem_page] = @tandem_page = stub_model(TandemPage)
   end
 
   it "renders attributes in <p>" do

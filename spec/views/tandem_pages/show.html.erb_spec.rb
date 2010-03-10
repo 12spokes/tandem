@@ -1,4 +1,4 @@
-require 'spec_helper'
+require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe "/tandem_pages/show.html.erb" do
   include TandemPagesHelper
@@ -11,15 +11,30 @@ describe "/tandem_pages/show.html.erb" do
       :keywords => "value for keywords",
       :description => "value for description"
     )
+    
+    @tandem_page.stub!(:tandem_contents).and_return([stub_model(TandemContent), stub_model(TandemContent)])
   end
 
-  it "renders attributes in <p>" do
-    render
-    response.should have_text(/value\ for\ title/)
-    response.should have_text(/value\ for\ token/)
-    response.should have_text(/value\ for\ layout/)
-    response.should have_text(/1/)
-    response.should have_text(/value\ for\ keywords/)
-    response.should have_text(/value\ for\ description/)
+  describe 'someone who cannot edit tandem content' do
+    it_should_behave_like "someone who cannot edit tandem content"
+    
+    it "renders every tandem_content" do
+      render
+      response.should have_tag('div.tandem_content', 2)
+    end
+    
+    it 'should not show a link to add content' do
+      render
+      response.should_not have_tag('a', 'Add content')
+    end
+  end
+  
+  describe 'someone who can edit tandem content' do
+    it_should_behave_like "someone who can edit tandem content"
+    
+    it 'should show a link to add content' do
+      render
+      response.should have_tag('a', 'Add content')
+    end
   end
 end

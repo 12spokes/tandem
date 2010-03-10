@@ -1,6 +1,6 @@
 <h1>Editing tandem_content</h1>
 
-<% form_for(@tandem_content) do |f| %>
+<% form_for([@tandem_page, @tandem_content]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -24,5 +24,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @tandem_content %> |
-<%= link_to 'Back', tandem_contents_path %>
+<%= link_to 'Show', [@tandem_page, @tandem_content] %> |
+<%= link_to 'Back', tandem_page_tandem_contents_path(@tandem_page) %>

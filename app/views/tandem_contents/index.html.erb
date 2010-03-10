@@ -14,13 +14,13 @@
     <td><%=h tandem_content.resource_type %></td>
     <td><%=h tandem_content.resource_id %></td>
     <td><%=h tandem_content.token %></td>
-    <td><%= link_to 'Show', tandem_content %></td>
-    <td><%= link_to 'Edit', edit_tandem_content_path(tandem_content) %></td>
-    <td><%= link_to 'Destroy', tandem_content, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', [@tandem_page, tandem_content] %></td>
+    <td><%= link_to 'Edit', edit_tandem_page_tandem_content_path(@tandem_page, tandem_content) %></td>
+    <td><%= link_to 'Destroy', [@tandem_page, tandem_content], :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New tandem_content', new_tandem_content_path %>
+<%= link_to 'New tandem_content', new_tandem_page_tandem_content_path(@tandem_page) %>
