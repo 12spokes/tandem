@@ -5,5 +5,5 @@
 <% end -%>
 
 <% if can_edit_tandem_content? -%>
-  <p><%= link_to 'Add content', '#' %></p>
+  <p><%= link_to 'Add content', new_tandem_page_tandem_content_path(@tandem_page) %></p>
 <% end -%>
