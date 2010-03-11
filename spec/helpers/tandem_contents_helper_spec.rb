@@ -3,14 +3,14 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe TandemContentsHelper do
 
   describe 'display_tandem_content' do
+    before do
+      tandem_page = stub_model(TandemPage)
+      tandem_text = stub_model(TandemText, :content => 'hello cow.')
+      @tandem_content = stub_model(TandemContent, :tandem_page => tandem_page, :resource_type => 'TandemText', :resource => tandem_text)
+    end
+    
     describe 'someone who can edit tandem content' do
       it_should_behave_like "someone who can edit tandem content"
-      
-      before do
-        tandem_page = stub_model(TandemPage)
-        tandem_text = stub_model(TandemText, :content => 'hello cow.')
-        @tandem_content = stub_model(TandemContent, :tandem_page => tandem_page, :resource_type => 'TandemText', :resource => tandem_text)
-      end
       
       it 'should include edit and delete links' do
         content = helper.display_tandem_content(@tandem_content)
@@ -32,5 +32,12 @@ describe TandemContentsHelper do
       end
     end
 
+    describe 'someone who cannot edit tandem content' do
+      it_should_behave_like "someone who cannot edit tandem content"
+      
+      it 'should now show the edit and delete links' do
+        helper.display_tandem_content(@tandem_content).should_not have_tag('.tandem_manage_links')
+      end
+    end
   end
 end
