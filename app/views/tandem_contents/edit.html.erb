@@ -2,25 +2,21 @@
 
 <% form_for([@tandem_page, @tandem_content]) do |f| %>
   <%= f.error_messages %>
-
+  
+  <% f.fields_for :resource do |resource_form| %>
+    <p>
+      <%= resource_form.label :content %><br />
+      <%= resource_form.text_area :content %>
+    </p>
+  <% end -%>
+  
   <p>
-    <%= f.label :tandem_page_id %><br />
-    <%= f.text_field :tandem_page_id %>
-  </p>
-  <p>
-    <%= f.label :resource_type %><br />
-    <%= f.text_field :resource_type %>
-  </p>
-  <p>
-    <%= f.label :resource_id %><br />
-    <%= f.text_field :resource_id %>
-  </p>
-  <p>
-    <%= f.label :token %><br />
+    <%= f.label :token, 'Token (optional)' %><br />
     <%= f.text_field :token %>
   </p>
+  
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'Save' %>
   </p>
 <% end %>
 
