@@ -38,6 +38,10 @@ describe TandemContentsHelper do
       it 'should now show the edit and delete links' do
         helper.display_tandem_content(@tandem_content).should_not have_tag('.tandem_manage_links')
       end
+      
+      it 'should show the text content' do
+        helper.display_tandem_content(@tandem_content).should have_text /hello cow\./
+      end
     end
   end
 end

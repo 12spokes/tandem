@@ -3,6 +3,7 @@ module TandemContentsHelper
     content_tag(:div, :class => 'tandem_content') do
       content = send("display_#{tandem_content.resource_type.underscore}", tandem_content.resource)
       content += tandem_manage_links(tandem_content) if can_edit_tandem_content?
+      content
     end
   end
   

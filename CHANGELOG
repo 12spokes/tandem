@@ -1,3 +1,6 @@
+0.1.2
+ * Bug: Content wouldn't be shown at all to people who didn't have permission to edit tandem content.  Clearly not desired.
+
 0.1.1
  * Make CRUD of pages/content/texts respect the can_edit_tandem_content? function.
 
