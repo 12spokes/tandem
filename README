@@ -1,13 +1,48 @@
-Tandem
+Tandem - version: 0.1
 ======
 
 A simple Rails plugin that brings basic CMS functionality to any app.  Just drop it in and go.
 
 
-Example
+Installation
 =======
 
-Example goes here.
+  script/plugin install git@github.com:12spokes/tandem.git
+
+For now, you need to copy all of the migrations in /vendor/plugins/tandem/db/migrate up to the route of your rails app.
+
+Add the following line to your app's routes.rb.  Most often, you'll want it at the bottom.
+
+  map.connect ':token', :controller => 'tandem_pages', :action => 'show'
+
+Define who can edit content in your application_controller.rb.  By default, anyone can add/edit/destroy pages and content.
+
+  def can_edit_tandem_content?
+    logged_in? && @current_user.admin?
+  end
+
+
+Usage
+=======
+
+Go to /tandem_pages to manage your pages.
+
+Tandem supports finding pages by token, so if you give your page a token of jumping_jacks, the page can be found at /jumping_jacks.
+
+There isn't a backend for managing content.  Well, there is, but it isn't the intended method for managing content and might go away.
+
+You manage content by going to the page.  If you are able to edit it, you'll see Edit and Delete links as well as a link to add content.
+
+
+Roadmap
+=======
+ * support custom page titles
+ * custom view templates
+ * meta keywords and descriptions
+ * icons for edit and delete (and style them so they don't break the layout)
+ * in-place editing
+ * TandemImage library
+ * make it easy to hook in custom TandemContent resource types.
 
 
 Notes
@@ -17,7 +52,7 @@ This is probably because you're using Restful_Authentication and there's some de
 
 Adding the following line to the app's environment.rb fixes it for now.
 
-config.load_once_paths += %W( #{RAILS_ROOT}/lib )
+  config.load_once_paths += %W( #{RAILS_ROOT}/lib )
 
 We hope to address this in the future.
 
