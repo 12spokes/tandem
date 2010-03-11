@@ -13,6 +13,8 @@ describe "someone who can edit tandem content", :shared => true do
     if defined?(template)
       template.stub!(:can_edit_tandem_content?).and_return(true)
       template.controller.stub!(:can_edit_tandem_content?).and_return(true)
+    elsif defined?(helper)
+      helper.stub!(:can_edit_tandem_content?).and_return(true)
     elsif defined?(controller)
       controller.stub!(:can_edit_tandem_content?).and_return(true)
     end
@@ -24,6 +26,8 @@ describe "someone who cannot edit tandem content", :shared => true do
     if defined?(template)
       template.stub!(:can_edit_tandem_content?).and_return(false)
       template.controller.stub!(:can_edit_tandem_content?).and_return(false)
+    elsif defined?(helper)
+      helper.stub!(:can_edit_tandem_content?).and_return(false)
     elsif defined?(controller)
       controller.stub!(:can_edit_tandem_content?).and_return(false)
     end

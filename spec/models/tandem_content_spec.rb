@@ -20,5 +20,10 @@ describe TandemContent do
       TandemContent.reflect_on_association(:resource).macro.should eql(:belongs_to)
       TandemContent.reflect_on_association(:resource).options.should include(:polymorphic => true)
     end
+    
+    it 'should belong to a tandem_page' do
+      TandemContent.reflect_on_association(:tandem_page).should_not be_nil
+      TandemContent.reflect_on_association(:tandem_page).macro.should eql(:belongs_to)
+    end
   end
 end
