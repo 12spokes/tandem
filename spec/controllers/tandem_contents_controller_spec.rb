@@ -85,10 +85,10 @@ describe TandemContentsController do
         assigns[:tandem_content].should equal(mock_tandem_content)
       end
 
-      it "redirects to the created tandem_content" do
+      it "redirects back to the tandem page" do
         TandemContent.stub(:new).and_return(mock_tandem_content(:save => true))
         post :create, :tandem_content => {}, :tandem_page_id => @tandem_page.id.to_s
-        response.should redirect_to(tandem_page_tandem_content_url(@tandem_page.id, mock_tandem_content))
+        response.should redirect_to(tandem_page_url(@tandem_page))
       end
       
       it 'loads the tandem_page' do
@@ -135,10 +135,10 @@ describe TandemContentsController do
         assigns[:tandem_content].should equal(mock_tandem_content)
       end
 
-      it "redirects to the tandem_content" do
+      it "redirects to the tandem page" do
         TandemContent.stub(:find).and_return(mock_tandem_content(:update_attributes => true))
         put :update, :id => "1", :tandem_page_id => @tandem_page.id.to_s
-        response.should redirect_to(tandem_page_tandem_content_url(@tandem_page.id, mock_tandem_content))
+        response.should redirect_to(tandem_page_url(@tandem_page))
       end
       
       it 'loads the tandem_page' do
@@ -178,10 +178,10 @@ describe TandemContentsController do
       delete :destroy, :id => "37", :tandem_page_id => @tandem_page.id.to_s
     end
 
-    it "redirects to the tandem_contents list" do
+    it "redirects to the tandem page" do
       TandemContent.stub(:find).and_return(mock_tandem_content(:destroy => true))
       delete :destroy, :id => "1", :tandem_page_id => @tandem_page.id.to_s
-      response.should redirect_to(tandem_page_tandem_contents_url(@tandem_page.id))
+      response.should redirect_to(tandem_page_url(@tandem_page))
     end
     
     it 'loads the tandem_page' do

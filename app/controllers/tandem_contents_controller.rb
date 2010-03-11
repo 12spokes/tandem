@@ -47,7 +47,7 @@ class TandemContentsController < ApplicationController
     respond_to do |format|
       if @tandem_content.save
         flash[:notice] = 'TandemContent was successfully created.'
-        format.html { redirect_to([@tandem_page, @tandem_content]) }
+        format.html { redirect_to(@tandem_page) }
         format.xml  { render :xml => @tandem_content, :status => :created, :location => @tandem_content }
       else
         format.html { render :action => "new" }
@@ -64,7 +64,7 @@ class TandemContentsController < ApplicationController
     respond_to do |format|
       if @tandem_content.update_attributes(params[:tandem_content])
         flash[:notice] = 'TandemContent was successfully updated.'
-        format.html { redirect_to([@tandem_page, @tandem_content]) }
+        format.html { redirect_to(@tandem_page) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,7 +80,7 @@ class TandemContentsController < ApplicationController
     @tandem_content.destroy
 
     respond_to do |format|
-      format.html { redirect_to(tandem_page_tandem_contents_url(@tandem_page)) }
+      format.html { redirect_to(@tandem_page) }
       format.xml  { head :ok }
     end
   end

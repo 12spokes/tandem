@@ -1,4 +1,4 @@
-<h1>Listing tandem_pages</h1>
+<h1>Listing tandem pages</h1>
 
 <table>
   <tr>
@@ -6,8 +6,7 @@
     <th>Token</th>
     <th>Layout</th>
     <th>Parent</th>
-    <th>Keywords</th>
-    <th>Description</th>
+    <th>Actions</th>
   </tr>
 
 <% @tandem_pages.each do |tandem_page| %>
@@ -16,11 +15,11 @@
     <td><%=h tandem_page.token %></td>
     <td><%=h tandem_page.layout %></td>
     <td><%=h tandem_page.parent_id %></td>
-    <td><%=h tandem_page.keywords %></td>
-    <td><%=h tandem_page.description %></td>
-    <td><%= link_to 'Show', tandem_page %></td>
-    <td><%= link_to 'Edit', edit_tandem_page_path(tandem_page) %></td>
-    <td><%= link_to 'Destroy', tandem_page, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <%= link_to 'Show', tandem_page %>
+      <%= link_to 'Edit', edit_tandem_page_path(tandem_page) %>
+      <%= link_to 'Destroy', tandem_page, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

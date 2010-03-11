@@ -30,7 +30,5 @@ describe "/tandem_pages/index.html.erb" do
     response.should have_tag("tr>td", "value for token".to_s, 2)
     response.should have_tag("tr>td", "value for layout".to_s, 2)
     response.should have_tag("tr>td", 1.to_s, 2)
-    response.should have_tag("tr>td", "value for keywords".to_s, 2)
-    response.should have_tag("tr>td", "value for description".to_s, 2)
   end
 end
