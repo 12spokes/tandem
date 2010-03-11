@@ -1,4 +1,5 @@
 class TandemContentsController < ApplicationController
+  before_filter :check_tandem_access
   before_filter :load_tandem_page
   
   # GET /tandem_contents

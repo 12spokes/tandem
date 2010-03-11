@@ -33,3 +33,14 @@ describe "someone who cannot edit tandem content", :shared => true do
     end
   end
 end
+
+def bar_actions(*actions)
+  actions.each do |method, action, options|
+    describe "#{method.to_s.upcase} #{action}" do
+      it 'should redirect to root path' do
+        send(method, action, options.is_a?(String) ? eval(options) : options)
+        response.should redirect_to(root_path)
+      end
+    end
+  end
+end

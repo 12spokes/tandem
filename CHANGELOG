@@ -1,0 +1,5 @@
+0.1.1
+ * Make CRUD of pages/content/texts respect the can_edit_tandem_content? function.
+
+0.1
+ * Basic setup for basic CMS functionality of pages and text.

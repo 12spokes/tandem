@@ -1,4 +1,6 @@
 class TandemTextsController < ApplicationController
+  before_filter :check_tandem_access
+  
   # GET /tandem_texts
   # GET /tandem_texts.xml
   def index

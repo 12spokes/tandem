@@ -1,4 +1,6 @@
 class TandemPagesController < ApplicationController
+  before_filter :check_tandem_access, :except => :show
+  
   # GET /tandem_pages
   # GET /tandem_pages.xml
   def index
