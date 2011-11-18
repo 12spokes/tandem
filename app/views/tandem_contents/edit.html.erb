@@ -1,6 +1,6 @@
 <h1>Editing tandem_content</h1>
 
-<% form_for([@tandem_page, @tandem_content]) do |f| %>
+<%= form_for([@tandem_page, @tandem_content]) do |f| %>
   <%= f.error_messages %>
   
   <% f.fields_for :resource do |resource_form| %>
