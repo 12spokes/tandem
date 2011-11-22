@@ -1,0 +1,29 @@
+h1 Listing contents
+
+table
+  tr
+    th Page
+    th Type
+    th Token
+    th Tag
+    th Content
+    th Bcontent
+    th
+    th
+    th
+
+  - @contents.each do |content|
+    tr
+      td= content.page_id
+      td= content.type
+      td= content.token
+      td= content.tag
+      td= content.content
+      td= content.bcontent
+      td= link_to 'Show', content
+      td= link_to 'Edit', edit_content_path(content)
+      td= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Content', new_content_path

@@ -1,46 +1,39 @@
-begin
-  require File.dirname(__FILE__) + '/../../../../spec/spec_helper'
-rescue LoadError
-  puts "You need to install rspec in your base app"
-  exit
-end
+# This file is copied to spec/ when you run 'rails generate rspec:install'
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path("../dummy/config/environment", __FILE__)
+require 'rspec/rails'
+require 'rspec/autorun'
 
-plugin_spec_dir = File.dirname(__FILE__)
-ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
+ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
 
-describe "someone who can edit tandem content", :shared => true do
-  before do
-    if defined?(template)
-      template.stub!(:can_edit_tandem_content?).and_return(true)
-      template.controller.stub!(:can_edit_tandem_content?).and_return(true)
-    elsif defined?(helper)
-      helper.stub!(:can_edit_tandem_content?).and_return(true)
-    elsif defined?(controller)
-      controller.stub!(:can_edit_tandem_content?).and_return(true)
-    end
-  end
-end
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir[File.join(ENGINE_RAILS_ROOT, "spec/support/**/*.rb")].each {|f| require f }
 
-describe "someone who cannot edit tandem content", :shared => true do
-  before do
-    if defined?(template)
-      template.stub!(:can_edit_tandem_content?).and_return(false)
-      template.controller.stub!(:can_edit_tandem_content?).and_return(false)
-    elsif defined?(helper)
-      helper.stub!(:can_edit_tandem_content?).and_return(false)
-    elsif defined?(controller)
-      controller.stub!(:can_edit_tandem_content?).and_return(false)
-    end
-  end
-end
+RSpec.configure do |config|
+  # == Mock Framework
+  #
+  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
+  #
+  # config.mock_with :mocha
+  # config.mock_with :flexmock
+  # config.mock_with :rr
+  config.mock_with :rspec
 
-def bar_actions(*actions)
-  actions.each do |method, action, options|
-    describe "#{method.to_s.upcase} #{action}" do
-      it 'should redirect to root path' do
-        send(method, action, options.is_a?(String) ? eval(options) : options)
-        response.should redirect_to(root_path)
-      end
-    end
-  end
+  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = true
+
+  # If true, the base class of anonymous controllers will be inferred
+  # automatically. This will be the default behavior in future versions of
+  # rspec-rails.
+  config.infer_base_class_for_anonymous_controllers = false
+
+  config.include Capybara, :example_group => { :file_path => /\bspec\/integration\// }
+
+  config.include Forem::Engine.routes.url_helpers
 end

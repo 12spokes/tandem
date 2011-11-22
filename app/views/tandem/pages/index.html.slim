@@ -1,0 +1,31 @@
+h1 Listing pages
+
+table
+  tr
+    th Parent
+    th Title
+    th Token
+    th Layout
+    th Template
+    th Keywords
+    th Description
+    th
+    th
+    th
+
+  - @pages.each do |page|
+    tr
+      td= page.parent_id
+      td= page.title
+      td= page.token
+      td= page.layout
+      td= page.template
+      td= page.keywords
+      td= page.description
+      td= link_to 'Show', page
+      td= link_to 'Edit', edit_page_path(page)
+      td= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Page', new_page_path
