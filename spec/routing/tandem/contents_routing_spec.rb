@@ -1,35 +1,39 @@
-require "spec_helper"
+module Tandem
+  require "spec_helper"
 
-describe ContentsController do
-  describe "routing" do
+  describe ContentsController do
+    before(:each) { @routes = Engine.routes }
 
-    it "routes to #index" do
-      get("/contents").should route_to("contents#index")
+    describe "routing" do
+
+      it "routes to #index" do
+        get("/contents").should route_to("tandem/contents#index")
+      end
+
+      it "routes to #new" do
+        get("/contents/new").should route_to("tandem/contents#new")
+      end
+
+      it "routes to #show" do
+        get("/contents/1").should route_to("tandem/contents#show", :id => "1")
+      end
+
+      it "routes to #edit" do
+        get("/contents/1/edit").should route_to("tandem/contents#edit", :id => "1")
+      end
+
+      it "routes to #create" do
+        post("/contents").should route_to("tandem/contents#create")
+      end
+
+      it "routes to #update" do
+        put("/contents/1").should route_to("tandem/contents#update", :id => "1")
+      end
+
+      it "routes to #destroy" do
+        delete("/contents/1").should route_to("tandem/contents#destroy", :id => "1")
+      end
+
     end
-
-    it "routes to #new" do
-      get("/contents/new").should route_to("contents#new")
-    end
-
-    it "routes to #show" do
-      get("/contents/1").should route_to("contents#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      get("/contents/1/edit").should route_to("contents#edit", :id => "1")
-    end
-
-    it "routes to #create" do
-      post("/contents").should route_to("contents#create")
-    end
-
-    it "routes to #update" do
-      put("/contents/1").should route_to("contents#update", :id => "1")
-    end
-
-    it "routes to #destroy" do
-      delete("/contents/1").should route_to("contents#destroy", :id => "1")
-    end
-
   end
 end

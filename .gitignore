@@ -12,4 +12,5 @@ tmp
 spec/dummy/log
 spec/dummy/db/*.sqlite3
 spec/dummy/tmp
+spec/dummy/config/dev_database.yml
 *.rbc

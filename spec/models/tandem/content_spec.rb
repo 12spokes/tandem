@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Content do
+describe Tandem::Content do
   pending "add some examples to (or delete) #{__FILE__}"
 end

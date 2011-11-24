@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 3.1.3"
-  s.add_dependency "jquery-rails"
   s.add_dependency "pg"
   s.add_dependency "cancan"
   s.add_dependency "slim-rails"
@@ -24,22 +23,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "cucumber-rails"
   s.add_development_dependency 'factory_girl_rails', '>= 1.2.0'
-  s.add_development_dependency "minitest"
+  #s.add_development_dependency "minitest"
   s.add_development_dependency "jasmine"
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'capybara-webkit'
   s.add_development_dependency 'database_cleaner'
-
-  s.add_development_dependency "spork"
-
-  s.add_development_dependency 'guard'
-  s.add_development_dependency 'rb-inotify'
-  s.add_development_dependency 'rb-fsevent'
-  s.add_development_dependency 'rb-fchange'
-
-  s.add_development_dependency 'guard-spork'
-  s.add_development_dependency 'guard-rspec'
-  s.add_development_dependency 'guard-cucumber'
-  s.add_development_dependency 'guard-livereload'
-  s.add_development_dependency 'growl_notify'
+  s.add_development_dependency 'spork'
 end
