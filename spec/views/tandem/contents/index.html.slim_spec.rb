@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "contents/index.html.slim" do
+  describe "tandem/contents/index.html.slim" do
     before(:each) do
       assign(:contents, [
         stub_model(Content,
