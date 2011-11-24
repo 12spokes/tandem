@@ -1,9 +1,0 @@
-<% @tandem_page.tandem_contents.each do |tandem_content| -%>
-  <div class="tandem_content">
-    <%= display_tandem_content(tandem_content) %>
-  </div>
-<% end -%>
-
-<% if can_edit_tandem_content? -%>
-  <p><%= link_to 'Add content', new_tandem_page_tandem_content_path(@tandem_page) %></p>
-<% end -%>
