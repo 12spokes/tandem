@@ -25,13 +25,19 @@ module Tandem
     # This should return the minimal set of attributes required to create a valid
     # Content. As you add validations to Content, be sure to
     # update the return value of this method accordingly.
+    before(:each) do
+      @page = Page.create!
+    end
+
     def valid_attributes
-      {}
+      {
+          :page_id => @page.id
+      }
     end
 
     describe "GET index" do
       it "assigns all contents as @contents" do
-        content = Content.create! valid_attributes
+        content = Content::Text.create! valid_attributes
         get :index
         assigns(:contents).should eq([content])
       end
@@ -39,7 +45,7 @@ module Tandem
 
     describe "GET show" do
       it "assigns the requested content as @content" do
-        content = Content.create! valid_attributes
+        content = Content::Text.create! valid_attributes
         get :show, :id => content.id
         assigns(:content).should eq(content)
       end
@@ -54,7 +60,7 @@ module Tandem
 
     describe "GET edit" do
       it "assigns the requested content as @content" do
-        content = Content.create! valid_attributes
+        content = Content::Text.create! valid_attributes
         get :edit, :id => content.id
         assigns(:content).should eq(content)
       end
@@ -76,21 +82,21 @@ module Tandem
 
         it "redirects to the created content" do
           post :create, :content => valid_attributes
-          response.should redirect_to(Content.last)
+          response.should redirect_to(content_path(Content.last))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved content as @content" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Content.any_instance.stub(:save).and_return(false)
+          Content::Text.any_instance.stub(:save).and_return(false)
           post :create, :content => {}
           assigns(:content).should be_a_new(Content)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Content.any_instance.stub(:save).and_return(false)
+          Content::Text.any_instance.stub(:save).and_return(false)
           post :create, :content => {}
           response.should render_template("new")
         end
@@ -100,41 +106,41 @@ module Tandem
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested content" do
-          content = Content.create! valid_attributes
+          content = Content::Text.create! valid_attributes
           # Assuming there are no other contents in the database, this
           # specifies that the Content created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          Content.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          Content::Text.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
           put :update, :id => content.id, :content => {'these' => 'params'}
         end
 
         it "assigns the requested content as @content" do
-          content = Content.create! valid_attributes
+          content = Content::Text.create! valid_attributes
           put :update, :id => content.id, :content => valid_attributes
           assigns(:content).should eq(content)
         end
 
         it "redirects to the content" do
-          content = Content.create! valid_attributes
+          content = Content::Text.create! valid_attributes
           put :update, :id => content.id, :content => valid_attributes
-          response.should redirect_to(content)
+          response.should redirect_to(content_path(content))
         end
       end
 
       describe "with invalid params" do
         it "assigns the content as @content" do
-          content = Content.create! valid_attributes
+          content = Content::Text.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
-          Content.any_instance.stub(:save).and_return(false)
+          Content::Text.any_instance.stub(:save).and_return(false)
           put :update, :id => content.id, :content => {}
           assigns(:content).should eq(content)
         end
 
         it "re-renders the 'edit' template" do
-          content = Content.create! valid_attributes
+          content = Content::Text.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
-          Content.any_instance.stub(:save).and_return(false)
+          Content::Text.any_instance.stub(:save).and_return(false)
           put :update, :id => content.id, :content => {}
           response.should render_template("edit")
         end
@@ -143,14 +149,14 @@ module Tandem
 
     describe "DELETE destroy" do
       it "destroys the requested content" do
-        content = Content.create! valid_attributes
+        content = Content::Text.create! valid_attributes
         expect {
           delete :destroy, :id => content.id
         }.to change(Content, :count).by(-1)
       end
 
       it "redirects to the contents list" do
-        content = Content.create! valid_attributes
+        content = Content::Text.create! valid_attributes
         delete :destroy, :id => content.id
         response.should redirect_to(contents_path)
       end
