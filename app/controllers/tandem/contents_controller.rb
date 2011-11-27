@@ -1,9 +1,11 @@
 module Tandem
   class ContentsController < ApplicationController
+    before_filter :load_page
+
     # GET /contents
     # GET /contents.json
     def index
-      @contents = Content::Text.all
+      @contents = @page.contents.all
   
       respond_to do |format|
         format.html # index.html.erb
@@ -14,7 +16,7 @@ module Tandem
     # GET /contents/1
     # GET /contents/1.json
     def show
-      @content = Content::Text.find(params[:id])
+      @content = @page.contents.find(params[:id])
   
       respond_to do |format|
         format.html # show.html.erb
@@ -25,7 +27,7 @@ module Tandem
     # GET /contents/new
     # GET /contents/new.json
     def new
-      @content = Content::Text.new
+      @content = @page.contents.new
   
       respond_to do |format|
         format.html # new.html.erb
@@ -35,22 +37,19 @@ module Tandem
   
     # GET /contents/1/edit
     def edit
-      @content = Content::Text.find(params[:id])
+      @content = @page.contents.find(params[:id])
     end
   
     # POST /contents
     # POST /contents.json
     def create
-      puts params[:content].inspect
-      @content = Content::Text.new(params[:content])
+      @content = Content::Text.new(params[:content].merge(:page_id => @page.id))
   
       respond_to do |format|
         if @content.save
-          puts 'here1***'
-          format.html { redirect_to content_url(@content), notice: 'Content was successfully created.' }
+          format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully created.' }
           format.json { render json: @content, status: :created, location: @content }
         else
-          puts 'here2***'
           format.html { render action: "new" }
           format.json { render json: @content.errors, status: :unprocessable_entity }
         end
@@ -60,11 +59,11 @@ module Tandem
     # PUT /contents/1
     # PUT /contents/1.json
     def update
-      @content = Content::Text.find(params[:id])
+      @content = @page.contents.find(params[:id])
   
       respond_to do |format|
         if @content.update_attributes(params[:content])
-          format.html { redirect_to content_url(@content), notice: 'Content was successfully updated.' }
+          format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully updated.' }
           format.json { head :ok }
         else
           format.html { render action: "edit" }
@@ -76,13 +75,20 @@ module Tandem
     # DELETE /contents/1
     # DELETE /contents/1.json
     def destroy
-      @content = Content::Text.find(params[:id])
+      @content = @page.contents.find(params[:id])
       @content.destroy
   
       respond_to do |format|
-        format.html { redirect_to contents_url }
+        format.html { redirect_to page_contents_url }
         format.json { head :ok }
       end
+    end
+
+    private
+
+    def load_page
+      puts params.inspect
+      @page = Page.find(params[:page_id])
     end
   end
 end

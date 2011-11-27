@@ -7,31 +7,31 @@ module Tandem
     describe "routing" do
 
       it "routes to #index" do
-        get("/contents").should route_to("tandem/contents#index")
+        get("/pages/1/contents").should route_to("tandem/contents#index", :page_id => "1")
       end
 
       it "routes to #new" do
-        get("/contents/new").should route_to("tandem/contents#new")
+        get("/pages/1/contents/new").should route_to("tandem/contents#new", :page_id => "1")
       end
 
       it "routes to #show" do
-        get("/contents/1").should route_to("tandem/contents#show", :id => "1")
+        get("/pages/1/contents/1").should route_to("tandem/contents#show", :page_id => "1", :id => "1")
       end
 
       it "routes to #edit" do
-        get("/contents/1/edit").should route_to("tandem/contents#edit", :id => "1")
+        get("/pages/1/contents/1/edit").should route_to("tandem/contents#edit", :page_id => "1", :id => "1")
       end
 
       it "routes to #create" do
-        post("/contents").should route_to("tandem/contents#create")
+        post("/pages/1/contents").should route_to("tandem/contents#create", :page_id => "1")
       end
 
       it "routes to #update" do
-        put("/contents/1").should route_to("tandem/contents#update", :id => "1")
+        put("/pages/1/contents/1").should route_to("tandem/contents#update", :page_id => "1", :id => "1")
       end
 
       it "routes to #destroy" do
-        delete("/contents/1").should route_to("tandem/contents#destroy", :id => "1")
+        delete("/pages/1/contents/1").should route_to("tandem/contents#destroy", :page_id => "1", :id => "1")
       end
 
     end

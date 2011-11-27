@@ -38,7 +38,7 @@ module Tandem
     describe "GET index" do
       it "assigns all contents as @contents" do
         content = Content::Text.create! valid_attributes
-        get :index
+        get :index, :page_id => @page.id
         assigns(:contents).should eq([content])
       end
     end
@@ -46,14 +46,14 @@ module Tandem
     describe "GET show" do
       it "assigns the requested content as @content" do
         content = Content::Text.create! valid_attributes
-        get :show, :id => content.id
+        get :show, :page_id => @page.id, :id => content.id
         assigns(:content).should eq(content)
       end
     end
 
     describe "GET new" do
       it "assigns a new content as @content" do
-        get :new
+        get :new, :page_id => @page.id
         assigns(:content).should be_a_new(Content)
       end
     end
@@ -61,7 +61,7 @@ module Tandem
     describe "GET edit" do
       it "assigns the requested content as @content" do
         content = Content::Text.create! valid_attributes
-        get :edit, :id => content.id
+        get :edit, :page_id => @page.id, :id => content.id
         assigns(:content).should eq(content)
       end
     end
@@ -70,19 +70,19 @@ module Tandem
       describe "with valid params" do
         it "creates a new Content" do
           expect {
-            post :create, :content => valid_attributes
+            post :create, :page_id => @page.id, :content => valid_attributes
           }.to change(Content, :count).by(1)
         end
 
         it "assigns a newly created content as @content" do
-          post :create, :content => valid_attributes
+          post :create, :page_id => @page.id, :content => valid_attributes
           assigns(:content).should be_a(Content)
           assigns(:content).should be_persisted
         end
 
         it "redirects to the created content" do
-          post :create, :content => valid_attributes
-          response.should redirect_to(content_path(Content.last))
+          post :create, :page_id => @page.id, :content => valid_attributes
+          response.should redirect_to(page_content_path(:page_id => @page.id, :id => Content.last.id))
         end
       end
 
@@ -90,14 +90,14 @@ module Tandem
         it "assigns a newly created but unsaved content as @content" do
           # Trigger the behavior that occurs when invalid params are submitted
           Content::Text.any_instance.stub(:save).and_return(false)
-          post :create, :content => {}
+          post :create, :page_id => @page.id, :content => {}
           assigns(:content).should be_a_new(Content)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           Content::Text.any_instance.stub(:save).and_return(false)
-          post :create, :content => {}
+          post :create, :page_id => @page.id, :content => {}
           response.should render_template("new")
         end
       end
@@ -112,19 +112,19 @@ module Tandem
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
           Content::Text.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-          put :update, :id => content.id, :content => {'these' => 'params'}
+          put :update, :page_id => @page.id, :id => content.id, :content => {'these' => 'params'}
         end
 
         it "assigns the requested content as @content" do
           content = Content::Text.create! valid_attributes
-          put :update, :id => content.id, :content => valid_attributes
+          put :update, :page_id => @page.id, :id => content.id, :content => valid_attributes
           assigns(:content).should eq(content)
         end
 
         it "redirects to the content" do
           content = Content::Text.create! valid_attributes
-          put :update, :id => content.id, :content => valid_attributes
-          response.should redirect_to(content_path(content))
+          put :update, :page_id => @page.id, :id => content.id, :content => valid_attributes
+          response.should redirect_to(page_content_path(:page_id => @page.id, :id => content.id))
         end
       end
 
@@ -133,7 +133,7 @@ module Tandem
           content = Content::Text.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
           Content::Text.any_instance.stub(:save).and_return(false)
-          put :update, :id => content.id, :content => {}
+          put :update, :page_id => @page.id, :id => content.id, :content => {}
           assigns(:content).should eq(content)
         end
 
@@ -141,7 +141,7 @@ module Tandem
           content = Content::Text.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
           Content::Text.any_instance.stub(:save).and_return(false)
-          put :update, :id => content.id, :content => {}
+          put :update, :page_id => @page.id, :id => content.id, :content => {}
           response.should render_template("edit")
         end
       end
@@ -151,14 +151,14 @@ module Tandem
       it "destroys the requested content" do
         content = Content::Text.create! valid_attributes
         expect {
-          delete :destroy, :id => content.id
+          delete :destroy, :page_id => @page.id, :id => content.id
         }.to change(Content, :count).by(-1)
       end
 
       it "redirects to the contents list" do
         content = Content::Text.create! valid_attributes
-        delete :destroy, :id => content.id
-        response.should redirect_to(contents_path)
+        delete :destroy, :page_id => @page.id, :id => content.id
+        response.should redirect_to(page_contents_path(:page_id => @page.id))
       end
     end
   end

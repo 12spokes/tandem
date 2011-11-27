@@ -1,6 +1,5 @@
 Tandem::Engine.routes.draw do
-  resources :contents
-
-  resources :pages
-
+  resources :pages do
+    resources :contents
+  end
 end
