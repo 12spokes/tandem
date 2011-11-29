@@ -6,7 +6,7 @@ module Tandem
     end
 
     def current_user
-      Tandem::current_user(request,session)
+      raise(ConfigurationNotFound.new("Tandem::Ability.initialize",'<method>'))
     end
 
     def current_ability
