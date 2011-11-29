@@ -1,0 +1,1 @@
+Tandem::ApplicationController.current_user
