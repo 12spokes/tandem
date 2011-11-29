@@ -7,11 +7,13 @@ gemspec
 
 # jquery-rails is used by the dummy application
 gem "jquery-rails"
+gem "devise"
 
 # the following gems are used by the engine, but for some reason must be explicitly required for the dummy to work
 gem "rails", '~> 3.1.3'
 gem 'pg'
 gem 'slim'
+gem 'cancan'
 
 # Declare any dependencies that are still in development here instead of in
 # your gemspec. These might include edge Rails or gems from your path or
@@ -22,15 +24,6 @@ gem 'slim'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :development do
-  #gem "rspec-rails"
-  #gem "cucumber-rails"
-  #gem 'factory_girl_rails', '>= 1.2.0'
-  #gem "jasmine"
-  #gem 'launchy'
-  #gem 'capybara-webkit'
-  #gem 'database_cleaner'
-  #gem "spork"
-
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
