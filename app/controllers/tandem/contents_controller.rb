@@ -1,11 +1,12 @@
 module Tandem
   class ContentsController < ApplicationController
-    before_filter :load_page
+    load_and_authorize_resource :page
 
     # GET /contents
     # GET /contents.json
     def index
       @contents = @page.contents.all
+      authorize_content!
   
       respond_to do |format|
         format.html # index.html.erb
@@ -17,7 +18,8 @@ module Tandem
     # GET /contents/1.json
     def show
       @content = @page.contents.find(params[:id])
-  
+      authorize_content!
+
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @content }
@@ -28,7 +30,8 @@ module Tandem
     # GET /contents/new.json
     def new
       @content = @page.contents.new
-  
+      authorize_content!
+
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @content }
@@ -38,13 +41,15 @@ module Tandem
     # GET /contents/1/edit
     def edit
       @content = @page.contents.find(params[:id])
+      authorize_content!
     end
   
     # POST /contents
     # POST /contents.json
     def create
       @content = Content::Text.new(params[:content].merge(:page_id => @page.id))
-  
+      authorize_content!
+
       respond_to do |format|
         if @content.save
           format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully created.' }
@@ -60,7 +65,8 @@ module Tandem
     # PUT /contents/1.json
     def update
       @content = @page.contents.find(params[:id])
-  
+      authorize_content!
+
       respond_to do |format|
         if @content.update_attributes(params[:content])
           format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully updated.' }
@@ -76,6 +82,8 @@ module Tandem
     # DELETE /contents/1.json
     def destroy
       @content = @page.contents.find(params[:id])
+      authorize_content!
+
       @content.destroy
   
       respond_to do |format|
@@ -86,9 +94,8 @@ module Tandem
 
     private
 
-    def load_page
-      puts params.inspect
-      @page = Page.find(params[:page_id])
+    def authorize_content!
+      authorize!(params[:action], @content || Content)
     end
   end
 end

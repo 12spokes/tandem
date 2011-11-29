@@ -1,16 +1,16 @@
 require "tandem/engine"
 
 module Tandem
-   mattr_accessor :current_user, :can
 
-  class << self
-    def current_user(request, session)
-      raise(ConfigurationNotFound.new("current_user",'<method>')) unless @@current_user
-      @@current_user.call(request, session)
+  module ApplicationControllerConfig
+    def current_user
+      raise(ConfigurationNotFound.new("Tandem::ApplicationControllerConfig#current_user",'<method>'))
     end
-    def can?(user, action, target)
-      raise(ConfigurationNotFound.new("can?",'<method>')) unless @@can
-      @@can.call(user, action, target)
+  end
+
+  module AbilityConfig
+    def initialize(user)
+      raise(ConfigurationNotFound.new("Tandem::AbilityConfig#initialize(user)",'<method>'))
     end
   end
 
