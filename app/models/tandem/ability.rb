@@ -2,7 +2,7 @@ module Tandem
   class Ability
     include CanCan::Ability
     def initialize(user)
-      raise(ConfigurationNotFound.new("Tandem::Ability.initialize",'<method>'))
+      Tandem::initialize_abilities(user)
     end
   end
 end

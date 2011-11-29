@@ -1,12 +1,12 @@
 module Tandem
   class ApplicationController < ActionController::Base
     check_authorization
-    rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :alert => exception.message
-    end
+    #rescue_from CanCan::AccessDenied do |exception|
+    #  redirect_to root_url, :alert => exception.message
+    #end
 
     def current_user
-      raise(ConfigurationNotFound.new("Tandem::Ability.initialize",'<method>'))
+      Tandem::current_user(session, request)
     end
 
     def current_ability

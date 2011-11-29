@@ -1,14 +1,19 @@
 require "tandem/engine"
 
 module Tandem
-  #mattr_accessor :current_user
+  mattr_accessor :current_user, :initialize_abilities
 
-  #class << self
-  #  def current_user(request, session)
-  #    raise(ConfigurationNotFound.new("current_user",'<method>')) unless @@current_user
-  #    @@current_user.call(request, session)
-  #  end
-  #end
+  class << self
+    def current_user(session, request)
+      raise(ConfigurationNotFound.new("current_user",'<method>')) unless @@current_user
+      @@current_user.call(session, request)
+    end
+
+    def initialize_abilities(user)
+      raise(ConfigurationNotFound.new("initialize_abilities",'<method>')) unless @@initialize_abilities
+      @@initialize_abilities.call(user)
+    end
+  end
 
   class ConfigurationNotFound < StandardError
     attr_accessor :message
