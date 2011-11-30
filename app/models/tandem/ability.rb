@@ -1,6 +1,6 @@
 module Tandem
   class Ability
     include CanCan::Ability
-    include Tandem::AbilityConfig
+    include Tandem::Configuration
   end
 end

@@ -1,25 +1,32 @@
 require "tandem/engine"
 
 module Tandem
-
-  module ApplicationControllerConfig
-    def current_user
-      raise(ConfigurationNotFound.new("Tandem::ApplicationControllerConfig#current_user",'<method>'))
+  module Configuration
+    def self.included(base)
+      if base == Tandem::ApplicationController
+        raise(ConfigurationNotFound.new("Tandem::Configuration.current_user { ... }")) unless @@current_user
+        base.send :define_method, :current_user, @@current_user
+      elsif base == Tandem::Ability
+        raise(ConfigurationNotFound.new("Tandem::Configuration.user_abilities { |user| ... }")) unless @@user_abilities
+        base.send :define_method, :initialize, @@user_abilities
+      end
     end
-  end
 
-  module AbilityConfig
-    def initialize(user)
-      raise(ConfigurationNotFound.new("Tandem::AbilityConfig#initialize(user)",'<method>'))
+    def self.current_user(&block)
+      @@current_user = block
+    end
+
+    def self.user_abilities(&block)
+      @@user_abilities = block
     end
   end
 
   class ConfigurationNotFound < StandardError
     attr_accessor :message
-    def initialize(option,type = '<value>')
-      @message = "Tandem configuration option #{option} not found. " +
-        "Please set this in config/initializers/forem.rb with this line:\n\n" +
-        "Tandem.#{option}= #{type}"
+    def initialize(option)
+      @message = "Tandem configuration option not found. " +
+        "Please complete this in config/initializers/tandem.rb with this line:\n\n" +
+        "#{option}"
     end
   end
 end
