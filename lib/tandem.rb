@@ -2,22 +2,22 @@ require "tandem/engine"
 
 module Tandem
   module Configuration
-    def self.included(base)
-      if base == Tandem::ApplicationController
-        raise(ConfigurationNotFound.new("Tandem::Configuration.current_user { ... }")) unless @@current_user
-        base.send :define_method, :current_user, @@current_user
-      elsif base == Tandem::Ability
-        raise(ConfigurationNotFound.new("Tandem::Configuration.user_abilities { |user| ... }")) unless @@user_abilities
-        base.send :define_method, :initialize, @@user_abilities
-      end
-    end
-
-    def self.current_user(&block)
+    def self.current_user_proc(&block)
       @@current_user = block
     end
 
-    def self.user_abilities(&block)
+    def self.user_abilities_proc(&block)
       @@user_abilities = block
+    end
+
+    def self.current_user
+      raise(ConfigurationNotFound.new("Tandem::Configuration.current_user { ... }")) unless @@current_user
+      @@current_user
+    end
+
+    def self.user_abilities
+      raise(ConfigurationNotFound.new("Tandem::Configuration.user_abilities { |user| ... }")) unless @@user_abilities
+      @@user_abilities
     end
   end
 

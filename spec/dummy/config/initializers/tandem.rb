@@ -1,15 +1,7 @@
-Tandem::Configuration.current_user {
+Tandem::Configuration.current_user_proc {
   User.find(session['user_id']) unless session['user_id'].blank?
 }
-Tandem::Configuration.user_abilities { |user|
-  can :manage, :all
-  #can :manage, Page
-  #can :read, Page
-
-  #can :manage, Content
-  #can :update, Content
-  #can :read, Content
-
+Tandem::Configuration.user_abilities_proc { |user|
   # Define abilities for the passed in user here. For example:
   #
   #   user ||= User.new # guest user (not logged in)
@@ -32,4 +24,12 @@ Tandem::Configuration.user_abilities { |user|
   #   can :update, Article, :published => true
   #
   # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+
+  can :manage, :all
+  #can :manage, Page
+  #can :read, Page
+
+  #can :manage, Content
+  #can :update, Content
+  #can :read, Content
 }
