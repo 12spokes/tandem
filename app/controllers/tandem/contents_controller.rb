@@ -1,6 +1,7 @@
 module Tandem
   class ContentsController < ApplicationController
     load_and_authorize_resource :page
+    layout :resource_layout
 
     # GET /contents
     # GET /contents.json
@@ -96,6 +97,16 @@ module Tandem
 
     def authorize_content!
       authorize!(params[:action], @content || Content)
+    end
+
+    def resource_layout
+      case params[:action]
+        when 'index','destroy'
+          nil
+        else
+          layout_path :content
+      end
+
     end
   end
 end

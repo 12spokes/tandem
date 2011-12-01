@@ -1,6 +1,7 @@
 module Tandem
   class PagesController < ApplicationController
     load_and_authorize_resource
+    layout :resource_layout
 
     # GET /pages
     # GET /pages.json
@@ -70,6 +71,12 @@ module Tandem
         format.html { redirect_to pages_url }
         format.json { head :ok }
       end
+    end
+
+    private
+
+    def resource_layout
+      layout_path @page.try(:layout)
     end
   end
 end

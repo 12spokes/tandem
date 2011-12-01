@@ -1,6 +1,6 @@
 module Tandem
   class Ability
     include CanCan::Ability
-    include Tandem::AbilityConfig
+    define_method :initialize, Configuration.user_abilities
   end
 end
