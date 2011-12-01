@@ -2,7 +2,7 @@ require "tandem/engine"
 
 module Tandem
   module Configuration
-    mattr_accessor :layouts_dir, :unauthoried_path
+    mattr_accessor :layouts_dir, :unauthorized_path
 
     self.layouts_dir = 'tandem'
 
