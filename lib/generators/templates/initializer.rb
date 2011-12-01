@@ -41,5 +41,5 @@ Tandem::Configuration.user_abilities_proc { |user|
 # an authentication error. This can cause an infinite loop if for example
 # PageController#index is not readable by all users. Uncomment this to redirect to the
 # app root instead.
-# Tandem::Configuration.unauthoried_path = '/'
+# Tandem::Configuration.unauthorized_path = '/'
 

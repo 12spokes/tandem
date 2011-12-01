@@ -6,7 +6,7 @@ module Tandem
     check_authorization
 
     rescue_from CanCan::AccessDenied do |exception|
-      redirect_to (Configuration::unauthoried_path || root_url) , :alert => exception.message
+      redirect_to (Configuration::unauthorized_path || root_url) , :alert => exception.message
     end
 
     define_method :current_user, Configuration.current_user

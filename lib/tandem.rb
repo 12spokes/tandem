@@ -6,7 +6,7 @@ module Tandem
 
     self.layouts_dir = 'tandem'
 
-    self.unauthoried_path = nil
+    self.unauthorized_path = nil
 
     def self.current_user_proc(&block)
       @@current_user = block
