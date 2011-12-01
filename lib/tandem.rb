@@ -2,6 +2,10 @@ require "tandem/engine"
 
 module Tandem
   module Configuration
+    mattr :template_dir
+
+    @@template_dir = File.join(Rails.root,'app/views/tandem')
+
     def self.current_user_proc(&block)
       @@current_user = block
     end

@@ -33,3 +33,5 @@ Tandem::Configuration.user_abilities_proc { |user|
   #can :update, Content
   #can :read, Content
 }
+
+puts Tandem::Configuration.template_dir
