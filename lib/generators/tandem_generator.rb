@@ -8,6 +8,10 @@ class TandemGenerator < Rails::Generators::Base
   end
 
   def create_initializer_file
-     copy_file 'initializer.rb', 'config/initializers/tandem.rb'
-   end
+    initializer 'tandem.rb', File.open(File.join(self.class.source_root,'initializer.rb'), 'rb') { |f| f.read }
+  end
+
+  def create_views_dir
+    directory 'layouts', 'app/views/layouts'
+  end
 end

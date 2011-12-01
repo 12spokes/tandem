@@ -1,25 +1,39 @@
 require "tandem/engine"
 
 module Tandem
+  module Configuration
+    mattr_accessor :layouts_dir, :unauthoried_path
 
-  module ApplicationControllerConfig
-    def current_user
-      raise(ConfigurationNotFound.new("Tandem::ApplicationControllerConfig#current_user",'<method>'))
+    self.layouts_dir = 'tandem'
+
+    self.unauthoried_path = nil
+
+    def self.current_user_proc(&block)
+      @@current_user = block
     end
-  end
 
-  module AbilityConfig
-    def initialize(user)
-      raise(ConfigurationNotFound.new("Tandem::AbilityConfig#initialize(user)",'<method>'))
+    def self.user_abilities_proc(&block)
+      @@user_abilities = block
+    end
+
+    def self.current_user
+      debugger
+      raise(ConfigurationNotFound.new("Tandem::Configuration.current_user { ... }")) unless @@current_user
+      @@current_user
+    end
+
+    def self.user_abilities
+      raise(ConfigurationNotFound.new("Tandem::Configuration.user_abilities { |user| ... }")) unless @@user_abilities
+      @@user_abilities
     end
   end
 
   class ConfigurationNotFound < StandardError
     attr_accessor :message
-    def initialize(option,type = '<value>')
-      @message = "Tandem configuration option #{option} not found. " +
-        "Please set this in config/initializers/forem.rb with this line:\n\n" +
-        "Tandem.#{option}= #{type}"
+    def initialize(option)
+      @message = "Tandem configuration option not found. " +
+        "Please complete this in config/initializers/tandem.rb with this line:\n\n" +
+        "#{option}"
     end
   end
 end
