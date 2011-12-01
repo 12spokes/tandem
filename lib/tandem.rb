@@ -2,9 +2,11 @@ require "tandem/engine"
 
 module Tandem
   module Configuration
-    mattr :template_dir
+    mattr_accessor :layouts_dir, :unauthoried_path
 
-    @@template_dir = File.join(Rails.root,'app/views/tandem')
+    self.layouts_dir = 'tandem'
+
+    self.unauthoried_path = nil
 
     def self.current_user_proc(&block)
       @@current_user = block
@@ -15,6 +17,7 @@ module Tandem
     end
 
     def self.current_user
+      debugger
       raise(ConfigurationNotFound.new("Tandem::Configuration.current_user { ... }")) unless @@current_user
       @@current_user
     end
