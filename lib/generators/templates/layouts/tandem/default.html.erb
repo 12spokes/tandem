@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<%= tandem_image_tag(@page, :test_image) if @page %>
+<%= tandem_text_tag(@page, :test_text) if @page %>
+
 <%= yield %>
 
 </body>
