@@ -7,3 +7,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+$().ready(function () {
+  $('.tandem_content').hover(
+      function () {
+        id = this.id
+        $('#tandem_toolbar_'+id).slideDown('slow')
+      },function () {
+        id = this.id
+        $('#tandem_toolbar_'+id).slideUp('slow')
+      }
+  )
+})
