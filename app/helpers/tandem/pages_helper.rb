@@ -34,6 +34,7 @@ module Tandem
         link_to("Edit","#",{
             id: "tandem_edit_link_#{identifier}",
             class: "tandem_edit_link #{options.delete(:class)}".strip,
+            title: "Edit #{identifier}",
             editor_options: {
                 page_id: page.id,
                 identifier: identifier,

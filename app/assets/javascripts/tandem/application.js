@@ -19,4 +19,5 @@ $().ready(function () {
         $('#tandem_toolbar_'+id).slideUp('slow')
       }
   )
+  $('.tandem_edit_link').colorbox()
 })
