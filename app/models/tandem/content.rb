@@ -9,7 +9,7 @@ module Tandem
 
     belongs_to :page
 
-    validates_presence_of :page_id, :tag, :type
+    validates_presence_of :tag, :type
     validates_uniqueness_of :page_id, :scope => [:tag, :type]
 
     #enforce abstract class architecture
@@ -21,14 +21,6 @@ module Tandem
 
     def self.scoped_type(type)
       "::Tandem::Content::#{type.to_s.camelize}"
-    end
-
-    def link_url
-      "http://www.golfhooked.com/wpaethumbs/golf_ball.jpg"
-    end
-
-    def link_target
-      "_blank"
     end
 
     def link?

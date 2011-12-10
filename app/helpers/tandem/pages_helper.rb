@@ -68,7 +68,7 @@ module Tandem
               id: "#{dom_class(tandem_content)}_#{identifier}",
               class: "#{dom_class(tandem_content)} #{options.delete(:class)}".strip
           }.merge(options)) {
-            tandem_content.formatted_text.html_safe
+            tandem_content.formatted_content.html_safe
           }
         when Content::Image
           image_tag(tandem_content.image_url,{
@@ -127,5 +127,41 @@ module Tandem
         tandem_content_tag page, identifier, klass.simple_type, options, html_options
       end
     end
+
+    def tandem_navigation_tag(selected_page, pages_collection = nil, html_options = {})
+      html_options, pages_collection = pages_collection, nil if pages_collection.is_a?(Hash)
+      page_groups = (pages_collection || Page.all).inject({}) do |groups, page|
+        if groups[page.parent_id.to_s]
+          groups[page.parent_id.to_s] << page
+        else
+          groups[page.parent_id.to_s] = [page]
+        end
+        groups
+      end
+
+      # generate must be in scope for the iterate proc declaration, but must be defined below iterate, so that iterate is recursively in scope
+      generate = nil
+
+      iterate = Proc.new do |parent_id|
+        #very important to delete the group from the collection, or it is possible users can create looping relationships
+        (page_groups.delete(parent_id.to_s) || {}).inject(''.html_safe) do |buffer, page|
+          buffer + generate.call(page)
+        end
+      end
+
+      generate = Proc.new do |page|
+        content_tag_for(:div, page, :link, class: "#{page == selected_page ? 'selected' : ''}") do
+          link_to(page.link_label, page_path(page), class: "#{page == selected_page ? 'selected' : ''}") +
+          content_tag(:div, class: 'children') do
+            iterate.call(page.id)
+          end
+        end
+      end
+
+      content_tag(:div, html_options) do
+        iterate.call
+      end
+    end
   end
+
 end

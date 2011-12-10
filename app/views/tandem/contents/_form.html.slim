@@ -7,22 +7,13 @@
           li= msg
 
   .field
-    = f.label :page_id
-    = f.number_field :page_id
+    = f.label :link_url
+    = f.text_field :link_url
   .field
-    = f.label :type
-    = f.text_field :type
-  .field
-    = f.label :token
-    = f.text_field :token
-  .field
-    = f.label :tag
-    = f.text_field :tag
+    = f.label :link_target
+    = f.text_field :link_target
   .field
     = f.label :content
     = f.text_area :content
-  .field
-    = f.label :bcontent
-    = f.text_field :bcontent
   .actions
     = f.submit 'Save'

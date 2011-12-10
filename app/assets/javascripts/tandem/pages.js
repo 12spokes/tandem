@@ -11,6 +11,6 @@ $().ready(function () {
         $('#tandem_toolbar_'+id).slideUp('slow')
       }
   )
-  $('.tandem_edit_link').colorbox()
-  $('.page_link').colorbox()
+  $('.tandem_edit_link').colorbox({iframe:true, width:"80%", height:"80%"})
+  $('.page_link').colorbox({iframe:true, width:"80%", height:"80%"})
 })

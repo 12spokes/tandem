@@ -88,7 +88,7 @@ module Tandem
     def resource_layout
       case params[:action]
         when 'show'
-          layout_path(@page.try(:layout) || :page)
+          layout_path(@page.template.presence || :page)
         when 'new', 'create', 'edit', 'update'
           layout_path :popup
         else

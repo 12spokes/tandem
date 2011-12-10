@@ -3,9 +3,9 @@ h1 Pages Listing
 table
   tr
     th Parent
-    th Title
-    th Token
-    th Layout
+    th Link Label
+    th Page Label
+    th Page Title
     th Template
     th Keywords
     th Description
@@ -16,9 +16,9 @@ table
   - @pages.each do |page|
     tr
       td= page.parent_id
+      td= page.link_label
+      td= page.page_label
       td= page.title
-      td= page.token
-      td= page.layout
       td= page.template
       td= page.keywords
       td= page.description
