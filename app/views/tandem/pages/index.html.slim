@@ -1,4 +1,4 @@
-h1 Listing pages
+h1 Pages Listing
 
 table
   tr
@@ -23,9 +23,9 @@ table
       td= page.keywords
       td= page.description
       td= link_to 'Show', page
-      td= link_to 'Edit', edit_page_path(page)
+      td= link_to 'Edit', edit_page_path(page), :class => :page_link
       td= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete
 
 br
 
-= link_to 'New Page', new_page_path
+= link_to 'New Page', new_page_path, :class => :page_link

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>::Tandem::Page</title>
+  <%= stylesheet_link_tag    "tandem/application" %>
+  <%= javascript_include_tag "tandem/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+<% if @page && @page.persisted? %>
+  <%= tandem_content_tag(@page, :test_image, :image) %>
+  <%= tandem_image_tag(@page, :test_image2) %>
+  <%= tandem_text_tag(@page, :test_text) %>
+<% end %>
+
+</body>
+</html>

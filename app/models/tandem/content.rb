@@ -10,7 +10,7 @@ module Tandem
     belongs_to :page
 
     validates_presence_of :page_id, :tag, :type
-    validates_uniqueness_of :page_id, :scope => [:tag]
+    validates_uniqueness_of :page_id, :scope => [:tag, :type]
 
     #enforce abstract class architecture
     validates_exclusion_of :type, :in => [self.name]

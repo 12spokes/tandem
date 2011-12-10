@@ -3,6 +3,16 @@ module Tandem
     load_and_authorize_resource
     layout :resource_layout
 
+    # GET /pages/home
+    # GET /pages.home.json
+    def home
+      #todo: need to build some special behavior here so that casual users are redirected to a specific 'default' page
+      #respond_to do |format|
+      #  format.html # home.html.erb
+      #  format.json { render json: @pages }
+      #end
+    end
+
     # GET /pages
     # GET /pages.json
     def index
@@ -76,7 +86,14 @@ module Tandem
     private
 
     def resource_layout
-      layout_path @page.try(:layout)
+      case params[:action]
+        when 'show'
+          layout_path(@page.try(:layout) || :page)
+        when 'new', 'create', 'edit', 'update'
+          layout_path :popup
+        else
+          layout_path :default
+      end
     end
   end
 end

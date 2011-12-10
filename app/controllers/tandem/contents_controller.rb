@@ -1,6 +1,6 @@
 module Tandem
   class ContentsController < ApplicationController
-    load_and_authorize_resource :page
+    load_and_authorize_resource :page, :class => "Tandem::Page"
     layout :resource_layout
 
     # GET /contents
@@ -100,13 +100,7 @@ module Tandem
     end
 
     def resource_layout
-      case params[:action]
-        when 'index','destroy'
-          nil
-        else
-          layout_path :content
-      end
-
+      layout_path :popup
     end
   end
 end
