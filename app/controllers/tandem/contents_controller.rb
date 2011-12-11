@@ -19,10 +19,11 @@ module Tandem
     # GET /contents/1.json
     def show
       @content = @page.contents.find(params[:id])
+      @options = params[:options].present? ? ActiveSupport::JSON.decode(params[:options]) : {}
       authorize_content!
 
       respond_to do |format|
-        format.html # show.html.erb
+        format.html { render layout: nil } # show.html.erb
         format.json { render json: @content }
       end
     end
@@ -53,7 +54,7 @@ module Tandem
 
       respond_to do |format|
         if @content.save
-          format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully created.' }
+          format.html { render action: "success", notice: 'Content was successfully created.' }
           format.json { render json: @content, status: :created, location: @content }
         else
           format.html { render action: "new" }
@@ -70,7 +71,7 @@ module Tandem
 
       respond_to do |format|
         if @content.update_attributes(params[:content])
-          format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully updated.' }
+          format.html { render action: "success", notice: 'Content was successfully updated.' }
           format.json { head :ok }
         else
           format.html { render action: "edit" }

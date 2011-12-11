@@ -1,10 +1,10 @@
 p#notice = notice
 
 #page_links
-  - if can? :update, @page
-    = link_to 'Edit Page', edit_page_path(@page), :class => :page_link
   - if can? :create, @page
-    = link_to 'New Page', new_page_path(parent_id: @page.id), :class => :page_link
+    = link_to 'New Page', new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link
+  - if can? :update, @page
+    = link_to 'Edit Page', edit_page_path(@page), :class => :page_link, :id => :page_edit_link
   - if can? :destroy, @page
     = link_to 'Destroy Page', @page, :confirm => 'Are you sure?', :method => :delete
   - if can? :index, ::Tandem::Page

@@ -11,6 +11,15 @@ $().ready(function () {
         $('#tandem_toolbar_'+id).slideUp('slow')
       }
   )
-  $('.tandem_edit_link').colorbox({iframe:true, width:"80%", height:"80%"})
-  $('.page_link').colorbox({iframe:true, width:"80%", height:"80%"})
+  $('.tandem_edit_link').colorbox({iframe:true, width:"80%", height:"80%", onCleanup: function() {
+    //alert(this)
+  }})
+  $('.page_link').colorbox({iframe:true, width:"80%", height:"80%", onCleanup: function() {
+           location.reload();
+  }})
 })
+
+reload_tandem_content = function(resource_id,resource_url) {
+  el = $('#tandem_edit_link_'+resource_id).attr('editor_options')
+  el = $('#'+resource_id)
+}
