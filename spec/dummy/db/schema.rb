@@ -11,30 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129001941) do
+ActiveRecord::Schema.define(:version => 20111208184338) do
 
   create_table "tandem_contents", :force => true do |t|
-    t.integer  "page_id"
-    t.string   "type"
-    t.string   "token"
-    t.string   "tag"
+    t.integer  "page_id",                                      :null => false
+    t.string   "type",                                         :null => false
+    t.string   "tag",                                          :null => false
     t.text     "content"
-    t.binary   "bcontent"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "details"
+    t.string   "link_url"
+    t.string   "link_target"
+    t.integer  "attachment_id"
+    t.string   "attachment_type", :default => "Tandem::Image"
   end
+
+  add_index "tandem_contents", ["page_id", "type", "tag"], :name => "index_tandem_contents_on_page_id_and_type_and_tag", :unique => true
+  add_index "tandem_contents", ["page_id"], :name => "index_tandem_contents_on_page_id"
 
   create_table "tandem_pages", :force => true do |t|
     t.integer  "parent_id"
     t.string   "title"
-    t.string   "token"
-    t.string   "layout"
+    t.string   "page_label"
+    t.string   "link_label",  :null => false
     t.string   "template"
     t.string   "keywords"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tandem_pages", ["parent_id"], :name => "index_tandem_pages_on_parent_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

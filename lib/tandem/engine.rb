@@ -6,6 +6,10 @@ module Tandem
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
       g.template_engine :slim
     end
+
+    config.to_prepare do
+      ActionController::Base.helper PagesHelper
+    end
   end
 
   #http://www.builtfromsource.com/2011/09/21/testing-routes-with-rails-3-1-engines/

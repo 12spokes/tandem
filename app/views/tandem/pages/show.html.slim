@@ -1,27 +1,11 @@
 p#notice = notice
 
-p
-  b Parent:
-  = @page.parent_id
-p
-  b Title:
-  = @page.title
-p
-  b Token:
-  = @page.token
-p
-  b Layout:
-  = @page.layout
-p
-  b Template:
-  = @page.template
-p
-  b Keywords:
-  = @page.keywords
-p
-  b Description:
-  = @page.description
-
-= link_to 'Edit', edit_page_path(@page)
-'|
-= link_to 'Back', pages_path
+#page_links
+  - if can? :create, @page
+    = link_to 'New Page', new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link
+  - if can? :update, @page
+    = link_to 'Edit Page', edit_page_path(@page), :class => :page_link, :id => :page_edit_link
+  - if can? :destroy, @page
+    = link_to 'Destroy Page', @page, :confirm => 'Are you sure?', :method => :delete
+  - if can? :index, ::Tandem::Page
+    = link_to 'Page Listing', pages_path

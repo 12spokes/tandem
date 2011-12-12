@@ -1,7 +1,8 @@
 Tandem::Engine.routes.draw do
   resources :pages do
-    resources :contents
+    resources :contents, :only => [:edit, :update]
+    collection { get 'home' }
   end
 
-  root :to => 'pages#index'
+  root :to => 'pages#home'
 end

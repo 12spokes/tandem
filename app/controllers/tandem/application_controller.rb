@@ -18,7 +18,6 @@ module Tandem
     end
 
     def layout_path(layout)
-      layout ||= :default
       layout.to_s.blank? || layout.to_s[0] == '/' ? layout : [Configuration.layouts_dir,layout.to_s].compact.join('/')
     end
   end
