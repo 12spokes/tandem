@@ -3,6 +3,7 @@ module Tandem
     load_and_authorize_resource :page, :class => "Tandem::Page"
     layout :resource_layout
 
+=begin ### default scaffold actions not currently used
     # GET /contents
     # GET /contents.json
     def index
@@ -19,11 +20,10 @@ module Tandem
     # GET /contents/1.json
     def show
       @content = @page.contents.find(params[:id])
-      @options = params[:options].present? ? ActiveSupport::JSON.decode(params[:options]) : {}
       authorize_content!
 
       respond_to do |format|
-        format.html { render layout: nil } # show.html.erb
+        format.html # show.html.erb
         format.json { render json: @content }
       end
     end
@@ -38,12 +38,6 @@ module Tandem
         format.html # new.html.erb
         format.json { render json: @content }
       end
-    end
-  
-    # GET /contents/1/edit
-    def edit
-      @content = @page.contents.find(params[:id])
-      authorize_content!
     end
   
     # POST /contents
@@ -63,14 +57,38 @@ module Tandem
       end
     end
   
+    # DELETE /contents/1
+    # DELETE /contents/1.json
+    def destroy
+      @content = @page.contents.find(params[:id])
+      authorize_content!
+
+      @content.destroy
+
+      respond_to do |format|
+        format.html { redirect_to page_contents_url }
+        format.json { head :ok }
+      end
+    end
+
+=end
+
+    # GET /contents/1/edit
+    def edit
+      @content = @page.contents.find(params[:id])
+      authorize_content!
+    end
+
     # PUT /contents/1
     # PUT /contents/1.json
     def update
       @content = @page.contents.find(params[:id])
+      param_key = ActiveModel::Naming.param_key(@content)
+      puts params[param_key].inspect
       authorize_content!
 
       respond_to do |format|
-        if @content.update_attributes(params[:content])
+        if @content.update_attributes(params[param_key])
           format.html { render action: "success", notice: 'Content was successfully updated.' }
           format.json { head :ok }
         else
@@ -80,20 +98,6 @@ module Tandem
       end
     end
   
-    # DELETE /contents/1
-    # DELETE /contents/1.json
-    def destroy
-      @content = @page.contents.find(params[:id])
-      authorize_content!
-
-      @content.destroy
-  
-      respond_to do |format|
-        format.html { redirect_to page_contents_url }
-        format.json { head :ok }
-      end
-    end
-
     private
 
     def authorize_content!

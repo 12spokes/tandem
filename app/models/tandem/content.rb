@@ -15,12 +15,26 @@ module Tandem
     #enforce abstract class architecture
     validates_exclusion_of :type, :in => [self.name]
 
+    def self.subclass_names
+      @subclass_names ||= subclasses.map { |sc| sc.name }
+    end
+
+    def self.simple_types
+      @simple_types ||= subclasses.map { |sc| sc.simple_type }
+    end
+
+    def self.valid_simple_type?(type)
+      simple_types.include?(type.to_s.downcase.to_sym)
+    end
+
     def self.simple_type
-      self.name.split('::').last.downcase
+      name =~ /^Tandem\:\:Content\:\:(.*)/
+      ($1 or raise "Unable to determine simple type for abstract class: #{name}").downcase.to_sym
     end
 
     def self.scoped_type(type)
-      "::Tandem::Content::#{type.to_s.camelize}"
+      valid_simple_type?(type) or raise "Invalid Tandem::Content.simple_type: '#{type}'. Valid options #{simple_types.join(', ')}"
+      "Tandem::Content::#{type.to_s.camelize}"
     end
 
     def link?

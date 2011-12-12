@@ -80,7 +80,7 @@ module Tandem
       content = case tandem_content = page.contents.find_or_create_by_tag_and_type(identifier,Content.scoped_type(type))
         when Content::Text
           content_tag(:div, tandem_content, options.merge(
-              id: "#{dom_class(tandem_content)}_#{tandem_content.tag}",
+              id: "#{dom_class(tandem_content)}_#{identifier}",
               class: "#{dom_class(tandem_content)} #{options[:class]}".strip
           )) {
             tandem_content.formatted_content.html_safe
@@ -90,7 +90,7 @@ module Tandem
               width: tandem_content.image_width,
               height: tandem_content.image_height
           }.merge(options).merge(
-              id: "#{dom_class(tandem_content)}_#{tandem_content.tag}",
+              id: "#{dom_class(tandem_content)}_#{identifier}",
               class: "#{dom_class(tandem_content)} #{options[:class]}".strip
           ))
         else
@@ -111,15 +111,14 @@ module Tandem
         link_to("Edit",edit_page_content_path(@page.id,tandem_content.id),{
             id: "tandem_edit_link_#{identifier}",
             class: "tandem_edit_link #{options[:class]}".strip,
-            title: "Edit #{identifier}",
-            editor_options: options.to_json
+            title: "editing #{identifier}"
         })
       } + content if can? :update, tandem_content
 
-      content_tag(:div, tandem_content, {
+      content_tag(:div, tandem_content, html_options.merge(
           id: identifier,
-          class: "tandem_content #{html_options.delete(:class)}".strip,
-      }.merge(html_options)) do
+          class: "tandem_content #{html_options[:class]}".strip
+      )) do
         content
       end
     end

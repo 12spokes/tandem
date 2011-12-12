@@ -12,8 +12,9 @@
   .field
     = f.label :link_target
     = f.text_field :link_target
-  .field
-    = f.label :content
-    = f.text_area :content
+  -if @content.is_a?(Tandem::Content::Text)
+    .field
+      br
+      = f.text_area :content, class: "wymeditor"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "wymupdate"

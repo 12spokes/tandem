@@ -1,6 +1,11 @@
 /*
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
-*= require tandem/colorbox
-*= require tandem/contents
 */
+
+label {
+  width: 200px;
+  display: inline-block;
+  text-align: right;
+  padding-right: 8px;
+}
