@@ -1,8 +1,9 @@
 module Tandem
   class ContentsController < ApplicationController
-    load_and_authorize_resource :page
+    load_and_authorize_resource :page, :class => "Tandem::Page"
     layout :resource_layout
 
+=begin ### default scaffold actions not currently used
     # GET /contents
     # GET /contents.json
     def index
@@ -39,12 +40,6 @@ module Tandem
       end
     end
   
-    # GET /contents/1/edit
-    def edit
-      @content = @page.contents.find(params[:id])
-      authorize_content!
-    end
-  
     # POST /contents
     # POST /contents.json
     def create
@@ -53,27 +48,10 @@ module Tandem
 
       respond_to do |format|
         if @content.save
-          format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully created.' }
+          format.html { render action: "success", notice: 'Content was successfully created.' }
           format.json { render json: @content, status: :created, location: @content }
         else
           format.html { render action: "new" }
-          format.json { render json: @content.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-  
-    # PUT /contents/1
-    # PUT /contents/1.json
-    def update
-      @content = @page.contents.find(params[:id])
-      authorize_content!
-
-      respond_to do |format|
-        if @content.update_attributes(params[:content])
-          format.html { redirect_to page_content_url(:page_id => @page.id, :id => @content.id), notice: 'Content was successfully updated.' }
-          format.json { head :ok }
-        else
-          format.html { render action: "edit" }
           format.json { render json: @content.errors, status: :unprocessable_entity }
         end
       end
@@ -86,13 +64,40 @@ module Tandem
       authorize_content!
 
       @content.destroy
-  
+
       respond_to do |format|
         format.html { redirect_to page_contents_url }
         format.json { head :ok }
       end
     end
 
+=end
+
+    # GET /contents/1/edit
+    def edit
+      @content = @page.contents.find(params[:id])
+      authorize_content!
+    end
+
+    # PUT /contents/1
+    # PUT /contents/1.json
+    def update
+      @content = @page.contents.find(params[:id])
+      param_key = ActiveModel::Naming.param_key(@content)
+      puts params[param_key].inspect
+      authorize_content!
+
+      respond_to do |format|
+        if @content.update_attributes(params[param_key])
+          format.html { render action: "success", notice: 'Content was successfully updated.' }
+          format.json { head :ok }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @content.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  
     private
 
     def authorize_content!
@@ -100,13 +105,7 @@ module Tandem
     end
 
     def resource_layout
-      case params[:action]
-        when 'index','destroy'
-          nil
-        else
-          layout_path :content
-      end
-
+      layout_path :popup
     end
   end
 end

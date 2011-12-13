@@ -1,3 +1,6 @@
 = Tandem
 
 This project rocks and uses MIT-LICENSE.
+
+#require 'rdoc'
+#RDoc::Markup::ToHtml.new.convert(IO.read('app/helpers/tandem/pages_helper.rb'))
