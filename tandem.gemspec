@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.1.3"
   s.add_dependency "cancan"
   s.add_dependency "slim-rails"
+  s.add_dependency "paperclip"
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "cucumber-rails"
