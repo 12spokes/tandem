@@ -1,16 +1,17 @@
 module Tandem
   class PagesController < ApplicationController
-    load_and_authorize_resource
+    load_and_authorize_resource :except => :home, :find_by => :slug
     layout :resource_layout
 
     # GET /pages/home
     # GET /pages.home.json
     def home
-      #todo: need to build some special behavior here so that casual users are redirected to a specific 'default' page
-      #respond_to do |format|
-      #  format.html # home.html.erb
-      #  format.json { render json: @pages }
-      #end
+      @page = Page.where(is_default: true).first || Page.first || Page.new
+      authorize!('index', Page)
+      respond_to do |format|
+        format.html { render action: "show", notice: @page.new_record? ? 'No Pages Found.' : '' }
+        format.json { render json: @page }
+      end
     end
 
     # GET /pages
@@ -34,6 +35,7 @@ module Tandem
     # GET /pages/new
     # GET /pages/new.json
     def new
+      @page.parent ||= Page.where(id: params['parent_id']).first
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @page }
@@ -87,8 +89,8 @@ module Tandem
 
     def resource_layout
       case params[:action]
-        when 'show'
-          layout_path(@page.template.presence || :page)
+        when 'show', 'home'
+          layout_path(@page.new_record? ? :default : @page.template.presence || :page)
         when 'new', 'create', 'edit', 'update'
           layout_path :popup
         else

@@ -18,7 +18,9 @@ module Tandem
     end
 
     def layout_path(layout)
-      layout.to_s.blank? || layout.to_s[0] == '/' ? layout : [Configuration.layouts_dir,layout.to_s].compact.join('/')
+      return layout if layout.to_s.blank?
+      return layout.to_s[1..-1] if layout.to_s[0] == '/'
+      [Configuration.layouts_dir,layout.to_s].compact.join('/')
     end
   end
 end

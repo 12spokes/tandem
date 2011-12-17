@@ -9,11 +9,12 @@ module Tandem
 
     belongs_to :page
 
-    validates_presence_of :tag, :type
-    validates_uniqueness_of :page_id, :scope => [:tag, :type]
+    validates :tag, presence: true
+    validates :page_id, presence: true, uniqueness: {:scope => [:tag, :type]}
+    #validates_uniqueness_of :page_id, :scope => [:tag, :type]
 
     #enforce abstract class architecture
-    validates_exclusion_of :type, :in => [self.name]
+    validates :type, presence: true, exclusion: ['Tandem::Content']
 
     def self.subclass_names
       @subclass_names ||= subclasses.map { |sc| sc.name }

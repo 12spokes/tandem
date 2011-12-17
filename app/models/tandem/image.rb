@@ -1,6 +1,6 @@
 module Tandem
   class Image < ActiveRecord::Base
-    has_attached_file :resource, :styles => { :small => "150x150>" },
+    has_attached_file :resource, :styles => { :thumb => "150x150>" },
                       :url  => "/assets/images/:id/:style/:basename.:extension",
                       :path => ":rails_root/public/assets/images/:id/:style/:basename.:extension"
 

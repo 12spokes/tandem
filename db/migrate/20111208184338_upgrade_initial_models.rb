@@ -1,6 +1,5 @@
 class UpgradeInitialModels < ActiveRecord::Migration
   def change
-    Tandem::Page.delete_all
     change_table :tandem_pages do |t|
       t.rename :token, :page_label
       t.rename :layout, :link_label
@@ -9,7 +8,6 @@ class UpgradeInitialModels < ActiveRecord::Migration
     end
     change_column :tandem_pages, :link_label, :string, :null => false
 
-    Tandem::Content.delete_all
     change_table :tandem_contents do |t|
       t.remove :token, :bcontent
       t.text :details
