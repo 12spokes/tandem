@@ -1,0 +1,9 @@
+h3 Gallery
+
+- @images.each do |image|
+  div
+    = image_tag image.resource.url(:thumb), :onclick => "select_gallery_item(#{image.id})"
+    = link_to 'Destroy', image, :confirm => 'Are you sure?', :method => :delete
+
+- if @update_current_image
+  script parent.update_current_image();

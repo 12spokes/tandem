@@ -2,11 +2,12 @@ require "tandem/engine"
 
 module Tandem
   module Configuration
-    mattr_accessor :layouts_dir, :unauthorized_path
-
-    self.layouts_dir = 'tandem'
+    mattr_accessor :unauthorized_path, :layouts_dir, :uploaded_images_dir, :uploaded_images_template
 
     self.unauthorized_path = nil
+    self.layouts_dir = "tandem"
+    self.uploaded_images_dir = ":rails_root/public"
+    self.uploaded_images_template = "/assets/images/:id/:style/:basename.:extension"
 
     def self.current_user_proc(&block)
       @@current_user = block

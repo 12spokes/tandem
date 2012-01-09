@@ -8,7 +8,11 @@
 
   .field
     = f.label :parent_id
-    = f.number_field :parent_id
+    = f.radio_button :parent_id, nil
+    | top level page
+    - if @page.parent.present?
+      = f.radio_button :parent_id, @page.parent_id
+      = page_path(@page.parent)
   .field
     = f.label :title
     = f.text_field :title
@@ -19,13 +23,19 @@
     = f.label :link_label
     = f.text_field :link_label
   .field
+    = f.label :slug
+    = f.text_field :slug
+  .field
     = f.label :template
-    = f.text_field :template
+    = f.select :template, options_for_select(valid_templates,@page.template)
   .field
     = f.label :keywords
     = f.text_field :keywords
   .field
     = f.label :description
     = f.text_field :description
+  .field
+    = f.label :is_default, 'Default Page?'
+    = f.check_box :is_default
   .actions
     = f.submit 'Save'
