@@ -86,14 +86,12 @@ module Tandem
             tandem_content.formatted_content.html_safe
           }
         when Content::Image
-          image_tag(tandem_content.image_url,{
-              width: tandem_content.image_width,
-              height: tandem_content.image_height
-          }.merge(options).merge(
+          image_content_tag(tandem_content,options.merge(
               id: "#{dom_class(tandem_content)}_#{identifier}",
               class: "#{dom_class(tandem_content)} #{options[:class]}".strip
           ))
         else
+          raise "Unable to create #{tandem_content.class.name}: #{tandem_content.errors.inspect}" if tandem_content.new_record?
           raise "Rendering behavior not defined for: #{tandem_content.class.name}"
       end
 
@@ -156,6 +154,22 @@ module Tandem
 
       content_tag(:div, html_options) do
         iterate.call
+      end
+    end
+
+    def valid_templates
+      controller.view_paths.inject({}) do |templates,path|
+        Dir["#{path}/layouts/**/*.html*"].each do |template|
+          template_name = template["#{path}/layouts".length+1..-1].split('.').first
+          template_path = template_name.split('/')
+          if template_path.first.downcase == Configuration.layouts_dir.downcase
+            template_path.shift
+          else
+            template_path.unshift('')
+          end
+          templates[template_name] = template_path.join('/')
+        end
+        templates
       end
     end
   end

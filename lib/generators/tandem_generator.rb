@@ -14,4 +14,12 @@ class TandemGenerator < Rails::Generators::Base
   def create_views_dir
     directory 'layouts', 'app/views/layouts'
   end
+
+  def add_mounting_route
+    route('mount Tandem::Engine => "/tandem"')
+  end
+
+  def import_migrations
+    rake("tandem:install:migrations")
+  end
 end

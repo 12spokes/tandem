@@ -34,12 +34,18 @@ Tandem::Configuration.user_abilities_proc { |user|
   #can :read, Content
 }
 
-# Change this to move your layouts directory from /app/views/layouts/tandem
-# Tandem::Configuration.layouts_dir = 'tandem'
-
 # By default, tandem will redirect a user back to the engine mount point "/tandem" on
 # an authentication error. This can cause an infinite loop if for example
 # PageController#index is not readable by all users. Uncomment this to redirect to the
 # app root instead.
 # Tandem::Configuration.unauthorized_path = '/'
+
+# Change this to move your layouts directory from /app/views/layouts/tandem
+# Tandem::Configuration.layouts_dir = 'tandem'
+
+# Change this to move your uploaded images directory from /public/assets/images/...
+# Tandem::Configuration.uploaded_images_dir = ":rails_root/public"
+
+# Change this to modify your uploaded images directory structure & routing from /public/assets/images/1/original/...
+# Tandem::Configuration.uploaded_images_template = "/assets/images/:id/:style/:basename.:extension"
 

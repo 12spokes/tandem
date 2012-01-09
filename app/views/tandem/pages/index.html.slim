@@ -15,7 +15,7 @@ table
 
   - @pages.each do |page|
     tr
-      td= page.parent_id
+      td= page.parent.try :slug
       td= page.link_label
       td= page.page_label
       td= page.title
