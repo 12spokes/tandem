@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 30000000000000) do
+ActiveRecord::Schema.define(:version => 30000000000001) do
 
   create_table "tandem_contents", :force => true do |t|
     t.integer  "page_id",                                      :null => false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 30000000000000) do
     t.string   "link_target"
     t.integer  "attachment_id"
     t.string   "attachment_type", :default => "Tandem::Image"
+    t.integer  "image_id"
   end
 
   add_index "tandem_contents", ["page_id", "type", "tag"], :name => "index_tandem_contents_on_page_id_and_type_and_tag", :unique => true

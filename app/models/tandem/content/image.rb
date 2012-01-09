@@ -1,16 +1,6 @@
 module Tandem
   class Content::Image < Content
-
-    def image_url
-      "http://www.golfhooked.com/wpaethumbs/golf_ball.jpg"
-    end
-
-    def image_width
-      80
-    end
-
-    def image_height
-      80
-    end
+    #todo: the following line introduces an artifact field on the other types of Content. For now there is only one other field type, so this down and dirty association is quickest.
+    belongs_to :image, class_name: 'Tandem::Image'
   end
 end

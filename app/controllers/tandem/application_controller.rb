@@ -22,5 +22,9 @@ module Tandem
       return layout.to_s[1..-1] if layout.to_s[0] == '/'
       [Configuration.layouts_dir,layout.to_s].compact.join('/')
     end
+
+    def javascript_layout
+      layout_path :javascript
+    end
   end
 end

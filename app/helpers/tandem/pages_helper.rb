@@ -86,10 +86,7 @@ module Tandem
             tandem_content.formatted_content.html_safe
           }
         when Content::Image
-          image_tag(tandem_content.image_url,{
-              width: tandem_content.image_width,
-              height: tandem_content.image_height
-          }.merge(options).merge(
+          image_content_tag(tandem_content,options.merge(
               id: "#{dom_class(tandem_content)}_#{identifier}",
               class: "#{dom_class(tandem_content)} #{options[:class]}".strip
           ))

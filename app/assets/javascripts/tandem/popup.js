@@ -20,3 +20,16 @@ $().ready(function () {
     skin: 'twopanels'
   });
 })
+
+update_image_selection = function(id) {
+  $('#content_image_image_id').val(id);
+  update_current_image();
+}
+
+update_image_gallery = function() {
+  $('#left_image_panel iframe').attr("src", $('#left_image_panel iframe').attr("src"));
+}
+
+update_current_image = function() {
+  $('#selected_image_viewpane').load($('#selected_image_viewpane').attr('src').replace(':id:',$('#content_image_image_id').val()))
+}

@@ -84,7 +84,8 @@ module Tandem
     def update
       @content = @page.contents.find(params[:id])
       param_key = ActiveModel::Naming.param_key(@content)
-      puts params[param_key].inspect
+      logger.error '!!!!LOOK HERE!!!!'
+      logger.error params[param_key].inspect
       authorize_content!
 
       respond_to do |format|

@@ -11,7 +11,6 @@ module Tandem
 
     validates :tag, presence: true
     validates :page_id, presence: true, uniqueness: {:scope => [:tag, :type]}
-    #validates_uniqueness_of :page_id, :scope => [:tag, :type]
 
     #enforce abstract class architecture
     validates :type, presence: true, exclusion: ['Tandem::Content']

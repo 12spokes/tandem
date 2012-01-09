@@ -1,5 +1,8 @@
-h1 New image
+h3 Upload New image
+
+p#notice = notice
 
 == render 'form'
 
-= link_to 'Back', images_path
+- if @update_gallery
+  script parent.update_image_gallery();
