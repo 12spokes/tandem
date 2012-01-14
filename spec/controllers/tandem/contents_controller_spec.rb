@@ -26,28 +26,28 @@ module Tandem
     # Content. As you add validations to Content, be sure to
     # update the return value of this method accordingly.
     before(:each) do
-      @page = Page.create!
+      controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
+      @page = Factory(:tandem_page)
+      @content = Factory(:tandem_content_text, :page => @page)
     end
 
     def valid_attributes
-      {
-          :page_id => @page.id
-      }
+      Factory.attributes_for(:tandem_content_text)
     end
+
+=begin ### default scaffold actions not currently used
 
     describe "GET index" do
       it "assigns all contents as @contents" do
-        content = Content::Text.create! valid_attributes
         get :index, :page_id => @page.id
-        assigns(:contents).should eq([content])
+        assigns(:contents).should eq([@content])
       end
     end
 
     describe "GET show" do
       it "assigns the requested content as @content" do
-        content = Content::Text.create! valid_attributes
-        get :show, :page_id => @page.id, :id => content.id
-        assigns(:content).should eq(content)
+        get :show, :page_id => @page.id, :id => @content.id
+        assigns(:content).should eq(@content)
       end
     end
 
@@ -58,13 +58,16 @@ module Tandem
       end
     end
 
+=end
+
     describe "GET edit" do
       it "assigns the requested content as @content" do
-        content = Content::Text.create! valid_attributes
-        get :edit, :page_id => @page.id, :id => content.id
-        assigns(:content).should eq(content)
+        get :edit, :page_id => @page.id, :id => @content.id
+        assigns(:content).should eq(@content)
       end
     end
+
+=begin ### default scaffold actions not currently used
 
     describe "POST create" do
       describe "with valid params" do
@@ -103,63 +106,63 @@ module Tandem
       end
     end
 
+=end
+
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested content" do
-          content = Content::Text.create! valid_attributes
           # Assuming there are no other contents in the database, this
           # specifies that the Content created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
           Content::Text.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-          put :update, :page_id => @page.id, :id => content.id, :content => {'these' => 'params'}
+          put :update, :page_id => @page.id, :id => @content.id, :content_text => {'these' => 'params'}
         end
 
         it "assigns the requested content as @content" do
-          content = Content::Text.create! valid_attributes
-          put :update, :page_id => @page.id, :id => content.id, :content => valid_attributes
-          assigns(:content).should eq(content)
+          put :update, :page_id => @page.id, :id => @content.id, :content_text => valid_attributes
+          assigns(:content).should eq(@content)
         end
 
-        it "redirects to the content" do
-          content = Content::Text.create! valid_attributes
-          put :update, :page_id => @page.id, :id => content.id, :content => valid_attributes
-          response.should redirect_to(page_content_path(:page_id => @page.id, :id => content.id))
+        it "renders the 'edit' template" do
+          put :update, :page_id => @page.id, :id => @content.id, :content_text => valid_attributes
+          response.should render_template("success")
         end
       end
 
       describe "with invalid params" do
         it "assigns the content as @content" do
-          content = Content::Text.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
           Content::Text.any_instance.stub(:save).and_return(false)
-          put :update, :page_id => @page.id, :id => content.id, :content => {}
-          assigns(:content).should eq(content)
+          put :update, :page_id => @page.id, :id => @content.id, :content_text => {}
+          assigns(:content).should eq(@content)
         end
 
         it "re-renders the 'edit' template" do
-          content = Content::Text.create! valid_attributes
           # Trigger the behavior that occurs when invalid params are submitted
           Content::Text.any_instance.stub(:save).and_return(false)
-          put :update, :page_id => @page.id, :id => content.id, :content => {}
+          put :update, :page_id => @page.id, :id => @content.id, :content_text => {}
           response.should render_template("edit")
         end
       end
     end
 
+=begin ### default scaffold actions not currently used
+
     describe "DELETE destroy" do
       it "destroys the requested content" do
-        content = Content::Text.create! valid_attributes
         expect {
-          delete :destroy, :page_id => @page.id, :id => content.id
+          delete :destroy, :page_id => @page.id, :id => @content.id
         }.to change(Content, :count).by(-1)
       end
 
       it "redirects to the contents list" do
-        content = Content::Text.create! valid_attributes
-        delete :destroy, :page_id => @page.id, :id => content.id
+        delete :destroy, :page_id => @page.id, :id => @content.id
         response.should redirect_to(page_contents_path(:page_id => @page.id))
       end
     end
+
+=end
+
   end
 end
