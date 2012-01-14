@@ -3,33 +3,31 @@ module Tandem
 
   describe "tandem/pages/show.html.slim" do
     before(:each) do
-      @page = assign(:page, stub_model(Page,
-        :parent_id => 1,
-        :title => "Title",
-        :token => "Token",
-        :layout => "Layout",
-        :template => "Template",
-        :keywords => "Keywords",
-        :description => "Description"
-      ))
+      @page = assign(:page, Factory(:tandem_page))
+      @ability = Ability.new(User.new)
+      controller.stub(:current_ability) { @ability }
     end
 
-    it "renders attributes in <p>" do
+    it "renders page" do
       render
+
+      #todo, test ability dependent behavior
+
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/1/)
+      assert_select "a", :text => "New Page".to_s, :count => 1
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Title/)
+      assert_select "a", :text => "Edit Page".to_s, :count => 1
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Token/)
+      assert_select "a", :text => "Destroy Page".to_s, :count => 1
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Layout/)
+      assert_select "a", :text => "Page Listing".to_s, :count => 1
+
+      #todo: move the following into a test that inspects the layout
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Template/)
+      #assert_select "meta", :name => "description", :content => @page.description.to_s, :count => 1
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Keywords/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Description/)
+      #assert_select "meta", :name => "keywords", :content => @page.keywords.to_s, :count => 1
+
     end
   end
 end

@@ -35,6 +35,10 @@ module Tandem
         delete("/pages/1").should route_to("tandem/pages#destroy", :id => "1")
       end
 
+      it "routes to #home" do
+        delete("/").should route_to("tandem/pages#home")
+      end
+
     end
   end
 end
