@@ -22,147 +22,156 @@ module Tandem
 
   describe ContentsController do
 
-    # This should return the minimal set of attributes required to create a valid
-    # Content. As you add validations to Content, be sure to
-    # update the return value of this method accordingly.
-    before(:each) do
-      controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
-      @page = Factory(:tandem_page)
-      @content = Factory(:tandem_content_text, :page => @page)
-    end
+    Content.subclasses.each do |sub_type|
 
-    def valid_attributes
-      Factory.attributes_for(:tandem_content_text)
-    end
+      describe "Sub Type - #{sub_type.name}" do
+
+        # This should return the minimal set of attributes required to create a valid
+        # Content. As you add validations to Content, be sure to
+        # update the return value of this method accordingly.
+        before(:each) do
+          controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
+          @page = Factory(:tandem_page)
+          @factory = "tandem_content_#{sub_type.simple_type}"
+          @content = Factory(@factory, :page => @page)
+          @param_key = ActiveModel::Naming.param_key(@content)
+          @klass = @content.class
+        end
+
+        def valid_attributes
+          Factory.attributes_for(@factory)
+        end
 
 =begin ### default scaffold actions not currently used
 
-    describe "GET index" do
-      it "assigns all contents as @contents" do
-        get :index, :page_id => @page.id
-        assigns(:contents).should eq([@content])
-      end
-    end
+        describe "GET index" do
+          it "assigns all contents as @contents" do
+            get :index, :page_id => @page.id
+            assigns(:contents).should eq([@content])
+          end
+        end
 
-    describe "GET show" do
-      it "assigns the requested content as @content" do
-        get :show, :page_id => @page.id, :id => @content.id
-        assigns(:content).should eq(@content)
-      end
-    end
+        describe "GET show" do
+          it "assigns the requested content as @content" do
+            get :show, :page_id => @page.id, :id => @content.id
+            assigns(:content).should eq(@content)
+          end
+        end
 
-    describe "GET new" do
-      it "assigns a new content as @content" do
-        get :new, :page_id => @page.id
-        assigns(:content).should be_a_new(Content)
-      end
-    end
+        describe "GET new" do
+          it "assigns a new content as @content" do
+            get :new, :page_id => @page.id
+            assigns(:content).should be_a_new(@klass)
+          end
+        end
 
 =end
 
-    describe "GET edit" do
-      it "assigns the requested content as @content" do
-        get :edit, :page_id => @page.id, :id => @content.id
-        assigns(:content).should eq(@content)
-      end
-    end
+        describe "GET edit" do
+          it "assigns the requested content as @content" do
+            get :edit, :page_id => @page.id, :id => @content.id
+            assigns(:content).should eq(@content)
+          end
+        end
 
 =begin ### default scaffold actions not currently used
 
-    describe "POST create" do
-      describe "with valid params" do
-        it "creates a new Content" do
-          expect {
-            post :create, :page_id => @page.id, :content => valid_attributes
-          }.to change(Content, :count).by(1)
-        end
+        describe "POST create" do
+          describe "with valid params" do
+            it "creates a new Content" do
+              expect {
+                post :create, :page_id => @page.id, :content => valid_attributes
+              }.to change(@klass, :count).by(1)
+            end
 
-        it "assigns a newly created content as @content" do
-          post :create, :page_id => @page.id, :content => valid_attributes
-          assigns(:content).should be_a(Content)
-          assigns(:content).should be_persisted
-        end
+            it "assigns a newly created content as @content" do
+              post :create, :page_id => @page.id, :content => valid_attributes
+              assigns(:content).should be_a(@klass)
+              assigns(:content).should be_persisted
+            end
 
-        it "redirects to the created content" do
-          post :create, :page_id => @page.id, :content => valid_attributes
-          response.should redirect_to(page_content_path(:page_id => @page.id, :id => Content.last.id))
-        end
-      end
+            it "redirects to the created content" do
+              post :create, :page_id => @page.id, :content => valid_attributes
+              response.should redirect_to(page_content_path(:page_id => @page.id, :id => @klass.last.id))
+            end
+          end
 
-      describe "with invalid params" do
-        it "assigns a newly created but unsaved content as @content" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          Content::Text.any_instance.stub(:save).and_return(false)
-          post :create, :page_id => @page.id, :content => {}
-          assigns(:content).should be_a_new(Content)
-        end
+          describe "with invalid params" do
+            it "assigns a newly created but unsaved content as @content" do
+              # Trigger the behavior that occurs when invalid params are submitted
+              @klass.any_instance.stub(:save).and_return(false)
+              post :create, :page_id => @page.id, :content => {}
+              assigns(:content).should be_a_new(@klass)
+            end
 
-        it "re-renders the 'new' template" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          Content::Text.any_instance.stub(:save).and_return(false)
-          post :create, :page_id => @page.id, :content => {}
-          response.should render_template("new")
+            it "re-renders the 'new' template" do
+              # Trigger the behavior that occurs when invalid params are submitted
+              @klass.any_instance.stub(:save).and_return(false)
+              post :create, :page_id => @page.id, :content => {}
+              response.should render_template("new")
+            end
+          end
         end
-      end
-    end
 
 =end
 
-    describe "PUT update" do
-      describe "with valid params" do
-        it "updates the requested content" do
-          # Assuming there are no other contents in the database, this
-          # specifies that the Content created on the previous line
-          # receives the :update_attributes message with whatever params are
-          # submitted in the request.
-          Content::Text.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-          put :update, :page_id => @page.id, :id => @content.id, :content_text => {'these' => 'params'}
-        end
+        describe "PUT update" do
+          describe "with valid params" do
+            it "updates the requested content" do
+              # Assuming there are no other contents in the database, this
+              # specifies that the Content created on the previous line
+              # receives the :update_attributes message with whatever params are
+              # submitted in the request.
+              @klass.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+              put :update, :page_id => @page.id, :id => @content.id, @param_key => {'these' => 'params'}
+            end
 
-        it "assigns the requested content as @content" do
-          put :update, :page_id => @page.id, :id => @content.id, :content_text => valid_attributes
-          assigns(:content).should eq(@content)
-        end
+            it "assigns the requested content as @content" do
+              put :update, :page_id => @page.id, :id => @content.id, @param_key => valid_attributes
+              assigns(:content).should eq(@content)
+            end
 
-        it "renders the 'edit' template" do
-          put :update, :page_id => @page.id, :id => @content.id, :content_text => valid_attributes
-          response.should render_template("success")
-        end
-      end
+            it "renders the 'edit' template" do
+              put :update, :page_id => @page.id, :id => @content.id, @param_key => valid_attributes
+              response.should render_template("success")
+            end
+          end
 
-      describe "with invalid params" do
-        it "assigns the content as @content" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          Content::Text.any_instance.stub(:save).and_return(false)
-          put :update, :page_id => @page.id, :id => @content.id, :content_text => {}
-          assigns(:content).should eq(@content)
-        end
+          describe "with invalid params" do
+            it "assigns the content as @content" do
+              # Trigger the behavior that occurs when invalid params are submitted
+              @klass.any_instance.stub(:save).and_return(false)
+              put :update, :page_id => @page.id, :id => @content.id, @param_key => {}
+              assigns(:content).should eq(@content)
+            end
 
-        it "re-renders the 'edit' template" do
-          # Trigger the behavior that occurs when invalid params are submitted
-          Content::Text.any_instance.stub(:save).and_return(false)
-          put :update, :page_id => @page.id, :id => @content.id, :content_text => {}
-          response.should render_template("edit")
+            it "re-renders the 'edit' template" do
+              # Trigger the behavior that occurs when invalid params are submitted
+              @klass.any_instance.stub(:save).and_return(false)
+              put :update, :page_id => @page.id, :id => @content.id, @param_key => {}
+              response.should render_template("edit")
+            end
+          end
         end
-      end
-    end
 
 =begin ### default scaffold actions not currently used
 
-    describe "DELETE destroy" do
-      it "destroys the requested content" do
-        expect {
-          delete :destroy, :page_id => @page.id, :id => @content.id
-        }.to change(Content, :count).by(-1)
-      end
+        describe "DELETE destroy" do
+          it "destroys the requested content" do
+            expect {
+              delete :destroy, :page_id => @page.id, :id => @content.id
+            }.to change(@klass, :count).by(-1)
+          end
 
-      it "redirects to the contents list" do
-        delete :destroy, :page_id => @page.id, :id => @content.id
-        response.should redirect_to(page_contents_path(:page_id => @page.id))
-      end
-    end
+          it "redirects to the contents list" do
+            delete :destroy, :page_id => @page.id, :id => @content.id
+            response.should redirect_to(page_contents_path(:page_id => @page.id))
+          end
+        end
 
 =end
 
+      end
+    end
   end
 end

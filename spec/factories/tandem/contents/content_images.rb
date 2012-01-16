@@ -2,7 +2,6 @@
 
 FactoryGirl.define do
   factory :tandem_content_image, :class => Tandem::Content::Image, :parent => :tandem_content do
-    #type "Tandem::Content::Image"
-    image
+    association :image, :factory => :tandem_image
   end
 end
