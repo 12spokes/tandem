@@ -1,6 +1,3 @@
-#require 'rdoc'
-#RDoc::Markup::ToHtml.new.convert(IO.read('app/helpers/tandem/pages_helper.rb'))
-
 = Tandem
 
 Adds CMS functionality to a rails application as an isolated rails engine.
@@ -11,7 +8,7 @@ Into Gemfile from Local Path:
 
     gem 'tandem', path: '/path/to/12spokes/tandem'
 
-Into environment gems from Github checkout:
+Into environment gems from Github checkout: (NOTE: I haven't actually tried the following)
 
   git clone git@github.com:12spokes/tandem.git tandem
   cd tandem
@@ -38,19 +35,19 @@ and
 
     Tandem::Configuration.user_abilities_proc
 
-To change the url that you wish to serve unauthorized access errors edit:
+To change the url that you wish to serve unauthorized access errors supply a value to:
 
-    Tandem::Configuration.unauthorized_path = '/'
+    Tandem::Configuration.unauthorized_path
 
-By default, the tandem generator copies all tandem layouts to app/views/layouts/tandem. If you wish to move your layouts to another location, edit:
+By default, the tandem generator copies all tandem layouts to app/views/layouts/tandem. If you wish to move your layouts to another location, supply a value to:
 
     Tandem::Configuration.layouts_dir
 
-By default, the uploaded images directly in the asset pipeline at :rails_root/public. To change this location, edit:
+By default, the uploaded images directly in the asset pipeline at :rails_root/public. To change this location, supply a value to:
 
     Tandem::Configuration.uploaded_images_dir
 
-By default, the uploaded images are stored and accessed via the default "paperclip" conventions (see paperclip gem). To change this behavior, edit:
+By default, the uploaded images are stored and accessed via the default "paperclip" conventions (see paperclip gem). To change this behavior, supply a value to:
 
     Tandem::Configuration.uploaded_images_template
 
@@ -89,3 +86,7 @@ Maintained by: Ethan Vizitel -- 12 Spokes
 Modifications by:
 
  - Ethan Vizitel - https://github.com/evizitei - ethan@12spokes.com
+
+//require 'rdoc'
+//RDoc::Markup::ToHtml.new.convert(IO.read('app/helpers/tandem/pages_helper.rb'))
+
