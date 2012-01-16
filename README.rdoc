@@ -1,6 +1,91 @@
-= Tandem
-
-This project rocks and uses MIT-LICENSE.
-
 #require 'rdoc'
 #RDoc::Markup::ToHtml.new.convert(IO.read('app/helpers/tandem/pages_helper.rb'))
+
+= Tandem
+
+Adds CMS functionality to a rails application as an isolated rails engine.
+
+== INSTALL
+
+Into Gemfile from Local Path:
+
+    gem 'tandem', path: '/path/to/12spokes/tandem'
+
+Into environment gems from Github checkout:
+
+  git clone git@github.com:12spokes/tandem.git tandem
+  cd tandem
+  rake build
+  sudo gem install pkg/tandem-*.gem
+
+== CONFIGURATION
+
+  rails g tandem
+  bundle
+  rake db:migrate
+
+== OPTIONS
+
+To modify the route at which tandem mounts (/tandem by default), edit the appropriate line in your routes file (placed for you by the tandem generator).
+
+The tandem generator also creates an initializer at config/initializers/tandem.rb.
+
+To enable ability based features within tandem, edit the blocks assigned to:
+
+    Tandem::Configuration.current_user_proc
+
+and
+
+    Tandem::Configuration.user_abilities_proc
+
+To change the url that you wish to serve unauthorized access errors edit:
+
+    Tandem::Configuration.unauthorized_path = '/'
+
+By default, the tandem generator copies all tandem layouts to app/views/layouts/tandem. If you wish to move your layouts to another location, edit:
+
+    Tandem::Configuration.layouts_dir
+
+By default, the uploaded images directly in the asset pipeline at :rails_root/public. To change this location, edit:
+
+    Tandem::Configuration.uploaded_images_dir
+
+By default, the uploaded images are stored and accessed via the default "paperclip" conventions (see paperclip gem). To change this behavior, edit:
+
+    Tandem::Configuration.uploaded_images_template
+
+== USAGE
+
+To manage CMS content, create and modify layouts at app/views/layouts/tandem. To render user generated content in a layout, use the tandem content helper method:
+
+  tandem_content_tag
+
+or its less verbose aliases:
+
+  tandem_text_tag
+  tandem_image_tag
+
+Please see the default `page` layout for example usage.
+
+After establishing layouts, define user abilities in the initializer (see OPTIONS), and create pages via the tandem UX (which will be mounted at /tandem by default). Specifying which layout to associate to any given page is accomplished as part of the user defined attributes for each page.
+
+== DEPENDENCIES
+
+Note that tandem will introduce three gem dependencies into your project
+
+* slim => https://github.com/stonean/slim.git
+* cancan => https://github.com/ryanb/cancan.git
+* paperclip => https://github.com/thoughtbot/paperclip.git
+
+== LICENSE:
+
+Propritary access only.
+
+== AUTHOR:
+
+Original code by: Jay Crouch -- JDC Consulting, Inc
+Maintained by: Ethan Vizitel -- 12 Spokes
+
+Modifications by:
+
+ - Ethan Vizitel - https://github.com/evizitei - ethan@12spokes.com
