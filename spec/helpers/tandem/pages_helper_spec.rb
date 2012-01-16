@@ -1,17 +1,89 @@
 module Tandem
   require 'spec_helper'
 
-  # Specs in this file have access to a helper object that includes
-  # the PagesHelper. For example:
-  #
-  # describe PagesHelper do
-  #   describe "string concat" do
-  #     it "concats two strings with spaces" do
-  #       helper.concat_strings("this","that").should == "this that"
-  #     end
-  #   end
-  # end
   describe PagesHelper do
-    pending "add some examples to (or delete) #{__FILE__}"
+    Tandem::Content.subclasses.each do |klass|
+      describe "tandem_#{klass.simple_type}_tag" do
+
+        before(:each) do
+          @page = Factory(:tandem_page)
+          helper.stub(:image_content_tag) {''}
+          helper.stub(:can?) {false}
+        end
+
+        it "aliases tandem_content_tag(page, :#{klass.simple_type}, ..." do
+          helper.send("tandem_#{klass.simple_type}_tag".to_sym, @page, 'identifier', { value_attr: 'value' }, { html_attr: 'html value' }).should ==
+              helper.tandem_content_tag(@page, 'identifier', klass.simple_type, { value_attr: 'value' }, { html_attr: 'html value' })
+        end
+      end
+    end
+
+    describe "tandem_content_tag" do
+      it "should render a unique html element containing sub-content" do
+        helper.stub(:can?) {false}
+        @content = Factory(:tandem_content_text)
+        result = helper.tandem_content_tag(@content.page,@content.tag,:text)
+        result.should =~ /id="#{@content.tag}"/
+        result.should =~ /id="#{dom_class(@content)}_#{@content.tag}"/
+      end
+
+      it "should render content specific to the text sub type" do
+        helper.stub(:can?) {false}
+        @content = Factory(:tandem_content_text)
+        helper.should_receive(:image_content_tag).at_most(0)
+        helper.tandem_content_tag(@content.page,@content.tag,:text)
+      end
+
+      it "should render content specific to the image sub type" do
+        helper.stub(:can?) {false}
+        @content = Factory(:tandem_content_image)
+        helper.should_receive(:image_content_tag).once.and_return('')
+        helper.tandem_content_tag(@content.page,@content.tag,:image)
+      end
+
+      it "should include a link if present" do
+        helper.stub(:can?) {false}
+        @content = Factory(:tandem_content_text)
+        helper.tandem_content_tag(@content.page,@content.tag,:text).should =~ /id="tandem_content_link_#{@content.tag}"/
+        @content.class.any_instance.stub(:link?) {false}
+        helper.tandem_content_tag(@content.page,@content.tag,:text).should_not =~ /id="tandem_content_link_#{@content.tag}"/
+      end
+
+      it "should include a toolbar if authorized" do
+        @content = Factory(:tandem_content_text)
+        helper.should_receive(:can?).once.with(:update, @content) {true}
+        helper.tandem_content_tag(@content.page,@content.tag,:text).should =~ /id="tandem_toolbar_#{@content.tag}"/
+        helper.should_receive(:can?).once.with(:update, @content) {false}
+        helper.tandem_content_tag(@content.page,@content.tag,:text).should_not =~ /id="tandem_toolbar_#{@content.tag}"/
+      end
+
+    end
+
+    describe "tandem_navigation_tag" do
+      it "should select the selected page" do
+        @pages = [Factory(:tandem_page),Factory(:tandem_page)]
+        @page = @pages.first
+        result = helper.tandem_navigation_tag(@page)
+
+        result =~ /<div ([^>]*)id="link_tandem_page_#{@page.id}"([^>]*)>/
+        ($1 + $2).should =~ /class="link_tandem_page selected"/
+
+        result =~ /<div ([^>]*)id="link_tandem_page_#{@pages.last.id}"([^>]*)>/
+        ($1 + $2).should =~ /class="link_tandem_page"/
+      end
+    end
+
+    describe "valid_templates" do
+      it "should include all templates defined in the tandem namespace" do
+        path = "#{ENGINE_RAILS_ROOT}/lib/generators/templates"
+        controller.stub(:view_paths) { [path] }
+        Dir["#{path}/layouts/**/*.html*"].each do |template|
+          template_name = template["#{path}/layouts".length+1..-1].split('.').first
+          template_path = template_name.split('/')
+          template_path.shift
+          helper.valid_templates[template_name].should == template_path.join('/')
+        end
+      end
+    end
   end
 end

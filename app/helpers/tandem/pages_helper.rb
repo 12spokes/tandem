@@ -1,17 +1,20 @@
 module Tandem
   module PagesHelper
-    Tandem::Content.subclasses.each do |klass|
-      # tandem_#{klass.simple_type}_tag is provided as an alias of tandem_content_tag,
-      # specifying the type of content through the method name. For example:
-      #
-      #    <%= tandem_image_tag(@page, :test_image) %>
-      #
-      # is equivalent to:
-      #
-      #    <%= tandem_content_tag(@page, :test_image, :image) %>
-      #
-      define_method "tandem_#{klass.simple_type}_tag" do |page, identifier, options = {}, html_options = {}|
-        tandem_content_tag page, identifier, klass.simple_type, options, html_options
+
+    def self.included(base)
+      Tandem::Content.subclasses.each do |klass|
+        # tandem_#{klass.simple_type}_tag is provided as an alias of tandem_content_tag,
+        # specifying the type of content through the method name. For example:
+        #
+        #    <%= tandem_image_tag(@page, :test_image) %>
+        #
+        # is equivalent to:
+        #
+        #    <%= tandem_content_tag(@page, :test_image, :image) %>
+        #
+        base.send(:define_method, "tandem_#{klass.simple_type}_tag") do |page, identifier, options = {}, html_options = {}|
+          tandem_content_tag page, identifier, klass.simple_type, options, html_options
+        end
       end
     end
 
@@ -106,7 +109,7 @@ module Tandem
           id: "tandem_toolbar_#{identifier}",
           class: "tandem_toolbar #{options[:class]}".strip
       }) {
-        link_to("Edit",edit_page_content_path(@page.id,tandem_content.id),{
+        link_to("Edit",edit_page_content_path(page.id,tandem_content.id),{
             id: "tandem_edit_link_#{identifier}",
             class: "tandem_edit_link #{options[:class]}".strip,
             title: "editing #{identifier}"
@@ -121,7 +124,7 @@ module Tandem
       end
     end
 
-    # pending... document this
+    #todo... document this
     def tandem_navigation_tag(selected_page, pages_collection = nil, html_options = {})
       html_options, pages_collection = pages_collection, nil if pages_collection.is_a?(Hash)
       page_groups = (pages_collection || Page.all).inject({}) do |groups, page|
@@ -158,7 +161,7 @@ module Tandem
     end
 
     def valid_templates
-      controller.view_paths.inject({}) do |templates,path|
+      @valid_templates ||= controller.view_paths.inject({}) do |templates,path|
         Dir["#{path}/layouts/**/*.html*"].each do |template|
           template_name = template["#{path}/layouts".length+1..-1].split('.').first
           template_path = template_name.split('/')

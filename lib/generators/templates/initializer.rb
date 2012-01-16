@@ -1,5 +1,7 @@
 Tandem::Configuration.current_user_proc {
-  User.find(session['user_id']) unless session['user_id'].blank?
+  # Uncomment and/or modify the following line once your project has a user model to
+  # derive abilities from
+  # User.find(session['user_id']) unless session['user_id'].blank?
 }
 Tandem::Configuration.user_abilities_proc { |user|
   # Define abilities for the passed in user here. For example:
