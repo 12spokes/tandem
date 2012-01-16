@@ -1,17 +1,26 @@
 module Tandem
   require 'spec_helper'
 
-  # Specs in this file have access to a helper object that includes
-  # the ImagesHelper. For example:
-  #
-  # describe ImagesHelper do
-  #   describe "string concat" do
-  #     it "concats two strings with spaces" do
-  #       helper.concat_strings("this","that").should == "this that"
-  #     end
-  #   end
-  # end
   describe ImagesHelper do
-    pending "add some examples to (or delete) #{__FILE__}"
+    describe "tandem_image_tag" do
+
+      it "accepts a Tandem::Image and html options and returns an image_tag" do
+        image = Factory.build(:tandem_image)
+        result = helper.tandem_image_tag(image, :attr => 'this value')
+        result.should =~ /^<img/
+        result.should =~ /attr="this value"/
+        result =~ /src="(.*)"/
+        $1.should == image.resource.url
+      end
+
+      it "accepts a Tandem::Image and format and returns an image_tag" do
+        image = Factory.build(:tandem_image)
+        result = helper.tandem_image_tag(image, {}, :thumb)
+        result.should =~ /^<img/
+        result =~ /src="([^"]*)"/
+        $1.should == image.resource.url(:thumb)
+      end
+
+    end
   end
 end

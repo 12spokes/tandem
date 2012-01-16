@@ -10,8 +10,8 @@ module Tandem
     before_validation :do_before_validation
     after_save :do_after_save
 
-    def initialize(attributes = {})
-      super
+    def initialize(attributes = {}, options = {})
+      super(attributes,options)
       self.template ||= 'page'
     end
 

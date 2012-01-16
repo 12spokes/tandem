@@ -3,33 +3,47 @@ module Tandem
 
   describe "tandem/pages/show.html.slim" do
     before(:each) do
-      @page = assign(:page, stub_model(Page,
-        :parent_id => 1,
-        :title => "Title",
-        :token => "Token",
-        :layout => "Layout",
-        :template => "Template",
-        :keywords => "Keywords",
-        :description => "Description"
-      ))
+      @page = assign(:page, Factory.build(:tandem_page))
     end
 
-    it "renders attributes in <p>" do
+    it "renders home page unless persisted" do
+      controller.should_receive(:can?).with(:create,@page).once.and_return(true)
+      controller.should_not_receive(:can?).with(:update,@page).and_return(true)
+      controller.should_not_receive(:can?).with(:destroy,@page).and_return(true)
+      controller.should_receive(:can?).with(:index,Page).once.and_return(true)
+
       render
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/1/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Title/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Token/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Layout/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Template/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Keywords/)
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(/Description/)
+
+      assert_select "a", :text => "New Page".to_s, :count => 1
+      assert_select "a", :text => "Edit Page".to_s, :count => 0
+      assert_select "a", :text => "Destroy Page".to_s, :count => 0
+      assert_select "a", :text => "Page Listing".to_s, :count => 1
+
+      rendered.should match(/This is the default page/)
+    end
+  end
+
+  describe "tandem/pages/show.html.slim" do
+    before(:each) do
+      @page = assign(:page, Factory(:tandem_page))
+    end
+
+    it_behaves_like "tandem/pages/view"
+
+    it "renders page if persisted" do
+      controller.should_receive(:can?).with(:create,@page).once.and_return(true)
+      controller.should_receive(:can?).with(:update,@page).once.and_return(true)
+      controller.should_receive(:can?).with(:destroy,@page).once.and_return(true)
+      controller.should_receive(:can?).with(:index,Page).once.and_return(true)
+
+      render
+
+      assert_select "a", :text => "New Page".to_s, :count => 1
+      assert_select "a", :text => "Edit Page".to_s, :count => 1
+      assert_select "a", :text => "Destroy Page".to_s, :count => 1
+      assert_select "a", :text => "Page Listing".to_s, :count => 1
+
+      rendered.should_not match(/This is the default page/)
     end
   end
 end

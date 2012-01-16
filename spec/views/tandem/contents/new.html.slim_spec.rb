@@ -1,6 +1,8 @@
 module Tandem
   require 'spec_helper'
 
+=begin ### default scaffold actions not currently used
+
   describe "tandem/contents/new.html.slim" do
     before(:each) do
       assign(:content, stub_model(Content,
@@ -27,4 +29,5 @@ module Tandem
       end
     end
   end
+=end
 end

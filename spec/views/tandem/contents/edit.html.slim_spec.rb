@@ -2,28 +2,43 @@ module Tandem
   require 'spec_helper'
 
   describe "tandem/contents/edit.html.slim" do
+    include SharedSpecHelpers
     before(:each) do
-      @content = assign(:content, stub_model(Content,
-        :page_id => 1,
-        :type => "",
-        :token => "MyString",
-        :tag => "MyString",
-        :content => "MyText",
-        :bcontent => ""
-      ))
+      @page = assign(:page, Factory(:tandem_page))
+      stub_all_view_helpers
     end
 
-    it "renders the edit content form" do
-      render
+    describe "Sub Type - Tandem::Content::Text" do
+      before(:each) do
+        @content = assign(:content, Factory(:tandem_content_text))
+      end
 
-      # Run the generator again with the --webrat flag if you want to use webrat matchers
-      assert_select "form", :action => contents_path(@content), :method => "post" do
-        assert_select "input#content_page_id", :name => "content[page_id]"
-        assert_select "input#content_type", :name => "content[type]"
-        assert_select "input#content_token", :name => "content[token]"
-        assert_select "input#content_tag", :name => "content[tag]"
-        assert_select "textarea#content_content", :name => "content[content]"
-        assert_select "input#content_bcontent", :name => "content[bcontent]"
+      it "renders the edit content text form" do
+        render
+
+        # Run the generator again with the --webrat flag if you want to use webrat matchers
+        assert_select "form", :action => page_content_path(@page.id,@content.id), :method => "post" do
+          assert_select "textarea#content_text_content", :name => "content[content]"
+          assert_select "input#content_text_link_url", :name => "content[link_url]"
+          assert_select "input#content_text_link_target", :name => "content[link_target]"
+        end
+      end
+    end
+
+    describe "Sub Type - Tandem::Content::Image" do
+      before(:each) do
+        @content = assign(:content, Factory(:tandem_content_image))
+      end
+
+      it "renders the edit content image form" do
+        render
+
+        # Run the generator again with the --webrat flag if you want to use webrat matchers
+        assert_select "form", :action => page_content_path(@page.id,@content.id), :method => "post" do
+          assert_select "input#content_image_image_id", :name => "content[image_id]"
+          assert_select "input#content_image_link_url", :name => "content[link_url]"
+          assert_select "input#content_image_link_target", :name => "content[link_target]"
+        end
       end
     end
   end

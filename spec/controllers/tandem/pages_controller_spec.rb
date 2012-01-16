@@ -21,17 +21,20 @@ module Tandem
   # that an instance is receiving a specific message.
 
   describe Tandem::PagesController do
+    before(:each) do
+      controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
+    end
 
     # This should return the minimal set of attributes required to create a valid
     # Page. As you add validations to Page, be sure to
     # update the return value of this method accordingly.
     def valid_attributes
-      {}
+      Factory.attributes_for(:tandem_page)
     end
 
     describe "GET index" do
       it "assigns all pages as @pages" do
-        page = Page.create! valid_attributes
+        page = Factory(:tandem_page)
         get :index
         assigns(:pages).should eq([page])
       end
@@ -39,8 +42,8 @@ module Tandem
 
     describe "GET show" do
       it "assigns the requested page as @page" do
-        page = Page.create! valid_attributes
-        get :show, :id => page.id
+        page = Factory(:tandem_page)
+        get :show, :id => page.to_param
         assigns(:page).should eq(page)
       end
     end
@@ -54,8 +57,8 @@ module Tandem
 
     describe "GET edit" do
       it "assigns the requested page as @page" do
-        page = Page.create! valid_attributes
-        get :edit, :id => page.id
+        page = Factory(:tandem_page)
+        get :edit, :id => page.to_param
         assigns(:page).should eq(page)
       end
     end
@@ -74,9 +77,9 @@ module Tandem
           assigns(:page).should be_persisted
         end
 
-        it "redirects to the created page" do
+        it "render the 'success' template" do
           post :create, :page => valid_attributes
-          response.should redirect_to(Page.last)
+          response.should render_template("success")
         end
       end
 
@@ -100,42 +103,42 @@ module Tandem
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested page" do
-          page = Page.create! valid_attributes
+          page = Factory(:tandem_page)
           # Assuming there are no other pages in the database, this
           # specifies that the Page created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
           Page.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-          put :update, :id => page.id, :page => {'these' => 'params'}
+          put :update, :id => page.to_param, :page => {'these' => 'params'}
         end
 
         it "assigns the requested page as @page" do
-          page = Page.create! valid_attributes
-          put :update, :id => page.id, :page => valid_attributes
+          page = Factory(:tandem_page)
+          put :update, :id => page.to_param, :page => valid_attributes
           assigns(:page).should eq(page)
         end
 
-        it "redirects to the page" do
-          page = Page.create! valid_attributes
-          put :update, :id => page.id, :page => valid_attributes
-          response.should redirect_to(page)
+        it "render the 'success' template" do
+          page = Factory(:tandem_page)
+          put :update, :id => page.to_param, :page => valid_attributes
+          response.should render_template("success")
         end
       end
 
       describe "with invalid params" do
         it "assigns the page as @page" do
-          page = Page.create! valid_attributes
+          page = Factory(:tandem_page)
           # Trigger the behavior that occurs when invalid params are submitted
           Page.any_instance.stub(:save).and_return(false)
-          put :update, :id => page.id, :page => {}
+          put :update, :id => page.to_param, :page => {}
           assigns(:page).should eq(page)
         end
 
         it "re-renders the 'edit' template" do
-          page = Page.create! valid_attributes
+          page = Factory(:tandem_page)
           # Trigger the behavior that occurs when invalid params are submitted
           Page.any_instance.stub(:save).and_return(false)
-          put :update, :id => page.id, :page => {}
+          put :update, :id => page.to_param, :page => {}
           response.should render_template("edit")
         end
       end
@@ -143,15 +146,15 @@ module Tandem
 
     describe "DELETE destroy" do
       it "destroys the requested page" do
-        page = Page.create! valid_attributes
+        page = Factory(:tandem_page)
         expect {
-          delete :destroy, :id => page.id
+          delete :destroy, :id => page.to_param
         }.to change(Page, :count).by(-1)
       end
 
       it "redirects to the pages list" do
-        page = Page.create! valid_attributes
-        delete :destroy, :id => page.id
+        page = Factory(:tandem_page)
+        delete :destroy, :id => page.to_param
         response.should redirect_to(pages_path)
       end
     end

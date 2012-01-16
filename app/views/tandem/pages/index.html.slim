@@ -23,9 +23,12 @@ table
       td= page.keywords
       td= page.description
       td= link_to 'Show', page
-      td= link_to 'Edit', edit_page_path(page), :class => :page_link
-      td= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete
+      - if can?(:update, page)
+        td= link_to 'Edit', edit_page_path(page), :class => :page_link
+      - if can?(:destroy, page)
+        td= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete
 
 br
 
-= link_to 'New Page', new_page_path, :class => :page_link
+- if can?(:create, ::Tandem::Page)
+  = link_to 'New Page', new_page_path, :class => :page_link, :id => :page_new_link

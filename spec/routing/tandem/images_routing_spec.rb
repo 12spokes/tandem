@@ -34,6 +34,10 @@ module Tandem
         delete("/images/1").should route_to("tandem/images#destroy", :id => "1")
       end
 
+      it "routes to #thumb" do
+        get("/images/1/thumb").should route_to("tandem/images#thumb", :id => "1")
+      end
+
     end
   end
 end
