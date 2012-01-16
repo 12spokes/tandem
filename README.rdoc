@@ -1,6 +1,6 @@
 = Tandem
 
-Adds CMS functionality to a rails application as an isolated rails engine.
+A simple Rails plugin that brings basic CMS functionality to any app. Just drop it in and go.
 
 == INSTALL
 
