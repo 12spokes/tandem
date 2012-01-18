@@ -4,7 +4,7 @@ module Tandem
     #alias_method :formatted_text=, :content=
 
     def formatted_content
-      content.presence || 'Sample Content'
+      content.presence || '<p>Sample Content</p>'
     end
   end
 end

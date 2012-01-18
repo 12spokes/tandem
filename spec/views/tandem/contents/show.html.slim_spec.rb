@@ -1,6 +1,8 @@
 module Tandem
   require 'spec_helper'
 
+=begin ### default scaffold actions not currently used
+
   describe "tandem/contents/show.html.slim" do
     before(:each) do
       @content = assign(:content, stub_model(Content,
@@ -29,4 +31,5 @@ module Tandem
       rendered.should match(//)
     end
   end
+=end
 end

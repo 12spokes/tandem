@@ -1,6 +1,8 @@
 module Tandem
   require 'spec_helper'
 
+=begin ### default scaffold actions not currently used
+
   describe "tandem/contents/index.html.slim" do
     before(:each) do
       assign(:contents, [
@@ -39,4 +41,5 @@ module Tandem
       assert_select "tr>td", :text => "".to_s, :count => 2
     end
   end
+=end
 end

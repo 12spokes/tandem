@@ -30,6 +30,9 @@ Spork.prefork do
   # in spec/support/ and its subdirectories.
   Dir[File.join(ENGINE_RAILS_ROOT, "spec/support/**/*.rb")].each {|f| require f }
 
+  FactoryGirl.definition_file_paths << File.join(ENGINE_RAILS_ROOT, 'spec/factories')
+  FactoryGirl.find_definitions
+
   RSpec.configure do |config|
     # == Mock Framework
     #
