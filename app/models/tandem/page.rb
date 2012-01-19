@@ -2,6 +2,7 @@ module Tandem
   class Page < ActiveRecord::Base
     has_many :contents
     belongs_to :parent, :class_name => 'Page'
+    has_many :children, :class_name => 'Page', :foreign_key => :parent_id
 
     validates :link_label, presence: true, uniqueness: true
     validates :slug, presence: true, uniqueness: true

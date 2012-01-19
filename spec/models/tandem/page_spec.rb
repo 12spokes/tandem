@@ -44,5 +44,18 @@ module Tandem
       it { should include(@top_page) }
       it { should_not include(@child_page) }
     end
+
+    describe 'children' do
+      subject { @top_page }
+
+      before(:each) do
+        @top_page = Factory(:tandem_page)
+        @child_page = Factory(:tandem_page, :parent => @top_page)
+        @other_page = Factory(:tandem_page)
+      end
+
+      its(:children) { should include(@child_page) }
+      its(:children) { should_not include(@other_page) }
+    end
   end
 end
