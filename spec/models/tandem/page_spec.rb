@@ -32,5 +32,17 @@ module Tandem
         Page.reflect_on_association(:parent).macro.should eql(:belongs_to)
       end
     end
+
+    describe 'top_level' do
+      subject { Page.top_level }
+
+      before(:each) do
+        @top_page = Factory(:tandem_page)
+        @child_page = Factory(:tandem_page, :parent => @top_page)
+      end
+
+      it { should include(@top_page) }
+      it { should_not include(@child_page) }
+    end
   end
 end

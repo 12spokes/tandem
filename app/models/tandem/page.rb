@@ -10,6 +10,8 @@ module Tandem
     before_validation :do_before_validation
     after_save :do_after_save
 
+    scope :top_level, where( parent_id: nil )
+
     def initialize(attributes = {}, options = {})
       super(attributes,options)
       self.template ||= 'page'
