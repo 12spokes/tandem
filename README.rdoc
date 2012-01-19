@@ -4,9 +4,9 @@ A simple Rails plugin that brings basic CMS functionality to any app. Just drop 
 
 == INSTALL
 
-Into Gemfile from Local Path:
+Into Gemfile from git:
 
-    gem 'tandem', path: '/path/to/12spokes/tandem'
+    gem 'tandem', :git => 'git@github.com:12spokes/tandem.git'
 
 Into environment gems from Github checkout: (NOTE: I haven't actually tried the following)
 
