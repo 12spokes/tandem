@@ -125,7 +125,7 @@ module Tandem
     end
 
     #todo... document this
-    def tandem_navigation_tag(selected_page, pages_collection = nil, html_options = {})
+    def tandem_navigation_tag(active_page, pages_collection = nil, html_options = {})
       html_options, pages_collection = pages_collection, nil if pages_collection.is_a?(Hash)
       page_groups = (pages_collection || Page.all).inject({}) do |groups, page|
         if groups[page.parent_id.to_s]
@@ -147,8 +147,8 @@ module Tandem
       end
 
       generate = Proc.new do |page|
-        content_tag_for(:li, page, :link, class: "#{page == selected_page ? 'selected' : ''}") do
-          link_to(page.link_label, page_path(page), class: "#{page == selected_page ? 'selected' : ''}") +
+        content_tag_for(:li, page, :link, class: "#{page == active_page ? 'active' : ''}") do
+          link_to(page.link_label, page_path(page), class: "#{page == active_page ? 'active' : ''}") +
           content_tag(:ul) do
             iterate.call(page.id)
           end

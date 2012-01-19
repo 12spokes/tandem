@@ -66,7 +66,7 @@ module Tandem
         result = helper.tandem_navigation_tag(@page)
 
         result =~ /<li ([^>]*)id="link_tandem_page_#{@page.id}"([^>]*)>/
-        ($1 + $2).should =~ /class="link_tandem_page selected"/
+        ($1 + $2).should =~ /class="link_tandem_page active"/
 
         result =~ /<li ([^>]*)id="link_tandem_page_#{@pages.last.id}"([^>]*)>/
         ($1 + $2).should =~ /class="link_tandem_page"/
