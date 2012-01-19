@@ -147,15 +147,15 @@ module Tandem
       end
 
       generate = Proc.new do |page|
-        content_tag_for(:div, page, :link, class: "#{page == selected_page ? 'selected' : ''}") do
+        content_tag_for(:li, page, :link, class: "#{page == selected_page ? 'selected' : ''}") do
           link_to(page.link_label, page_path(page), class: "#{page == selected_page ? 'selected' : ''}") +
-          content_tag(:div, class: 'children') do
+          content_tag(:ul) do
             iterate.call(page.id)
           end
         end
       end
 
-      content_tag(:div, html_options) do
+      content_tag(:ul, html_options) do
         iterate.call
       end
     end

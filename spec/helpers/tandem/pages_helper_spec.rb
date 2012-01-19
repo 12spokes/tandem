@@ -65,10 +65,10 @@ module Tandem
         @page = @pages.first
         result = helper.tandem_navigation_tag(@page)
 
-        result =~ /<div ([^>]*)id="link_tandem_page_#{@page.id}"([^>]*)>/
+        result =~ /<li ([^>]*)id="link_tandem_page_#{@page.id}"([^>]*)>/
         ($1 + $2).should =~ /class="link_tandem_page selected"/
 
-        result =~ /<div ([^>]*)id="link_tandem_page_#{@pages.last.id}"([^>]*)>/
+        result =~ /<li ([^>]*)id="link_tandem_page_#{@pages.last.id}"([^>]*)>/
         ($1 + $2).should =~ /class="link_tandem_page"/
       end
     end
