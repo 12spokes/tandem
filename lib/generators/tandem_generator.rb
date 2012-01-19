@@ -22,11 +22,4 @@ class TandemGenerator < Rails::Generators::Base
   def import_migrations
     rake("tandem:install:migrations")
   end
-
-  def add_gem_dependencies
-    #gem 'tandem', path: '/Library/WebServer/12spokes/tandem'
-    gem 'slim'
-    gem 'cancan'
-    gem 'paperclip'
-  end
 end
