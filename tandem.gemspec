@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Tandem::VERSION
   s.authors     = ["Jay Crouch, Trey Bean"]
   s.email       = ["trey@12spokes.com"]
-  s.homepage    = "www.12spokes.com"
+  s.homepage    = "http://www.12spokes.com"
   s.summary     = "Embed a customizable CMS within an app."
   s.description = "Embed a customizable CMS within an app."
 
