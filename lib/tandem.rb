@@ -21,7 +21,6 @@ module Tandem
     end
 
     def self.current_user
-      debugger
       raise(ConfigurationNotFound.new("Tandem::Configuration.current_user { ... }")) unless @@current_user
       @@current_user
     end
