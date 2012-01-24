@@ -11,7 +11,7 @@ module Tandem
 
       # Run the generator again with the --webrat flag if you want to use webrat matchers
       assert_select "form", :action => page_path(@page), :method => "post" do
-        assert_select "input#page_parent_id", :name => "page[parent_id]"
+        assert_select "input#page_parent_id_", :name => "page[parent_id]"
         assert_select "input#page_title", :name => "page[title]"
         assert_select "input#page_page_label", :name => "page[page_label]"
         assert_select "input#page_link_label", :name => "page[link_label]"
