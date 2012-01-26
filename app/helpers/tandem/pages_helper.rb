@@ -160,19 +160,19 @@ module Tandem
       end
     end
 
-    def valid_templates
-      @valid_templates ||= controller.view_paths.inject({}) do |templates,path|
-        Dir["#{path}/layouts/**/*.html*"].each do |template|
-          template_name = template["#{path}/layouts".length+1..-1].split('.').first
-          template_path = template_name.split('/')
-          if template_path.first.downcase == Configuration.layouts_dir.downcase
-            template_path.shift
+    def valid_layouts
+      @valid_layouts ||= controller.view_paths.inject({}) do |layouts,path|
+        Dir["#{path}/layouts/**/*.html*"].each do |layout|
+          layout_name = layout["#{path}/layouts".length+1..-1].split('.').first
+          layout_path = layout_name.split('/')
+          if layout_path.first.downcase == Configuration.layouts_dir.downcase
+            layout_path.shift
           else
-            template_path.unshift('')
+            layout_path.unshift('')
           end
-          templates[template_name] = template_path.join('/')
+          layouts[layout_name] = layout_path.join('/')
         end
-        templates
+        layouts
       end
     end
   end

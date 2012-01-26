@@ -57,7 +57,7 @@ module Tandem
       end
 
       context "page with a custom layout" do
-        let(:page) { Factory(:tandem_page, :template => 'custom_layout') }
+        let(:page) { Factory(:tandem_page, :layout => 'custom_layout') }
 
         it "should render the custom_layout layout" do
           get :show, :id => page.to_param

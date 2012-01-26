@@ -17,7 +17,7 @@ module Tandem
       assert_select "tr>th", :text => "Link Label".to_s, :count => 1
       assert_select "tr>th", :text => "Page Label".to_s, :count => 1
       assert_select "tr>th", :text => "Page Title".to_s, :count => 1
-      assert_select "tr>th", :text => "Template".to_s, :count => 1
+      assert_select "tr>th", :text => "Layout".to_s, :count => 1
       assert_select "tr>th", :text => "Keywords".to_s, :count => 1
       assert_select "tr>th", :text => "Description".to_s, :count => 1
       assert_select "a", :text => "Show".to_s, :count => 2

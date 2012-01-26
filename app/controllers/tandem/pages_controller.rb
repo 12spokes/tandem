@@ -90,7 +90,7 @@ module Tandem
     def pages_layout
       case params[:action]
         when 'show', 'home'
-          @page.template || 'application'
+          @page.layout || 'application'
         when 'new', 'create', 'edit', 'update'
           'tandem/popup'
         else
