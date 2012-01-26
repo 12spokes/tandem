@@ -1,6 +1,5 @@
 module Tandem
   class ApplicationController < ActionController::Base
-    include ApplicationControllerDevelopmentHack if defined? ApplicationControllerDevelopmentHack
     check_authorization
 
     rescue_from CanCan::AccessDenied do |exception|
