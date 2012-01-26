@@ -46,6 +46,24 @@ module Tandem
         get :show, :id => page.to_param
         assigns(:page).should eq(page)
       end
+
+      context "page without a custom layout set" do
+        let(:page) { Factory(:tandem_page) }
+
+        it "should render the application layout" do
+          get :show, :id => page.to_param
+          response.should render_template("layouts/application")
+        end
+      end
+
+      context "page with a custom layout" do
+        let(:page) { Factory(:tandem_page, :template => 'custom_layout') }
+
+        it "should render the custom_layout layout" do
+          get :show, :id => page.to_param
+          response.should render_template("layouts/custom_layout")
+        end
+      end
     end
 
     describe "GET new" do

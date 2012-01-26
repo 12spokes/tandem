@@ -1,7 +1,7 @@
 module Tandem
   class PagesController < ApplicationController
     load_and_authorize_resource :except => :home, :find_by => :slug
-    layout :resource_layout
+    layout :pages_layout
 
     # GET /pages/home
     # GET /pages.home.json
@@ -87,14 +87,14 @@ module Tandem
 
     private
 
-    def resource_layout
+    def pages_layout
       case params[:action]
         when 'show', 'home'
-          layout_path(@page.new_record? ? :default : @page.template.presence || :page)
+          @page.template || 'application'
         when 'new', 'create', 'edit', 'update'
-          layout_path :popup
+          'tandem/popup'
         else
-          layout_path :default
+          'application'
       end
     end
   end
