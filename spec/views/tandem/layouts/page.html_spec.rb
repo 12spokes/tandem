@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "../../lib/generators/templates/layouts/tandem/page.html.erb" do
+  describe "layouts/tandem/page.html.erb" do
     include SharedSpecHelpers
     before(:each) do
       @page = assign(:page, Factory.build(:tandem_page))
