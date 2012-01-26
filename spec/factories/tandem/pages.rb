@@ -11,7 +11,6 @@ FactoryGirl.define do
     title "value for title"
     page_label "value for page label"
     link_label
-    template nil
     keywords "value for keywords"
     description "value for description"
     slug
