@@ -1,8 +1,5 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-//
-//= require tandem/jquery.colorbox
-//= require tandem/contents
 
 bind_tandem_events = function(container) {
   container.find('.tandem_content').hover(
