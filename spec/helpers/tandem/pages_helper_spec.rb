@@ -74,15 +74,12 @@ module Tandem
     end
 
     describe "valid_layouts" do
-      it "should include all layouts defined in the tandem namespace" do
-        path = "#{ENGINE_RAILS_ROOT}/lib/generators/layouts"
-        controller.stub(:view_paths) { [path] }
-        Dir["#{path}/layouts/**/*.html*"].each do |layout|
-          layout_name = layout["#{path}/layouts".length+1..-1].split('.').first
-          layout_path = layout_name.split('/')
-          layout_path.shift
-          helper.valid_layouts[layout_name].should == layout_path.join('/')
-        end
+      it "should not include layouts defined in the tandem namespace" do
+        helper.valid_layouts.should_not include('tandem/image')
+      end
+
+      it "should include layouts in host app" do
+        helper.valid_layouts.should include('application')
       end
     end
   end

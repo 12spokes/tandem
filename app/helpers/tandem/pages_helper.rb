@@ -161,18 +161,8 @@ module Tandem
     end
 
     def valid_layouts
-      @valid_layouts ||= controller.view_paths.inject({}) do |layouts,path|
-        Dir["#{path}/layouts/**/*.html*"].each do |layout|
-          layout_name = layout["#{path}/layouts".length+1..-1].split('.').first
-          layout_path = layout_name.split('/')
-          if layout_path.first.downcase == Configuration.layouts_dir.downcase
-            layout_path.shift
-          else
-            layout_path.unshift('')
-          end
-          layouts[layout_name] = layout_path.join('/')
-        end
-        layouts
+      @valid_layouts ||= Dir["#{::Rails.root}/app/views/layouts/**/*.html*"].collect do |layout|
+        layout.match(/layouts\/([\w-\/]*)((\.\w*){2})$/)[1]
       end
     end
   end
