@@ -9,7 +9,7 @@ module Tandem
       @page = Page.where(is_default: true).first || Page.first || Page.new
       authorize!('index', Page)
       respond_to do |format|
-        format.html { render action: "show", notice: @page.new_record? ? 'No Pages Found.' : '' }
+        format.html { render (@page.template.present? ? @page.template : 'show'), notice: @page.new_record? ? 'No Pages Found.' : '' }
         format.json { render json: @page }
       end
     end
@@ -27,7 +27,7 @@ module Tandem
     # GET /pages/1.json
     def show
       respond_to do |format|
-        format.html # show.html.erb
+        format.html { render @page.template if @page.template.present? }
         format.json { render json: @page }
       end
     end
