@@ -162,7 +162,7 @@ module Tandem
 
     def valid_layouts
       @valid_layouts ||= Dir["#{::Rails.root}/app/views/layouts/**/*.html*"].collect do |layout|
-        name = layout.match(/layouts\/([\w-\/]*)((\.\w*){2})$/)[1]
+        name = layout.match(/layouts\/([\w\-\/]*)((\.\w*){2})$/)[1]
         name unless name == 'application'
       end.compact
     end
