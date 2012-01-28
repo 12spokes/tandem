@@ -27,7 +27,7 @@
     = f.text_field :slug
   .field
     = f.label :layout
-    = f.select :layout, options_for_select(valid_layouts,@page.layout)
+    = f.select :layout, options_for_select(valid_layouts,@page.layout), :include_blank => true
   .field
     = f.label :keywords
     = f.text_field :keywords
