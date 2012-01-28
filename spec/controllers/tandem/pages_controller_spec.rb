@@ -21,10 +21,6 @@ module Tandem
   # that an instance is receiving a specific message.
 
   describe Tandem::PagesController do
-    before(:each) do
-      controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
-    end
-
     # This should return the minimal set of attributes required to create a valid
     # Page. As you add validations to Page, be sure to
     # update the return value of this method accordingly.
@@ -45,6 +41,24 @@ module Tandem
         page = Factory(:tandem_page)
         get :show, :id => page.to_param
         assigns(:page).should eq(page)
+      end
+
+      context "page without a custom layout set" do
+        let(:page) { Factory(:tandem_page) }
+
+        it "should render the application layout" do
+          get :show, :id => page.to_param
+          response.should render_template("layouts/application")
+        end
+      end
+
+      context "page with a custom layout" do
+        let(:page) { Factory(:tandem_page, :layout => 'custom_layout') }
+
+        it "should render the custom_layout layout" do
+          get :show, :id => page.to_param
+          response.should render_template("layouts/custom_layout")
+        end
       end
     end
 

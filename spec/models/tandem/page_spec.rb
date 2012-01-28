@@ -9,6 +9,7 @@ module Tandem
         :title => "value for title",
         :page_label => "value for page label",
         :link_label => "value for link label",
+        :layout => "value for layout",
         :template => "value for template",
         :keywords => "value for keywords",
         :description => "value for description",

@@ -30,7 +30,6 @@ module Tandem
         # Content. As you add validations to Content, be sure to
         # update the return value of this method accordingly.
         before(:each) do
-          controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
           @page = Factory(:tandem_page)
           @factory = "tandem_content_#{sub_type.simple_type}"
           @content = Factory(@factory, :page => @page)

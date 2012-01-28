@@ -13,11 +13,6 @@ module Tandem
 
     scope :top_level, where( parent_id: nil )
 
-    def initialize(attributes = {}, options = {})
-      super(attributes,options)
-      self.template ||= 'page'
-    end
-
     def to_param
       persisted? ? slug : nil
     end
