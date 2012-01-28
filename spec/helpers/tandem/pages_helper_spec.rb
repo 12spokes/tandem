@@ -78,9 +78,14 @@ module Tandem
         helper.valid_layouts.should_not include('tandem/image')
       end
 
-      it "should include layouts in host app" do
-        helper.valid_layouts.should include('application')
+      it "should include not include the default application layout" do
+        helper.valid_layouts.should_not include('application')
       end
+
+      it "should include a custom layout defined in the host app" do
+        helper.valid_layouts.should include('custom_layout')
+      end
+
     end
   end
 end
