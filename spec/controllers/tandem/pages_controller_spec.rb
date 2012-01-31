@@ -45,21 +45,48 @@ module Tandem
 
       context "page without a custom layout set" do
         let(:page) { Factory(:tandem_page) }
+        subject { get :show, :id => page.to_param }
 
-        it "should render the application layout" do
-          get :show, :id => page.to_param
-          response.should render_template("layouts/application")
-        end
+        it { should render_template("layouts/application") }
       end
 
       context "page with a custom layout" do
         let(:page) { Factory(:tandem_page, :layout => 'custom_layout') }
+        subject { get :show, :id => page.to_param }
 
-        it "should render the custom_layout layout" do
-          get :show, :id => page.to_param
-          response.should render_template("layouts/custom_layout")
-        end
+        it { should render_template("layouts/custom_layout") }
       end
+
+      context "page without a custom template set" do
+        let(:page) { Factory(:tandem_page) }
+        subject { get :show, :id => page.to_param }
+
+        it { should render_template("tandem/pages/show") }
+      end
+
+      context "page with a custom template" do
+        let(:page) { Factory(:tandem_page, :template => 'custom_template') }
+        subject { get :show, :id => page.to_param }
+
+        it { should render_template("tandem/pages/custom_template") }
+      end
+    end
+
+    describe "Get home" do
+      context "page without a custom template set" do
+        before(:each) { Factory(:tandem_page, is_default: true) }
+        subject { get :home }
+
+        it { should render_template("tandem/pages/show") }
+      end
+
+      context "page with a custom template" do
+        before(:each) { Factory(:tandem_page, template: 'custom_template', is_default: true) }
+        subject { get :home }
+
+        it { should render_template("tandem/pages/custom_template") }
+      end
+
     end
 
     describe "GET new" do
