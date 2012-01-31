@@ -20,10 +20,6 @@ module Tandem
   # that an instance is receiving a specific message.
 
   describe ImagesController do
-    before(:each) do
-      controller.append_view_path(File.join(ENGINE_RAILS_ROOT,'/lib/generators/templates'))
-    end
-
     # This should return the minimal set of attributes required to create a valid
     # Image. As you add validations to Image, be sure to
     # update the return value of this method accordingly.

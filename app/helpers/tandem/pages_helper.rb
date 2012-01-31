@@ -160,20 +160,11 @@ module Tandem
       end
     end
 
-    def valid_templates
-      @valid_templates ||= controller.view_paths.inject({}) do |templates,path|
-        Dir["#{path}/layouts/**/*.html*"].each do |template|
-          template_name = template["#{path}/layouts".length+1..-1].split('.').first
-          template_path = template_name.split('/')
-          if template_path.first.downcase == Configuration.layouts_dir.downcase
-            template_path.shift
-          else
-            template_path.unshift('')
-          end
-          templates[template_name] = template_path.join('/')
-        end
-        templates
-      end
+    def valid_layouts
+      @valid_layouts ||= Dir["#{::Rails.root}/app/views/layouts/**/*.html*"].collect do |layout|
+        name = layout.match(/layouts\/([\w-\/]*)((\.\w*){2})$/)[1]
+        name unless name == 'application'
+      end.compact
     end
   end
 

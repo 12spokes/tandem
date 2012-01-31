@@ -26,8 +26,8 @@
     = f.label :slug
     = f.text_field :slug
   .field
-    = f.label :template
-    = f.select :template, options_for_select(valid_templates,@page.template)
+    = f.label :layout
+    = f.select :layout, options_for_select(valid_layouts,@page.layout), :include_blank => true
   .field
     = f.label :keywords
     = f.text_field :keywords

@@ -9,7 +9,7 @@ module Tandem
       end
       view.stub(:tandem_content_tag) {''}
       view.stub(:tandem_navigation_tag) {''}
-      view.stub(:valid_templates) {''}
+      view.stub(:valid_layouts) {''}
     end
   end
 

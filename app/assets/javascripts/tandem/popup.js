@@ -1,7 +1,5 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-//
-//= require tandem/wymeditor/jquery.wymeditor.js
 
 $().ready(function () {
   if($('#success_data').length != 0) {

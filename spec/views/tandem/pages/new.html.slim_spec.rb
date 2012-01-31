@@ -15,6 +15,7 @@ module Tandem
         assert_select "input#page_title", :name => "page[title]"
         assert_select "input#page_page_label", :name => "page[page_label]"
         assert_select "input#page_link_label", :name => "page[link_label]"
+        assert_select "select#page_layout", :name => "page[layout]"
         assert_select "select#page_template", :name => "page[template]"
         assert_select "input#page_keywords", :name => "page[keywords]"
         assert_select "input#page_description", :name => "page[description]"

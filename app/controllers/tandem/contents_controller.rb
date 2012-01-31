@@ -1,7 +1,7 @@
 module Tandem
   class ContentsController < ApplicationController
     load_and_authorize_resource :page, :class => "Tandem::Page"
-    layout :resource_layout
+    layout 'tandem/popup'
 
 =begin ### default scaffold actions not currently used
     # GET /contents
@@ -101,10 +101,6 @@ module Tandem
 
     def authorize_content!
       authorize!(params[:action], @content || Content)
-    end
-
-    def resource_layout
-      layout_path :popup
     end
   end
 end

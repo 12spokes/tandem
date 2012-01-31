@@ -11,33 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 30000000000001) do
+ActiveRecord::Schema.define(:version => 30000000000000) do
 
   create_table "tandem_contents", :force => true do |t|
     t.integer  "page_id",                                      :null => false
     t.string   "type",                                         :null => false
     t.string   "tag",                                          :null => false
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.text     "details"
     t.string   "link_url"
     t.string   "link_target"
     t.integer  "attachment_id"
     t.string   "attachment_type", :default => "Tandem::Image"
     t.integer  "image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "tandem_contents", ["page_id", "type", "tag"], :name => "index_tandem_contents_on_page_id_and_type_and_tag", :unique => true
   add_index "tandem_contents", ["page_id"], :name => "index_tandem_contents_on_page_id"
 
   create_table "tandem_images", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "resource_file_name"
     t.string   "resource_content_type"
     t.integer  "resource_file_size"
     t.datetime "resource_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tandem_pages", :force => true do |t|
@@ -45,13 +45,14 @@ ActiveRecord::Schema.define(:version => 30000000000001) do
     t.string   "title"
     t.string   "page_label"
     t.string   "link_label",                     :null => false
+    t.string   "layout"
     t.string   "template"
     t.string   "keywords"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "slug",                           :null => false
     t.boolean  "is_default",  :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "tandem_pages", ["parent_id"], :name => "index_tandem_pages_on_parent_id"

@@ -3,7 +3,7 @@ module Tandem
     load_and_authorize_resource
     skip_load_and_authorize_resource :only => :thumb
     skip_authorization_check :only => :thumb
-    layout :image_gallery_layout
+    layout 'tandem/image'
 
     # GET /images
     # GET /images.json
@@ -89,10 +89,5 @@ module Tandem
     end
 
     private
-
-    def image_gallery_layout
-      layout_path :image
-    end
-
   end
 end
