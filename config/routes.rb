@@ -6,6 +6,10 @@ Tandem::Engine.routes.draw do
   end
 
   resources :pages do
+    collection do
+      get :home
+    end
+
     resources :contents, :only => [:edit, :update]
   end
 

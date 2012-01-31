@@ -162,10 +162,25 @@ module Tandem
 
     def valid_layouts
       @valid_layouts ||= Dir["#{::Rails.root}/app/views/layouts/**/*.html*"].collect do |layout|
-        name = layout.match(/layouts\/([\w-\/]*)((\.\w*){2})$/)[1]
+        name = layout.match(/layouts\/([\w\-\/]*)((\.\w*){2})$/)[1]
         name unless name == 'application'
       end.compact
     end
-  end
 
+    def valid_templates
+      @valid_templates ||= Dir["#{::Rails.root}/app/views/tandem/pages/**/*.*.*"].collect do |template|
+        template_name = File.basename(template).split('.').first
+        template_name if valid_custom_template?(template_name)
+      end.compact
+    end
+
+    private
+      def invalid_templates
+        ['show', 'edit', 'index', 'new', 'success']
+      end
+
+      def valid_custom_template?(template_name)
+        template_name[0] != '_' && !invalid_templates.include?(template_name)
+      end
+  end
 end

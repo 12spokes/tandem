@@ -87,5 +87,47 @@ module Tandem
       end
 
     end
+
+    describe "valid_templates" do
+      it "should include custom templates in the host app" do
+        helper.valid_templates.should include('custom_template')
+      end
+
+      context "with a custom show template" do
+        filename = "#{::Rails.root}/app/views/tandem/pages/show.html.slim"
+        
+        before(:each) do
+          File.open(filename, "w") {}
+        end
+
+        after(:each) do
+          File.delete(filename)
+        end
+
+        it "should not include it" do
+          helper.valid_templates.should_not include('show')
+        end
+      end
+
+      context "with a custom edit template" do
+        filename = "#{::Rails.root}/app/views/tandem/pages/edit.html.slim"
+        
+        before(:each) do
+          File.open(filename, "w") {}
+        end
+
+        after(:each) do
+          File.delete(filename)
+        end
+        
+        it "should not include it" do
+          helper.valid_templates.should_not include('edit')
+        end
+      end
+
+      it "should not include any partials" do
+        helper.valid_templates.select { |template| template[0] == '_' }.should be_empty
+      end
+    end
   end
 end
