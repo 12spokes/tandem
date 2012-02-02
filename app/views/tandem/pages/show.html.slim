@@ -10,6 +10,14 @@ p#notice = notice
   - if can?(:index, ::Tandem::Page)
     = link_to 'Page Listing', pages_path
 
+.hero-unit
+  = tandem_text_tag(@page, :hero_text)
+
+.row
+  .span8
+    = tandem_text_tag(@page, :main_text)
+  .span4
+    = tandem_text_tag(@page, :sidebar_text)
 
 - unless @page.persisted?
   | This is the default page content and should tell the user to go create a page
