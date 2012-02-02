@@ -73,6 +73,40 @@ module Tandem
       end
     end
 
+    describe "tandem_page_links" do
+      context 'with full editing abilities' do
+        before(:each) do
+          helper.stub(:can?).and_return(true)
+        end
+
+        context 'for a new page' do
+          before(:each) do
+            assign(:page, Factory.build(:tandem_page))
+          end
+
+          subject { helper.tandem_page_links }
+
+          it { should match(/New Page/) }
+          it { should_not match(/Edit Page/) }
+          it { should_not match(/Destroy Page/) }
+          it { should match(/Page Listing/) }
+        end
+
+        context 'for a persisted page' do
+          before(:each) do
+            assign(:page, Factory(:tandem_page))
+          end
+
+          subject { helper.tandem_page_links }
+
+          it { should match(/New Page/) }
+          it { should match(/Edit Page/) }
+          it { should match(/Destroy Page/) }
+          it { should match(/Page Listing/) }
+        end
+      end
+    end
+
     describe "valid_layouts" do
       it "should not include layouts defined in the tandem namespace" do
         helper.valid_layouts.should_not include('tandem/image')

@@ -160,6 +160,37 @@ module Tandem
       end
     end
 
+    def tandem_page_links(options ={})
+      options[:id] ||= 'page_links'
+      options[:class] ||= 'nav'
+
+      content_tag(:ul, options) do
+        links = []
+        
+        if can?(:create, @page)
+          links << link_to('New Page', new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link)
+        end
+
+        if @page.persisted? && can?(:update, @page)
+          links << link_to('Edit Page', edit_page_path(@page), :class => :page_link, :id => :page_edit_link)
+        end
+
+        if @page.persisted? && can?(:destroy, @page)
+          links << link_to('Destroy Page', @page, :confirm => 'Are you sure?', :method => :delete)
+        end
+
+        if can?(:index, ::Tandem::Page)
+          links << link_to('Page Listing', pages_path)
+        end
+
+        links.collect! do |link|
+          content_tag(:li, link)
+        end
+
+        raw(links.join)
+      end
+    end
+
     def valid_layouts
       @valid_layouts ||= Dir["#{::Rails.root}/app/views/layouts/**/*.html*"].collect do |layout|
         name = layout.match(/layouts\/([\w\-\/]*)((\.\w*){2})$/)[1]
