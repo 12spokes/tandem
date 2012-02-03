@@ -7,11 +7,11 @@ require "tandem/version"
 Gem::Specification.new do |s|
   s.name        = "tandem"
   s.version     = Tandem::VERSION
-  s.authors     = ["Jay Crouch, Trey Bean"]
-  s.email       = ["trey@12spokes.com"]
+  s.authors     = ['12 Spokes', 'Trey Bean', 'Jay Crouch', 'Ethan Vizitei', 'Colleen Palmer']
+  s.email       = ["tandem@12spokes.com"]
   s.homepage    = "http://www.12spokes.com"
-  s.summary     = "Embed a customizable CMS within an app."
-  s.description = "Embed a customizable CMS within an app."
+  s.summary     = "A lightweight CMS for Rails 3.1+"
+  s.description = "A lightweight CMS for Rails 3.1+"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
