@@ -107,8 +107,11 @@ authentication and authorization.
 
 == Other Options
 
-To modify the route at which tandem mounts (/tandem by default), edit the appropriate 
-line in your routes file (placed for you by the tandem generator).
+By default, Tandem mounts to the root of your application. We're not trying to be pushy, 
+it's just what we find ourselves doing 90% of the time. To change this, simply modify your
+config/routes.rb to something like:
+
+    mount Tandem::Engine => "/tandem"
 
 To change the url that you wish to serve unauthorized access errors supply a value to:
 
