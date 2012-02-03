@@ -1,92 +1,136 @@
-= Tandem
+= Tandem CMS
 
-A simple Rails plugin that brings basic CMS functionality to any app. Just drop it in and go.
+Tandme is a content management system (CMS) for Rails 3.1+. We felt like it was 
+needed because too many of the CMS options for Rails are either 
+unpolished—something we wouldn't want to put in front of our clients or bloated
+and heavy, causing many headaches when trying to integrate into existing 
+applications. 
 
-== INSTALL
+Tandem was designed to be as simple as can be to integrate into a 
+larger application. It's a mountable engine that allows you to easily specify
+how it fits into a larger application and doesn't bring any opinions about how
+that application is architected.
 
-Into Gemfile from git:
+The simplicity doesn't stop there, though. It also has the end user in mind. 
+Through in-place editing, users simply navigate their site like they normally 
+would. If they want to edit something, they simply click on it, edit it, and go
+on their merry way.
 
-    gem 'tandem', :git => 'git@github.com:12spokes/tandem.git'
+It's early in the life of Tandem and we have lots in store, but it's something 
+we find useful and hope you will too.
 
-Into environment gems from Github checkout: (NOTE: I haven't actually tried the following)
+== Getting Started
 
-  git clone git@github.com:12spokes/tandem.git tandem
-  cd tandem
-  rake build
-  sudo gem install pkg/tandem-*.gem
+Has it ever been easier to check off that "CMS functionality" feature story?
 
-== CONFIGURATION
+This assumes you have a rails app already. If you don't, <tt>rails new tanem_app</tt>
 
-  rails g tandem
-  bundle
-  rake db:migrate
+1. Add the tandem gem to your Gemfile
 
-== OPTIONS
+    gem 'tandem'
 
-To modify the route at which tandem mounts (/tandem by default), edit the appropriate line in your routes file (placed for you by the tandem generator).
+2. Install the gem
 
-The tandem generator also creates an initializer at config/initializers/tandem.rb.
+    bundle install
 
-To enable ability based features within tandem, edit the blocks assigned to:
+3. Generate the tandem files
 
-    Tandem::Configuration.current_user_proc
+    rails g tandem
 
-and
+4. Migrate
 
-    Tandem::Configuration.user_abilities_proc
+    rake db:migrate
+
+5. Start your app and you're ready to go.
+
+    rails s
+
+== Usage
+
+By default, Tandem uses your application layout and Tandem's pages/show template to
+render pages. Both of these can be customized for an individual page.
+
+=== Custom pages
+
+With Tandem, you can easily insert editable content into your page by using the simple 
+helpers, <tt>tandem_text_tag</tt> and <tt>tandem_image_tag</tt>.
+
+Simply insert those into your templates where you want the user to be able to 
+edit content and Tandem will take care of the rest.
+
+    <div id="sidebar">
+      <%= tandem_image_tag(@page, :sidebar_image)
+      <%= tandem_text_tag(@page, :sidebar_text)
+    </div>
+
+=== Navigation
+
+Tandem comes with a helper method to add a navigation menu. It's not included in the default
+views, since it will most likely be used in your app's application layout. Adding it is easy,
+though.
+
+    <%= tandem_navigation_tag(@page) %>
+
+By default, Tandem will produce a nested tree of all your pages. If you just want the top level:
+
+    <%= tandem_navigation_tag(@page, Page.top_level) %>
+
+You can also create submenus easily by passing in a collection of pages, e.g.
+
+    <%= tandem_navigation_tag(@page, Page.find_by_title('Services').children) %>
+
+== Authentication
+
+Now, most apps don't simply want to let anyone edit content. Tandem allows you to easily
+specify how it should control access.
+
+Inside config/initializers/tandem.rb, you can define procs for Tandem to use for 
+authentication and authorization.
+
+1. Tell Tandem how to find the current_user
+
+    Tandem::Configuration.current_user_proc {
+      User.find(session['user_id']) unless session['user_id'].blank?
+    }
+
+2. Define what each user can do using CanCan
+
+    Tandem::Configuration.user_abilities_proc { |user|
+      user ||= User.new # guest user (not logged in)
+
+      if user.admin?
+        can :manage, :all
+      else
+        can :read, :all
+      end
+    }
+
+== Other Options
+
+To modify the route at which tandem mounts (/tandem by default), edit the appropriate 
+line in your routes file (placed for you by the tandem generator).
 
 To change the url that you wish to serve unauthorized access errors supply a value to:
 
     Tandem::Configuration.unauthorized_path
 
-By default, the tandem generator copies all tandem layouts to app/views/layouts/tandem. If you wish to move your layouts to another location, supply a value to:
+By default, the tandem generator copies all tandem layouts to app/views/layouts/tandem. 
+If you wish to move your layouts to another location, supply a value to:
 
     Tandem::Configuration.layouts_dir
 
-By default, the uploaded images directly in the asset pipeline at :rails_root/public. To change this location, supply a value to:
+By default, the uploaded images directly in the asset pipeline at :rails_root/public. 
+To change this location, supply a value to:
 
     Tandem::Configuration.uploaded_images_dir
 
-By default, the uploaded images are stored and accessed via the default "paperclip" conventions (see paperclip gem). To change this behavior, supply a value to:
+By default, the uploaded images are stored and accessed via the default "paperclip" 
+conventions (see paperclip gem). To change this behavior, supply a value to:
 
     Tandem::Configuration.uploaded_images_template
 
-== USAGE
+== License
 
-To manage CMS content, create and modify layouts at app/views/layouts/tandem. To render user generated content in a layout, use the tandem content helper method:
+Tandem is released under the MIT license:
 
-  tandem_content_tag
-
-or its less verbose aliases:
-
-  tandem_text_tag
-  tandem_image_tag
-
-Please see the default `page` layout for example usage.
-
-After establishing layouts, define user abilities in the initializer (see OPTIONS), and create pages via the tandem UX (which will be mounted at /tandem by default). Specifying which layout to associate to any given page is accomplished as part of the user defined attributes for each page.
-
-== DEPENDENCIES
-
-Note that tandem will introduce three gem dependencies into your project
-
-* slim => https://github.com/stonean/slim.git
-* cancan => https://github.com/ryanb/cancan.git
-* paperclip => https://github.com/thoughtbot/paperclip.git
-
-== LICENSE:
-
-Propritary access only.
-
-== AUTHOR:
-
-Original code by: Jay Crouch -- JDC Consulting, Inc
-Maintained by: Ethan Vizitel -- 12 Spokes
-
-Modifications by:
-
- - Ethan Vizitel - https://github.com/evizitei - ethan@12spokes.com
-
-//require 'rdoc'
-//RDoc::Markup::ToHtml.new.convert(IO.read('app/helpers/tandem/pages_helper.rb'))
-
+* http://www.opensource.org/licenses/MIT
