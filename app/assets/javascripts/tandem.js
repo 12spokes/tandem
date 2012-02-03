@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //
-//= require_tree './tandem'
+//= require tandem/jquery.colorbox
+//= require tandem/pages

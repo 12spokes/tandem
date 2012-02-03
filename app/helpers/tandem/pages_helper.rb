@@ -127,6 +127,9 @@ module Tandem
     #todo... document this
     def tandem_navigation_tag(active_page, pages_collection = nil, html_options = {})
       html_options, pages_collection = pages_collection, nil if pages_collection.is_a?(Hash)
+
+      html_options[:class] ||= 'nav'
+
       page_groups = (pages_collection || Page.all).inject({}) do |groups, page|
         if groups[page.parent_id.to_s]
           groups[page.parent_id.to_s] << page
@@ -157,6 +160,37 @@ module Tandem
 
       content_tag(:ul, html_options) do
         iterate.call
+      end
+    end
+
+    def tandem_page_links(options ={})
+      options[:id] ||= 'page_links'
+      options[:class] ||= 'nav'
+
+      content_tag(:ul, options) do
+        links = []
+        
+        if can?(:create, @page)
+          links << link_to('New Page', new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link)
+        end
+
+        if @page.persisted? && can?(:update, @page)
+          links << link_to('Edit Page', edit_page_path(@page), :class => :page_link, :id => :page_edit_link)
+        end
+
+        if @page.persisted? && can?(:destroy, @page)
+          links << link_to('Destroy Page', @page, :confirm => 'Are you sure?', :method => :delete)
+        end
+
+        if can?(:index, ::Tandem::Page)
+          links << link_to('Page Listing', pages_path)
+        end
+
+        links.collect! do |link|
+          content_tag(:li, link)
+        end
+
+        raw(links.join)
       end
     end
 
