@@ -12,7 +12,7 @@ class TandemGenerator < Rails::Generators::Base
   end
 
   def add_mounting_route
-    route('mount Tandem::Engine => "/tandem"')
+    route('mount Tandem::Engine => "/"')
   end
 
   def import_migrations
