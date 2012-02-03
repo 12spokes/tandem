@@ -127,6 +127,9 @@ module Tandem
     #todo... document this
     def tandem_navigation_tag(active_page, pages_collection = nil, html_options = {})
       html_options, pages_collection = pages_collection, nil if pages_collection.is_a?(Hash)
+
+      html_options[:class] ||= 'nav'
+
       page_groups = (pages_collection || Page.all).inject({}) do |groups, page|
         if groups[page.parent_id.to_s]
           groups[page.parent_id.to_s] << page
