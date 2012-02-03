@@ -27,14 +27,6 @@ $().ready(function () {
            location.reload();
   }})
   bind_tandem_events($('body'))
-
-  jQuery('.wymeditor').wymeditor({
-
-        html: '<p>Hello, World!<\/p>',
-        stylesheet: 'styles.css',
-        skin: 'twopanels'
-
-    });
 })
 
 
