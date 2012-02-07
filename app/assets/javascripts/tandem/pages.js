@@ -5,10 +5,10 @@ bind_tandem_events = function(container) {
   container.find('.tandem_content').hover(
       function () {
         id = this.id
-        $('#tandem_toolbar_'+id).slideDown('slow')
+        $('#tandem_toolbar_'+id).fadeIn('slow')
       },function () {
         id = this.id
-        $('#tandem_toolbar_'+id).slideUp('slow')
+        $('#tandem_toolbar_'+id).fadeOut('slow')
       }
   )
   container.find('.tandem_edit_link').colorbox({iframe:true, width:"80%", height:"80%"})

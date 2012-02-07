@@ -1,16 +1,21 @@
-p#notice = notice
+#tandem-defaults
+  = tandem_page_links
 
-= tandem_page_links
+  p#notice = notice
+    
+  .hero
+    h1 This is an awesome introduction to Tandem.
+    h2 = tandem_text_tag(@page, :hero_text)
+          
+  p Ever wanted to edit your site on the fly? Guess what?! With Tandem you totally can!
+  
+  .div.blocks
+    .span-3
+      = tandem_image_tag(@page, :tandem_image)
+    .span-3
+      = tandem_text_tag(@page, :block_two)
+    .span-3      
+      = tandem_text_tag(@page, :block_three)  
 
-.hero-unit
-  = tandem_text_tag(@page, :hero_text)
-
-.row
-  .span8
-    = tandem_image_tag(@page, :main_image)
-    = tandem_text_tag(@page, :main_text)
-  .span4
-    = tandem_text_tag(@page, :sidebar_text)
-
-- unless @page.persisted?
-  | This is the default page content and should tell the user to go create a page
+  - unless @page.persisted?
+    | This is the default page content and should tell the user to go create a page
