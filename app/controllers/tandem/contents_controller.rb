@@ -1,5 +1,5 @@
 module Tandem
-  class ContentsController < ApplicationController
+  class ContentsController < ::Tandem::ApplicationController
     load_and_authorize_resource :page, :class => "Tandem::Page"
     layout 'tandem/popup'
 

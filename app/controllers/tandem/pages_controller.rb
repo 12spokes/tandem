@@ -1,5 +1,5 @@
 module Tandem
-  class PagesController < ApplicationController
+  class PagesController < ::Tandem::ApplicationController
     load_and_authorize_resource :except => :home, :find_by => :slug
     layout :pages_layout
 
