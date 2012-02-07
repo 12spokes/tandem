@@ -11,7 +11,7 @@ module Tandem
     private
 
     def current_ability
-      @current_ability ||= Tandem::Ability.new(current_user)
+      @current_ability ||= ::Tandem::Ability.new(current_user)
     end
   end
 end
