@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tandem (0.0.1)
+    tandem (0.2.0)
       cancan
       paperclip
       rails (>= 3.1.0)
@@ -78,10 +78,10 @@ GEM
       eventmachine (>= 0.12.9)
     erubis (2.7.0)
     eventmachine (0.12.10)
-    factory_girl (2.3.0)
+    factory_girl (2.5.1)
       activesupport
-    factory_girl_rails (1.4.0)
-      factory_girl (~> 2.3.0)
+    factory_girl_rails (1.6.0)
+      factory_girl (~> 2.5.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
     gherkin (2.6.7)
@@ -231,7 +231,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   devise
-  factory_girl_rails (>= 1.2.0)
+  factory_girl_rails (~> 1.6.0)
   growl_notify
   guard
   guard-cucumber
