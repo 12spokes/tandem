@@ -1,12 +1,5 @@
 module Tandem
   class Content < ActiveRecord::Base
-    #in dev mode, subclasses won't work if they aren't preloaded
-    if ::Rails.env.development?
-      Dir["#{File.dirname(__FILE__)}/content/**/*.rb"].each do |model|
-        require_or_load model
-      end
-    end
-
     belongs_to :page
 
     validates :tag, presence: true
@@ -42,3 +35,6 @@ module Tandem
     end
   end
 end
+
+require 'image'
+require 'text'
