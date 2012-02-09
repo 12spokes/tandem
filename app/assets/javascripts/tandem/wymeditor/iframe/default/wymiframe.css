@@ -89,3 +89,10 @@
 
 /* Spacer BRs shouldn't add much whitespace */
 br { height: 5px; line-height: 5px; }
+
+/* Tandem Wym Edits */
+.wym_iframe {background: #E8F3F8;}
+a.wym_wymeditor_link {display: none !important;}
+.wym_area_main {
+  border-bottom: 1px solid #aaa;
+}
