@@ -1,0 +1,20 @@
+// Varibles for Tandem UX
+
+@import url(http://fonts.googleapis.com/css?family=Glegoo);
+
+@mixin goo {
+  font-family: 'Glegoo', serif;
+}
+
+@mixin radius($radius) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+$lightblue: #E8F3F8;
+$lowblue: #DBE6EC;
+$midblue: #C2CBCE;
+$highblue: #A4BCC2;
+$darkblue: #81A8B8;
+$red: #660000;

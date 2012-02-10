@@ -1,4 +1,4 @@
-h1 Listing contents
+h1.tandem-title Listing contents
 
 table
   tr
@@ -22,7 +22,7 @@ table
       td= content.bcontent
       td= link_to 'Show', content
       td= link_to 'Edit', edit_content_path(content)
-      td= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete
+      td= link_to 'Delete', content, :confirm => 'Are you sure?', :method => :delete
 
 br
 

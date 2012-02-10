@@ -1,0 +1,300 @@
+/*
+  These are styles for the actual tandem application UX.
+  
+*/
+
+@import "variables";
+
+p#notice {
+  display: none;
+  padding: 0;
+  margin: 0;
+}
+.tandem_content:hover {
+//  box-shadow: 0 0 5px $darkblue;
+//  border: 1px solid $darkblue;
+  outline: 1px solid $midblue;
+}
+.tandem_toolbar {
+  position: absolute;
+  margin: 10px 5px;
+  display: none;
+  background: none;  
+  font-size: 13px;
+  @include goo;
+}
+a.tandem_edit_link,
+a.tandem_edit_link:active,
+a.tandem_edit_link:visited {
+  font-size: 13px;
+  @include goo;  
+  color: #333;
+  background: $lightblue;
+  padding: 5px 10px;
+  text-decoration: none;    
+  text-transform: uppercase;
+  @include radius(3px);
+  box-shadow: 0px 0px 5px #333;
+}
+a.tandem_edit_link:hover {
+  color: #fff;
+  background: $darkblue;
+}
+#page_links {
+  display: none;
+  background: #333;
+  box-shadow: 0px 0px 5px #333;
+  @include radius(3px);
+  margin: 10px 0;  
+  padding: 10px;  
+  li {
+    display: inline;    
+    padding: 0 10px 0 0;
+    a, a:active, a:visited {
+     color: #fff;
+     text-decoration: none; 
+    }
+  }
+}
+
+/////// Tandem Editor
+
+h1.tandem-title {
+  font-size: 18px;
+  @include goo;
+  color: $darkblue;
+  font-weight: none;
+  margin: 10px 0;
+}
+h3#selected_image_title {
+  font-size: 18px;
+  @include goo;
+  color: $darkblue;
+  font-weight: none;
+  margin: 10px 0;
+}
+h4.tandem-title {
+  font-size: 12px;
+  @include goo;
+  color: $midblue;
+  text-align:right;
+  font-weight: none;
+  margin: 10px 0;
+  font-weight: normal;
+}
+
+
+// WYMEditor Overwrites
+
+#tandem-editor {
+  iframe{
+    border:none;
+    height: 100%;
+  }
+  form {
+    label {
+      @include goo;
+      color: $darkblue;
+      width: 100px;
+      padding: 3px 0;
+      text-align: left;
+      font-size: 14px;
+      margin-left: 10px;  
+      display:block;
+      float: left;
+    }
+    input, textarea {
+      border: 1px solid #ccc;
+      @include radius(3px);
+      box-shadow: 0 0 5px #aaa;
+      padding: 5px;
+    }
+    .field {
+      margin: 3px 0;
+    }
+   .wym_box {
+     background: none;
+     border:none;
+     border-bottom: 1px solid #eee;
+   } 
+   .wym_iframe {
+     background: #fff;
+     border: 1px solid #ccc;     
+   }
+   .wym_skin_default .wym_iframe iframe {border:none;}
+   iframe .wym_iframe {background: transparent; border:none;}
+  } // end form
+  .wym_section {
+    background: none;
+    h2 {
+      background: none;
+      border: 1px solid $darkblue;      
+      @include goo;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    ul {
+      border: none;
+    }
+    a {
+      @include goo;
+      color: $darkblue;    
+      padding: 3px 5px;  
+    }
+    border:none;
+    padding: 2px 3px;    
+  } // end wym-section
+  .actions {
+    margin: 15px 10px;    
+    input.wymupdate {
+      background: $lightblue;
+      color: $darkblue;
+      font-size: 16px;
+      @include radius(3px);
+      border: 1px solid $midblue;
+      cursor: pointer;
+      &:hover {color: #fff;background: $darkblue;}      
+    }      
+  } // end actions  
+  div#tandem-image-editor {
+    overflow-y: scroll;
+  }
+  div#current-image {
+    width: 49%;
+    float: left;
+    h3 {
+      font-size: 15px;
+      @include goo;
+      color: $darkblue;
+      font-weight: none;
+      margin: 10px 0;
+    }
+  }
+  div#upload-image {
+//    height: 100px;
+    background: $lightblue;
+    padding: 5px 15px;
+    margin: 10px 0;    
+    h3 {
+      font-size: 15px;
+      @include goo;
+      color: $darkblue;
+      font-weight: none;
+      margin: 10px 0;
+    }    
+  }
+
+  div#gallery-image {
+    width: 49%;
+    float: right;
+    h3 {
+      font-size: 15px;
+      @include goo;
+      color: $darkblue;
+      font-weight: none;
+      margin: 10px 0;
+    }
+  }
+
+} // end tandem editor
+.tandem-gallery {
+  img {
+    border: 5px solid $lightblue;
+  }
+  ul li {
+    list-style: none;
+    border-bottom: 1px solid $lightblue;
+    position: relative;
+    ul.actions {
+      border-bottom: none;
+      li {
+        position: absolute;
+        top: 0;
+        right: 0;        
+        display: inline;
+        border-bottom: none;        
+        a, a:active, a:visited {
+          font-size: 11px;
+          color: $midblue;
+          padding: 2px 0;
+          @include goo;
+          text-decoration: none;
+          padding: 0 5px;
+        }
+        a.delete {color: $red;}
+        a:hover {color: $darkblue;}
+      }
+    }
+  }
+  .thumb {
+    max-width: 50px;
+    max-height: 50px;
+    overflow: hidden;
+    border: 5px solid $lightblue;    
+  }
+}
+// Image Uploads Popups
+#selected_image_title {
+
+}
+
+#selected_image_viewpane {
+  width: 80px;
+  height: 80px;
+  background-color: $lightblue;
+}
+#right_image_panel {
+  float: right;
+  width: 40%;
+  padding: 10px;
+}
+#left_image_panel {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+
+#cboxTitle{
+  position:absolute; 
+  bottom:0; 
+  text-transform: capitalize;
+  text-align:center; 
+  width:100%; 
+  font-size: 18px;
+  @include goo;
+  color: $highblue;
+  font-weight: none;
+}
+#cboxOverlay {
+  background: #333;
+}
+#cboxClose {
+  @include goo;
+  color: $darkblue;
+  font-size: 13px;
+}
+
+#advanced_settings {
+  margin: 45px 0 15px 0;
+  a {
+    font-size: 15px;
+    display: block;
+    margin: 10px;
+    color: $darkblue;
+    text-decoration: none;
+    @include goo;
+  }
+}
+/* new clearfix */
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+  
