@@ -36,5 +36,5 @@ module Tandem
   end
 end
 
-require 'image'
-require 'text'
+load 'image.rb'
+load 'text.rb'
