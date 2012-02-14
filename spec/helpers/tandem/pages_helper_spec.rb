@@ -71,6 +71,28 @@ module Tandem
         result =~ /<li ([^>]*)id="link_tandem_page_#{@pages.last.id}"([^>]*)>/
         ($1 + $2).should =~ /class="link_tandem_page"/
       end
+
+      context "being called without a passed in collection" do
+        let(:top_level_page) { Factory(:tandem_page) }
+        let(:child_1) { Factory(:tandem_page, :parent => top_level_page) }
+        let(:top_level_page2) { Factory(:tandem_page) }
+
+        subject { helper.tandem_navigation_tag(top_level_page) }
+
+        it { should match( page_path(top_level_page) ) }
+        it { should match( page_path(child_1) ) }
+        it { should match( page_path(top_level_page2) ) }
+      end
+
+      context "being called with a passed in collection" do
+        let(:page) { Factory(:tandem_page) }
+        let(:child_1) { Factory(:tandem_page, :parent => page) }
+
+        subject { helper.tandem_navigation_tag(page, page.children) }
+
+        it { should_not match( page_path(page) ) }
+        it { should match( page_path(child_1) ) }
+      end
     end
 
     describe "tandem_page_links" do
