@@ -159,7 +159,7 @@ module Tandem
       end
 
       content_tag(:ul, html_options) do
-        iterate.call
+        iterate.call(page_groups.keys.first)
       end
     end
 

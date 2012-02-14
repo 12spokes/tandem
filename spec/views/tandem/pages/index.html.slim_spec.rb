@@ -22,7 +22,7 @@ module Tandem
       assert_select "tr>th", :text => "Description".to_s, :count => 1
       assert_select "a", :text => "Show".to_s, :count => 2
       assert_select "a", :text => "Edit".to_s, :count => 2
-      assert_select "a", :text => "Destroy".to_s, :count => 2
+      assert_select "a", :text => "Delete".to_s, :count => 2
       assert_select "a", :text => "New Page".to_s, :count => 1
       assert_select "tr", :count => 3
     end

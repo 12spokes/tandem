@@ -73,11 +73,15 @@ though.
 
 By default, Tandem will produce a nested tree of all your pages. If you just want the top level:
 
-    <%= tandem_navigation_tag(@page, Page.top_level) %>
+    <%= tandem_navigation_tag(@page, Tandem::Page.top_level) %>
 
-You can also create submenus easily by passing in a collection of pages, e.g.
+If you want to show just the subnavication for a given page:
 
-    <%= tandem_navigation_tag(@page, Page.find_by_title('Services').children) %>
+    <%= tandem_navigation_tag(@page, @page.children) %>
+
+You can also create submenus easily by passing in a custom collection of pages, e.g.
+
+    <%= tandem_navigation_tag(@page, Tandem::Page.find_by_title('Services').children) %>
 
 == Authentication
 
