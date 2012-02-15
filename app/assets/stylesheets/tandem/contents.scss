@@ -35,11 +35,12 @@ a.tandem_edit_link:visited {
   text-transform: uppercase;
   @include radius(3px);
   box-shadow: 0px 0px 5px #333;
+  &:hover {
+    color: #fff !important;
+    background: $darkblue;
+  }
 }
-a.tandem_edit_link:hover {
-  color: #fff;
-  background: $darkblue;
-}
+
 #page_links {
   display: none;
   background: #333;
