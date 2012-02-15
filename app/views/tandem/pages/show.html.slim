@@ -1,8 +1,7 @@
 #tandem-defaults
-  = tandem_page_links
-
   p#notice = notice
-    
+  = tandem_text_tag(@page, :sidebar_text)
+  = tandem_image_tag(@page, :image_test)
   .hero
     h1 
       | CONGRATULATIONS! You've set up a new Tandem page!
@@ -32,7 +31,7 @@
       | By default, Tandem will produce a nested tree of all your pages. If you just want the top level:
       pre <%= tandem_navigation_tag(@page, Tandem::Page.top_level) %>
     p 
-      | If you want to show just the subnavication for a given page:
+      | If you want to show just the subnavigation for a given page:
       pre <%= tandem_navigation_tag(@page, @page.children) %>
     p 
       | You can also create submenus easily by passing in a custom collection of pages, e.g.
