@@ -1,5 +1,5 @@
-#upload-image
-  h3 Upload a New Image
+#tandem-upload-image
+  h3.tandem-mod-title Upload a New Image
   = form_for @image, :html => { :multipart => true } do |f|
     -if @image.errors.any?
       #error_explanation

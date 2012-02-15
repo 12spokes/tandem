@@ -1,44 +1,45 @@
-= form_for @page do |f|
-  -if @page.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
-      ul
-        - @page.errors.full_messages.each do |msg|
-          li= msg
+#tandem-editor
+  = form_for @page do |f|
+    -if @page.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"
+        ul
+          - @page.errors.full_messages.each do |msg|
+            li= msg
 
-  .field
-    = f.label :parent_id
-    = f.radio_button :parent_id, ''
-    | top level page
-    - if @page.parent.present?
-      = f.radio_button :parent_id, @page.parent_id
-      = page_path(@page.parent)
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :page_label
-    = f.text_field :page_label
-  .field
-    = f.label :link_label
-    = f.text_field :link_label
-  .field
-    = f.label :slug
-    = f.text_field :slug
-  .field
-    = f.label :layout
-    = f.select :layout, options_for_select(valid_layouts,@page.layout), :include_blank => true
-  .field
-    = f.label :template
-    = f.select :template, options_for_select(valid_templates, @page.template), :include_blank => true
-  .field
-    = f.label :keywords
-    = f.text_field :keywords
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :is_default, 'Default Page?'
-    = f.check_box :is_default
-  .actions
-    = f.submit 'Save'
+    .field
+      = f.label :parent_id
+      = f.radio_button :parent_id, ''
+      | top level page
+      - if @page.parent.present?
+        = f.radio_button :parent_id, @page.parent_id
+        = page_path(@page.parent)
+    .field
+      = f.label :title
+      = f.text_field :title
+    .field
+      = f.label :page_label
+      = f.text_field :page_label
+    .field
+      = f.label :link_label
+      = f.text_field :link_label
+    .field
+      = f.label :slug
+      = f.text_field :slug
+    .field
+      = f.label :layout
+      = f.select :layout, options_for_select(valid_layouts,@page.layout), :include_blank => true
+    .field
+      = f.label :template
+      = f.select :template, options_for_select(valid_templates, @page.template), :include_blank => true
+    .field
+      = f.label :keywords
+      = f.text_field :keywords
+    .field
+      = f.label :description
+      = f.text_field :description
+    .field
+      = f.label :is_default, 'Default Page?'
+      = f.check_box :is_default
+    .actions
+      = f.submit 'Save'

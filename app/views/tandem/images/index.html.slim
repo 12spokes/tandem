@@ -5,7 +5,7 @@
         = image_tag image.resource.url(:thumb), :onclick => "select_gallery_item(#{image.id})", :class => "thumb"
         ul.actions
           li 
-            a.show href="/" Show
+            a.use href="/" Use
             = link_to 'Delete', image, :confirm => 'Are you sure?', :method => :delete, :class => "delete"
 
 
