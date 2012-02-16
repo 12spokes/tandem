@@ -1,9 +1,7 @@
-#tandem-editor
-  h4.tandem-title Tandem
-    
+#tandem-editor    
   = form_for [@page, @content], url: page_content_path(@page.id,@content.id) do |f|
     -if @content.errors.any?
-      #error_explanation
+      #tandem_error_explanation
         h2 = "#{pluralize(@content.errors.count, "error")} prohibited this content from being saved:"
         ul
           - @content.errors.full_messages.each do |msg|
@@ -20,9 +18,9 @@
       div#tandem-image-editor.clearfix
 
 
-        #current-image.clearfix
-          h3#selected_image_title Current Image
-          #selected_image_viewpane.clearfix{src=thumb_image_path(':id:')} =image_content_tag @content, {}, :thumb
+        / #current-image.clearfix
+        /   h3#selected_image_title Current Image
+        /   #selected_image_viewpane.clearfix{src=thumb_image_path(':id:')} =image_content_tag @content, {}, :thumb
   
         #gallery-image.clearfix
           iframe{src=new_image_path}
@@ -30,7 +28,7 @@
           iframe{src=images_path(selected: 1)}
 
 
-    #advanced_settings
+    #tandem_advanced_settings
       a href="/" Advanced Settings
       .advanced-settings
         .field
