@@ -6,40 +6,50 @@
         ul
           - @page.errors.full_messages.each do |msg|
             li= msg
-
+    #tandem_settings
+      h1.tandem-title Page Settings
+      .field
+        = f.label :parent_id
+        = f.radio_button :parent_id, ''
+        span Top Level Page
+        - if @page.parent.present?
+          = f.radio_button :parent_id, @page.parent_id
+          span 
+            | Child Page (
+            = page_path(@page.parent)
+            | )
+      .field
+        = f.label :title
+        = f.text_field :title
+      .field
+        = f.label :link_label
+        = f.text_field :link_label
+      .field
+        = f.label :slug
+        = f.text_field :slug        
+      .field
+        = f.label :layout
+        = f.select :layout, options_for_select(valid_layouts,@page.layout), :include_blank => true
+      .field
+        = f.label :template
+        = f.select :template, options_for_select(valid_templates, @page.template), :include_blank => true        
+        
+    #tandem_advanced_settings
+      a href="/" Advanced Settings
+      .advanced-settings
+        .field
+          = f.label :page_label
+          = f.text_field :page_label
+        .field
+          = f.label :keywords
+          = f.text_field :keywords
+        .field
+          = f.label :description
+          = f.text_field :description
     .field
-      = f.label :parent_id
-      = f.radio_button :parent_id, ''
-      | top level page
-      - if @page.parent.present?
-        = f.radio_button :parent_id, @page.parent_id
-        = page_path(@page.parent)
-    .field
-      = f.label :title
-      = f.text_field :title
-    .field
-      = f.label :page_label
-      = f.text_field :page_label
-    .field
-      = f.label :link_label
-      = f.text_field :link_label
-    .field
-      = f.label :slug
-      = f.text_field :slug
-    .field
-      = f.label :layout
-      = f.select :layout, options_for_select(valid_layouts,@page.layout), :include_blank => true
-    .field
-      = f.label :template
-      = f.select :template, options_for_select(valid_templates, @page.template), :include_blank => true
-    .field
-      = f.label :keywords
-      = f.text_field :keywords
-    .field
-      = f.label :description
-      = f.text_field :description
-    .field
-      = f.label :is_default, 'Default Page?'
+      = f.label :is_default, 'Set As Home Page?', :style => "width: auto;margin-right: 8px;"
       = f.check_box :is_default
     .actions
-      = f.submit 'Save'
+      = f.submit 'Save', :class => "save"
+      
+      

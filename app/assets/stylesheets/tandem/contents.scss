@@ -35,25 +35,48 @@ a.tandem_edit_link:visited {
   }
 }
 
-#page_links {
-  display: none;
+#tandem_page_links {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 900;
+  width: 100%;
   background: #333;
-  box-shadow: 0px 0px 5px #333;
-  @include radius(3px);
-  margin: 10px 0;  
+  margin: 0;  
   padding: 10px;  
+  text-align: right;
+  box-shadow: 0px 0px 8px #000;
+  border-top: 1px solid $darkblue;
+  opacity: 0.9;
+  -moz-opacity: 0.9;
+  filter:alpha(opacity=90);
   li {
     display: inline;    
-    padding: 0 10px 0 0;
+    padding: 0 20px;
     a, a:active, a:visited {
      color: #fff;
      text-decoration: none; 
+     &:hover {color: $darkblue;}
     }
   }
 }
 
 /////// Tandem Editor
-
+h4.tandem-logo {
+  font-size: 12px;
+  text-align:right;
+  position: relative;
+  right: 0;
+  @include goo;
+  color: $midblue;
+  font-weight: none;
+  height: 33px;
+  margin: 10px 0;
+  font-weight: normal;
+  text-shadow: none;
+  background: transparent url(image_path('tandem/tandem_logo.png')) 100% 0 no-repeat;
+  text-indent: -9999px;	
+}
 
 
 /////// Contents, Page, & Image Editor
@@ -73,21 +96,6 @@ a.tandem_edit_link:visited {
     font-weight: none;
     margin: 10px 0;
   }
-  h4.tandem-logo {
-    font-size: 12px;
-    text-align:right;
-    position: relative;
-    right: 0;
-    @include goo;
-    color: $midblue;
-    font-weight: none;
-    height: 33px;
-    margin: 10px 0;
-    font-weight: normal;
-	  text-shadow: none;
-    background: transparent url(image_path('tandem/tandem_logo.png')) 100% 0 no-repeat;
-    text-indent: -9999px;	
-  }
   iframe{
     border:none;
     height: 100%;
@@ -99,6 +107,13 @@ a.tandem_edit_link:visited {
   form {
     div {
       padding: 5px;
+    }
+    div.field_with_errors {
+      padding:0;
+      label {padding: 0;}
+      input {
+        background: #fdeeee;
+      }
     }
     label {
       @include goo;
@@ -119,6 +134,12 @@ a.tandem_edit_link:visited {
     }
     .field {
       margin: 3px 0;
+      @include goo;
+    }
+    .field span {
+      font-size: 14px;
+      color: $darkblue;
+      padding-right: 10px;
     }
    .wym_box {
      background: none;
@@ -155,7 +176,7 @@ a.tandem_edit_link:visited {
   } // end wym-section
   .actions {
     margin: 15px 10px;    
-    input.wymupdate {
+    input.wymupdate,input.save {
       background: $lightblue;
       color: $darkblue;
       font-size: 16px;
@@ -165,7 +186,9 @@ a.tandem_edit_link:visited {
       &:hover {color: #fff;background: $darkblue;}      
     }      
   } // end actions  
-
+  #error_explanation {
+    @include errors;
+  }
 } // end tandem editor
 
 
@@ -216,21 +239,7 @@ iframe {
   margin: 10px 0;
   @include goo;  
   #error_explanation {
-    background: $midblue;
-    padding: 5px;
-    margin-bottom: 5px;
-    h2 {
-      font-size: 15px;
-      @include goo;
-      color: #fff;        
-      font-weight: normal;
-    }
-    ul {
-      li {
-      color: #fff;
-      font-size: 13px;
-      }
-    }
+    @include errors;
   }
 }
 
@@ -285,8 +294,7 @@ iframe {
 /// Colorbox Overwrites
 
 #cboxTitle{
-  position:absolute; 
-  bottom:0; 
+  display: none !important;
   text-transform: capitalize;
   text-align:center; 
   width:100%; 
