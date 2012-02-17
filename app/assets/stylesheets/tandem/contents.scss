@@ -328,6 +328,9 @@ iframe {
     text-decoration: none;
     @include goo;
   }
+  div.advanced-settings {
+    display: none;
+  }
 }
 
 
