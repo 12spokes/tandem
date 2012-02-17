@@ -31,3 +31,9 @@ update_image_gallery = function() {
 update_current_image = function() {
   $('#selected_image_viewpane').load($('#selected_image_viewpane').attr('src').replace(':id:',$('#content_image_image_id').val()))
 }
+
+$(document).ready (function() {
+  $('h3.settings-toggle').live('click', function () {
+    $('div.advanced-settings').slideToggle('slow');
+  });
+});
