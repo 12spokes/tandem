@@ -1,34 +1,35 @@
-h1 Pages Listing
+#tandem-defaults
+	h1.tandem-title Pages Listing
 
-table
-  tr
-    th Parent
-    th Link Label
-    th Page Label
-    th Page Title
-    th Layout
-    th Keywords
-    th Description
-    th
-    th
-    th
+	table
+	  tr
+	    th Parent
+	    th Link Label
+	    th Page Label
+	    th Page Title
+	    th Layout
+	    th Keywords
+	    th Description
+	    th
+	    th
+	    th
 
-  - @pages.each do |page|
-    tr
-      td= page.parent.try :slug
-      td= page.link_label
-      td= page.page_label
-      td= page.title
-      td= page.layout
-      td= page.keywords
-      td= page.description
-      td= link_to 'Show', page
-      - if can?(:update, page)
-        td= link_to 'Edit', edit_page_path(page), :class => :page_link
-      - if can?(:destroy, page)
-        td= link_to 'Delete', page, :confirm => 'Are you sure?', :method => :delete
+	  - @pages.each do |page|
+	    tr
+	      td= page.parent.try :slug
+	      td= page.link_label
+	      td= page.page_label
+	      td= page.title
+	      td= page.layout
+	      td= page.keywords
+	      td= page.description
+	      td= link_to 'Show', page
+	      - if can?(:update, page)
+	        td= link_to 'Edit', edit_page_path(page), :class => :page_link
+	      - if can?(:destroy, page)
+	        td= link_to 'Delete', page, :confirm => 'Are you sure?', :method => :delete
 
-br
+	br
 
-- if can?(:create, ::Tandem::Page)
-  = link_to 'New Page', new_page_path, :class => :page_link, :id => :page_new_link
+	- if can?(:create, ::Tandem::Page)
+	  = link_to 'New Page', new_page_path, :class => :page_link, :id => :page_new_link

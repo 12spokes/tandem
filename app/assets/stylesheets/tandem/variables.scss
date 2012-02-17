@@ -11,7 +11,23 @@
   -webkit-border-radius: $radius;
   border-radius: $radius;
 }
-
+@mixin errors {
+  background: $midblue;
+  padding: 5px;
+  margin-bottom: 5px;
+  h2 {
+    font-size: 15px;
+    @include goo;
+    color: #fff;        
+    font-weight: normal;
+  }
+  ul {
+    li {
+    color: #fff;
+    font-size: 13px;
+    }
+  }
+}
 $lightblue: #E8F3F8;
 $lowblue: #DBE6EC;
 $midblue: #C2CBCE;
