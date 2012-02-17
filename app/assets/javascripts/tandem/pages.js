@@ -25,8 +25,13 @@ reload_tandem_content = function(resource_id,resource_url) {
 $().ready(function () {
   $('.page_link').colorbox({iframe:true, width:"80%", height:"80%", onCleanup: function() {
            location.reload();
-  }})
-  bind_tandem_events($('body'))
+  }});
+
+  bind_tandem_events($('body'));
+
+  if( $('#tandem_page_links').length > 0 ){
+    $('body').addClass('tandem-admin-bar');
+  }
 })
 
 
