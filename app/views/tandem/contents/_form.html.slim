@@ -19,13 +19,14 @@
         = f.hidden_field :image_id
       div#tandem-image-editor.clearfix
 
+        iframe{src=new_image_path}
 
-        / #current-image.clearfix
-        /   h3#selected_image_title Current Image
-        /   #selected_image_viewpane.clearfix{src=thumb_image_path(':id:')} =image_content_tag @content, {}, :thumb
+        #current-image.clearfix
+          h3#selected_image_title Current Image
+          #selected_image_viewpane.clearfix{src=thumb_image_path(':id:')} =image_content_tag @content, {}, :thumb
   
         #gallery-image.clearfix
-          iframe{src=new_image_path}
+
           h3 Gallery
           iframe{src=images_path(selected: 1)}
 
