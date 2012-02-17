@@ -23,7 +23,7 @@ reload_tandem_content = function(resource_id,resource_url) {
 }
 
 $().ready(function () {
-  $('.page_link').colorbox({iframe:true, width:"80%", height:"80%", onCleanup: function() {
+  $('.page_link').colorbox({onCleanup: function() {
            location.reload();
   }});
 
@@ -32,6 +32,7 @@ $().ready(function () {
   if( $('#tandem_page_links').length > 0 ){
     $('body').addClass('tandem-admin-bar');
   }
+  
 })
 
 
