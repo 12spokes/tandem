@@ -164,8 +164,7 @@ module Tandem
     end
 
     def tandem_page_links(options ={})
-      options[:id] ||= 'page_links'
-      options[:class] ||= 'nav'
+      options[:id] ||= 'tandem_page_links'
 
       content_tag(:ul, options) do
         links = []
