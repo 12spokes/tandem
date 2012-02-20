@@ -1,15 +1,13 @@
 #tandem-upload-image
-  = form_for @image, :html => { :multipart => true } do |f|
+  = form_for (@image || ::Tandem::Image.new), :html => { :multipart => true, :id => 'new_tandem_iamge' } do |f|
 
-    -if @image.errors.any?
+    -if f.object.errors.any?
       #error_explanation
-        h2 = "#{pluralize(@image.errors.count, "error")} prohibited this image from being saved:"
+        h2 = "#{pluralize(f.object.errors.count, "error")} prohibited this image from being saved:"
         ul
-          - @image.errors.full_messages.each do |msg|
+          - f.object.errors.full_messages.each do |msg|
             li= msg
-    input#upload-button value="Upload a New Image" type="submit
     
-    / .field
-    /   = f.file_field :resource
-    / .actions
-    /   = f.submit 'Upload'
+    = f.file_field :resource
+
+    input#upload-button value="Upload a New Image" type="submit

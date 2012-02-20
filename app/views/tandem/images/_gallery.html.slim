@@ -1,0 +1,6 @@
+section id='tandem_image_gallery'
+  h1 Gallery
+
+  ul
+    - ::Tandem::Image.all.each do |image|
+      li= render image
