@@ -13,5 +13,15 @@ module Tandem
     validates_attachment_content_type :resource, :content_type => ['image/jpg', 'image/jpeg', 'image/png']
 
     has_many :content_images, class_name: 'Tandem::Content::Image'
+
+    default_scope order('created_at DESC')
+
+    def thumb_url
+      resource.url(:thumb)
+    end
+
+    def as_json(options={})
+      super(:methods => :thumb_url)
+    end
   end
 end

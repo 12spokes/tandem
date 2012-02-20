@@ -3,6 +3,10 @@
 //
 //= require jquery
 //= require tandem/wymeditor/jquery.wymeditor.min
+//= require tandem/images
+//= require tandem/vendor/jquery.ui.widget
+//= require tandem/vendor/jquery-fileupload/jquery.iframe-transport.js
+//= require tandem/vendor/jquery-fileupload/jquery.fileupload.js
 
 $().ready(function () {
   if($('#success_data').length != 0) {

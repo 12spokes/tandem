@@ -17,19 +17,11 @@
     -if @content.is_a?(Tandem::Content::Image)
       .field
         = f.hidden_field :image_id
-      div#tandem-image-editor.clearfix
 
-        iframe{src=new_image_path}
-
-        #current-image.clearfix
-          h3#selected_image_title Current Image
-          #selected_image_viewpane.clearfix{src=thumb_image_path(':id:')} =image_content_tag @content, {}, :thumb
-  
-        #gallery-image.clearfix
-
-          h3 Gallery
-          iframe{src=images_path(selected: 1)}
-
+      #current-image.clearfix
+        h3#selected_image_title Current Image
+        #selected_image_viewpane.clearfix
+          =image_tag @content.image.resource.url(:thumb)
 
     #tandem_advanced_settings
       h3.settings-toggle Advanced Settings
@@ -43,3 +35,10 @@
 
     .actions
       = f.submit 'Save', class: "wymupdate"
+
+  - if @content.is_a?(Tandem::Content::Image)
+    div#tandem-image-editor.clearfix
+      = render '/tandem/images/form'
+
+      #gallery-image.clearfix
+        = render '/tandem/images/gallery'
