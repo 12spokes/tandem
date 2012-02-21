@@ -248,6 +248,10 @@ section#tandem_image_gallery ul{
   
   li {
     float:left;
+
+    img:hover {
+      cursor:pointer;
+    }
   }
 }
 div#current-image {
