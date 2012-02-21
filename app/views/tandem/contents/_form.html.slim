@@ -1,6 +1,5 @@
 // This is the form that controls Image upload and Text Editor
 #tandem-editor-wym
-  h4.tandem-logo
   = form_for [@page, @content], url: page_content_path(@page.id,@content.id) do |f|
     -if @content.errors.any?
       #tandem_error_explanation
@@ -15,8 +14,7 @@
 
 
     -if @content.is_a?(Tandem::Content::Image)
-      .field
-        = f.hidden_field :image_id
+      = f.hidden_field :image_id
 
       #current-image.clearfix
         h3#selected_image_title Current Image

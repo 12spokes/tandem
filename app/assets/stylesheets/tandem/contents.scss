@@ -100,11 +100,12 @@ h4.tandem-logo {
     margin: 10px 0;
   }
   h3#selected_image_title {
-    font-size: 18px;
+    font-size: 15px;
     @include goo;
     color: $darkblue;
-    font-weight: none;
+    font-weight: normal;
     margin: 10px 0;
+    
   }
   iframe{
     border:none;
@@ -211,8 +212,7 @@ h4.tandem-logo {
 /// Image Upload Modal
 
 form.edit_content_image{
-  width:33%;
-  float:left;
+  position: fixed;
 }
 h3.tandem-mod-title {
   font-size: 15px;
@@ -224,6 +224,9 @@ h3.tandem-mod-title {
 div#tandem-image-editor {
   width:66%;
   float:left;
+  margin-left: 25%;
+  border-left: 4px solid $lightblue;
+  padding-left: 15px;
 }
 #tandem-image-editor div#gallery-image {
 width: 100%;
@@ -243,18 +246,40 @@ iframe {
     margin: 10px 0;
   }
 }
-section#tandem_image_gallery ul{
-  list-style:none;
-  
-  li {
-    float:left;
-
-    img:hover {
-      cursor:pointer;
+section#tandem_image_gallery {
+  h1 {
+    font-weight: normal;
+    color: $darkblue;
+    font-size: 15px;
+    @include goo;
+  }
+  div.table {
+    display: table;
+    margin: 0 auto;
+  }
+  ul {
+    list-style:none;
+    li {
+      float:left;
+      display: block;
+      width: 150px;
+      height: 150px;
+      border: 2px solid $lightblue;
+      text-align: center;
+      vertical-align: middle;
+      margin: 2%;
+      img {
+        
+      }
+      img:hover {
+        cursor:pointer;
+        
+      }
     }
   }
 }
 div#current-image {
+
   h3 {
     font-size: 15px;
     @include goo;
@@ -369,6 +394,12 @@ div#current-image {
   @include goo;
   color: $darkblue;
   font-size: 13px;
+  bottom: 25px;
+}
+#cboxLoadedContent{
+  padding-bottom: 50px;
+  background: transparent url(image_path('tandem/tandem_logo.png')) 0 100%  no-repeat;
+
 }
 
 /// Advanced Settings
