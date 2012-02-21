@@ -21,7 +21,7 @@
       #current-image.clearfix
         h3#selected_image_title Current Image
         #selected_image_viewpane.clearfix
-          =image_tag @content.image.resource.url(:thumb)
+          = image_content_tag @content, {}, :thumb
 
     #tandem_advanced_settings
       h3.settings-toggle Advanced Settings
