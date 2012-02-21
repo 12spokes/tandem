@@ -421,19 +421,21 @@ div#current-image {
   h3:hover {
     color: #333;
   }
-  div.advanced-settings {
-    display: none;
-    .field {
-      padding: none;
-      label {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        float: none;
-      }
-      input {width: 90%;}
-    }
-  }
+}
+form.edit_content_image div#tandem_advanced_settings .advanced-settings {
+   display: none;
+   .field {
+     padding: none;
+     label {
+       width: 100%;
+       padding: 0;
+       margin: 0;
+       float: none;
+     }
+     input {
+       width: 90%;
+     }
+   }
 }
 
 
