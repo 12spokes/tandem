@@ -1,3 +1,4 @@
+*.DS_Store
 .bundle/
 log/
 pkg/
@@ -16,3 +17,4 @@ spec/dummy/config/dev_database.yml
 spec/dummy/public/assets/images
 *.rbc
 .sass-cache
+.DS_Store
