@@ -212,7 +212,8 @@ h4.tandem-logo {
 /// Image Upload Modal
 
 form.edit_content_image{
-  position: fixed;
+width: 25%;
+float: left;
 }
 h3.tandem-mod-title {
   font-size: 15px;
@@ -222,9 +223,8 @@ h3.tandem-mod-title {
   margin: 10px 0;
 }
 div#tandem-image-editor {
-  width:66%;
+  width:73%;
   float:left;
-  margin-left: 25%;
   border-left: 4px solid $lightblue;
   padding-left: 15px;
 }
@@ -406,7 +406,6 @@ div#current-image {
 
 #tandem_advanced_settings {
   margin: 0 0 15px 0;
-  border-top: 1px dotted $lightblue;
   h3 {
     cursor: pointer;
     font-size: 13px;
@@ -424,6 +423,16 @@ div#current-image {
   }
   div.advanced-settings {
     display: none;
+    .field {
+      padding: none;
+      label {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        float: none;
+      }
+      input {width: 90%;}
+    }
   }
 }
 
