@@ -6,6 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//
+//= require tandem/modernizr-2.5.3.min
 //= require tandem/jquery.colorbox
 //= require tandem/pages
