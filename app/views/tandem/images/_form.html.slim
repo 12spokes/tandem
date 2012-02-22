@@ -7,7 +7,7 @@
         ul
           - f.object.errors.full_messages.each do |msg|
             li= msg
-    
-    = f.file_field :resource
+    span#upload-button
+      | Upload a New Image
+      = f.file_field :resource
 
-    input#upload-button value="Upload a New Image" type="submit
