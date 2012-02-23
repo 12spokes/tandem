@@ -1,5 +1,9 @@
 section id='tandem_image_gallery'
-  .table
-    ul
-      - ::Tandem::Image.all.each do |image|
-        li= render image
+  ul
+    - ::Tandem::Image.all.each do |image|
+      li
+        span
+          = render image
+        p 
+          | Name of image
+          a.delete_image href="#" 

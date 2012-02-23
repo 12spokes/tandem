@@ -19,7 +19,11 @@
       #current-image.clearfix
         h3#selected_image_title Current Image
         #selected_image_viewpane.clearfix
-          = image_content_tag @content, {}, :thumb
+          = image_content_tag @content, {}, :thumb        
+        ul#tandem_image_attributes
+          li.image_name Name of Image
+          li 100px x 100px
+          li Last Modified: 10/12/11
 
     #tandem_advanced_settings
       h3.settings-toggle Advanced Settings
@@ -32,7 +36,7 @@
           = f.text_field :link_target
 
     .actions
-      = f.submit 'Save', class: "wymupdate"
+      = f.submit 'Save Your Changes', class: "wymupdate"
 
   - if @content.is_a?(Tandem::Content::Image)
     div#tandem-image-editor.clearfix

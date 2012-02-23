@@ -20,8 +20,8 @@ $(document).ready ->
       $.fn.colorbox
         href: $('a.tandem_edit_link', $(this)).attr('href')
         iframe: true
-        width: '80%'
-        height: '80%'
+        width: '95%'
+        height: '90%'
         open: true
       return false
 
