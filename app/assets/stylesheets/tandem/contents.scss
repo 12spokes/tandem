@@ -35,6 +35,7 @@ body.tandem-admin-bar {
 }
 .tandem_content:hover {
   outline: 1px solid $midblue;
+  cursor: pointer;
 }
 .tandem_toolbar {
   position: absolute;
