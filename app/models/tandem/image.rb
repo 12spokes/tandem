@@ -4,9 +4,7 @@ module Tandem
     THUMB_WIDTH = 150
     THUMB_HEIGHT = 150
 
-    has_attached_file :resource, :styles => { :thumb => "150x150>" },
-                      :url  => Tandem::Configuration.uploaded_images_template,
-                      :path => Tandem::Configuration.uploaded_images_dir + Tandem::Configuration.uploaded_images_template
+    has_attached_file :resource, Tandem::Configuration.paperclip_options
 
     validates_attachment_presence :resource
     validates_attachment_size :resource, :less_than => 200.kilobytes
