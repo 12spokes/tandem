@@ -357,6 +357,7 @@ section#tandem_image_gallery {
   padding: 0;
   margin: 0 0 0 20px;
   @include goo;  
+  position: relative;
   span#upload-button {
     display: block;
     width: 200px;
@@ -412,6 +413,30 @@ section#tandem_image_gallery {
   #error_explanation {
     @include errors;
   }
+  .loader {
+    width: 200px;
+    height: 20px;
+    background: $lightblue;
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    @include radius(5px);
+    padding: 0;
+    margin: 0;
+    -webkit-box-shadow: 0 0 5px #aaa;
+    -moz-box-shadow: 0 0 5px #aaa;    
+    box-shadow: 0 0 5px #aaa;
+    overflow: hidden;
+    .range {
+      height: 20px;
+      background: transparent url(image_path('tandem/loader_stripe.png'));    
+      span {
+        font-size: 14px;
+        position: relative;
+        bottom: 5px;
+      }
+    }
+  }
 }
 
 
@@ -452,6 +477,9 @@ section#tandem_image_gallery {
 
 #tandem_advanced_settings {
   margin: 0 0 15px 0;
+  .advanced-settings {
+    display: none;
+  }
   h3 {
     cursor: pointer;
     font-size: 13px;
