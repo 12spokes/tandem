@@ -99,12 +99,11 @@ h4.tandem-logo {
     margin: 10px 0;
   }
   h3#selected_image_title {
-    font-size: 15px;
+    font-size: 20px;
     @include goo;
-    color: $darkblue;
+    color: #407992;
     font-weight: normal;
-    margin: 10px 0;
-    
+    margin: 15px 0;
   }
   iframe{
     border:none;
@@ -190,19 +189,36 @@ h4.tandem-logo {
     padding: 2px 3px;    
   } // end wym-section
   .actions {
-    margin: 15px 10px;    
+//    margin: 15px 10px;    
     input.wymupdate,input.save {
-      background: $lightblue;
-      color: $darkblue;
-      font-size: 16px;
-      @include radius(3px);
-      border: 1px solid $midblue;
+      background: #4ba9d8;
+      color: #fff;
+      font-size: 18px;
+      @include radius(8px);
+      border: 1px solid #4ba9d8;
       cursor: pointer;
+      padding: 8px 10px;     
+      @include goo;
       &:hover {color: #fff;background: $darkblue;}      
     }      
   } // end actions  
   #error_explanation {
     @include errors;
+  }
+  ul#tandem_image_attributes {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      padding: 5px;
+      list-position: inside;
+      @include goo;
+      color: #3e4c52;
+      font-size: 12px;
+    }
+    li.image_name {
+      font-size: 16px;
+    }
   }
 } // end tandem editor
 
@@ -211,9 +227,18 @@ h4.tandem-logo {
 /// Image Upload Modal
 
 form.edit_content_image{
-width: 25%;
+width: 24%;
 float: left;
+padding-left: 1%;
+
 }
+
+div#tandem-image-editor {
+  width:73%;
+  float:left;
+  border-left: 1px solid $lightblue;
+}
+//
 h3.tandem-mod-title {
   font-size: 15px;
   @include goo;
@@ -221,16 +246,12 @@ h3.tandem-mod-title {
   font-weight: normal;
   margin: 10px 0;
 }
-div#tandem-image-editor {
-  width:73%;
-  float:left;
-  border-left: 4px solid $lightblue;
-  padding-left: 15px;
-}
+
 #tandem-image-editor div#gallery-image {
 width: 100%;
 padding: 0;
 margin: 0;
+
 iframe {
 	width: 90%;
 	padding: 0;
@@ -245,59 +266,106 @@ iframe {
     margin: 10px 0;
   }
 }
+/* force to show scrollbars in webkit browsers */
+::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 7px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	background-color: rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
 section#tandem_image_gallery {
+  max-height:400px;
+  overflow-y: scroll;
+  border-top: 1px solid $lightblue;
+  margin: 10px 0;
   h1 {
     font-weight: normal;
     color: $darkblue;
     font-size: 15px;
     @include goo;
   }
-  div.table {
-    display: table;
-    margin: 0 auto;
-  }
   ul {
     list-style:none;
     li {
       float:left;
       display: block;
-      width: 150px;
-      height: 150px;
-      border: 2px solid $lightblue;
-      text-align: center;
-      vertical-align: middle;
-      margin: 2%;
-      img {
+      width: 180px;
+      height: 130px;
+      margin: 0 10px 40px 10px;
+      padding: 10px 5px 5px 5px;
+      background: $lightblue;
+        span {
+          display: block;
+          width: 150px;
+          height: 80px;
+          margin: 0 auto;
+          overflow: hidden;  
+          text-align:center;
+        }
+        img {
+        margin: 0 auto;      
+        background: #fff;
+        height: 100%;
+        }
         
-      }
-      img:hover {
-        cursor:pointer;
+        p {
+          @include goo;
+          color: $darkblue;
+          display:block;
+          clear:both;
+          font-size: 12px;
+          text-align: center;
+          position: relative;
+          padding: 5px 0;
+          a.delete_image {
+            display: block;
+            width: 16px;
+            height: 16px;
+            background: transparent url(image_path('tandem/ic-delete_image.png')) 0 0 no-repeat;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            cursor: default;
+            &:hover {
+             opacity: 0.5;
+             -moz-opacity: 0.5;
+             filter:alpha(opacity=50); 
+            }
+          }
+        }
+        &:hover {         
+         cursor: pointer;
+         -webkit-box-shadow: 0 0 20px rgba(122,122,122, .5);
+         -moz-box-shadow: 0 0 20px rgba(122,122,122, .5);
+         box-shadow: 0 0 20px rgba(122,122,122, .5);
+         -webkit-transform: rotate(0deg) scale(1.05);
+         -moz-transform: rotate(0deg) scale(1.05);
+         transform: rotate(0deg) scale(1.05);
+         z-index: 300;
+        }
         
-      }
     }
-  }
-}
-div#current-image {
 
-  h3 {
-    font-size: 15px;
-    @include goo;
-    color: $darkblue;
-    font-weight: none;
-    margin: 10px 0;
   }
 }
 
 #tandem-upload-image {
-  padding: 0 0;
-  margin: 0;
+  padding: 0;
+  margin: 0 0 0 20px;
   @include goo;  
-  input#upload-button {
-    padding: 15px 10px;
+  span#upload-button {
+    display: block;
+    width: 200px;
+    padding: 10px 0 10px 10px;
+    height: 20px;
+    margin-top: 10px;
     color: #407992;
     @include radius(5px);
     border: 1px solid #c3cace;
-    font-size: 22px;
+    font-size: 18px;
     -webkit-box-shadow: 0px 0px 7px #ccc;
     -moz-box-shadow: 0px 0px 7px #ccc;
     box-shadow: 0px 0px 7px #ccc;
@@ -312,9 +380,30 @@ div#current-image {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9f3f8', endColorstr='#dbe9f0',GradientType=0 ); /* IE6-9 */
     @include goo;
     cursor: pointer;
-    -moz-transition: opacity 8s ease-in-out;
-    -webkit-transition: opacity 8s ease-in-out;
-     transition: opacity 8s ease-in-out;  
+    position: relative;
+    &#upload-button:hover {
+     background: #e5e5e5; /* Old browsers */
+     background: -moz-linear-gradient(top,  #e5e5e5 0%, #d1d1d1 100%); /* FF3.6+ */
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e5e5e5), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
+     background: -webkit-linear-gradient(top,  #e5e5e5 0%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
+     background: -o-linear-gradient(top,  #e5e5e5 0%,#d1d1d1 100%); /* Opera 11.10+ */
+     background: -ms-linear-gradient(top,  #e5e5e5 0%,#d1d1d1 100%); /* IE10+ */
+     background: linear-gradient(top,  #e5e5e5 0%,#d1d1d1 100%); /* W3C */
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e5', endColorstr='#d1d1d1',GradientType=0 ); /* IE6-9 */
+     color: #fff;
+     border-color: #aaa;
+     cursor: pointer;
+    }
+     input#image_resource {
+       opacity: 0;
+       -moz-opacity: 0;
+       filter:alpha(opacity=0);    
+       position: absolute;
+       top: 0;
+       left: 0;
+       cursor: pointer;
+       width: 200px;
+     }
   }
   input#upload-button:hover {
     background: #eee;
@@ -328,50 +417,7 @@ div#current-image {
 
 /// Tandem Gallery
 
-.tandem-gallery {
-  img {
-    border: 5px solid $lightblue;
-  }
-  ul { 
-    margin: 0;
-    padding: 0;
-    li {
-      list-style: none;
-      border-bottom: 1px solid $lightblue;
-      position: relative;
-      padding: 10px 5px 8px 5px;
-      &.chosen {background: #f9fcfd;}
-    ul.actions {
-      border-bottom: none;
-      li {
-        position: absolute;
-        top: 0;
-        right: 0;        
-        display: inline;
-        border-bottom: none;   
-        padding: 5px 0;    
-        margin: 5px 0; 
-          a, a:active, a:visited {
-            font-size: 14px;
-            color: $darkblue;
-            padding: 2px 0;
-            @include goo;
-            text-decoration: none;
-            padding: 0 5px;
-          }
-          a.delete {color: $red;}
-          a:hover {color: $midblue;}
-        }
-      }
-    }
-  }
-  .thumb {
-    max-width: 50px;
-    max-height: 50px;
-    overflow: hidden;
-    border: 5px solid $lightblue;    
-  }
-}// end tandem gallery
+
 
 
 /// Colorbox Overwrites
@@ -436,7 +482,6 @@ form.edit_content_image div#tandem_advanced_settings .advanced-settings {
      }
    }
 }
-
 
 /* new clearfix */
 .clearfix:after {
