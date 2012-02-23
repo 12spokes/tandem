@@ -9,21 +9,21 @@ $(document).ready ->
   if $('#tandem_page_links').length > 0
     $('body').addClass('tandem-admin-bar')
 
-  $('.tandem_content').live 
+  $('div.tandem_content').on 
     'mouseenter': ->
-      $('.tandem_toolbar', $(this)).fadeIn('slow')
+      $('div.tandem_toolbar', $(this)).fadeIn('slow')
   
     'mouseleave': ->
-      $('.tandem_toolbar', $(this)).fadeOut('slow')
+      $('div.tandem_toolbar', $(this)).fadeOut('slow')
 
-  $('.tandem_content').live 'click', ->
-    $.fn.colorbox
-      href: $('.tandem_edit_link', $(this)).attr('href')
-      iframe: true
-      width: '80%'
-      height: '80%'
-      open: true
-    return false
+    'click': ->
+      $.fn.colorbox
+        href: $('a.tandem_edit_link', $(this)).attr('href')
+        iframe: true
+        width: '80%'
+        height: '80%'
+        open: true
+      return false
 
 reload_tandem_content = (resource_id,resource_url) ->
   $.fn.colorbox.close()
