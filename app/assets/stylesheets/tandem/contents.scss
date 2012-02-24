@@ -227,13 +227,11 @@ h4.tandem-logo {
 
 /// Image Upload Modal
 
-form.edit_content_image{
+#tandem-editor-wym form.edit_content_image {
 width: 24%;
 float: left;
 padding-left: 1%;
-
 }
-
 div#tandem-image-editor {
   width:73%;
   float:left;
@@ -268,15 +266,19 @@ iframe {
   }
 }
 /* force to show scrollbars in webkit browsers */
-::-webkit-scrollbar {
-	-webkit-appearance: none;
-	width: 7px;
+
+#tandem-editor-wym {
+  ::-webkit-scrollbar {
+  	-webkit-appearance: none;
+  	width: 7px;
+  }
+  ::-webkit-scrollbar-thumb {
+  	border-radius: 4px;
+  	background-color: rgba(0,0,0,.5);
+  	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+  }
 }
-::-webkit-scrollbar-thumb {
-	border-radius: 4px;
-	background-color: rgba(0,0,0,.5);
-	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-}
+
 section#tandem_image_gallery {
   max-height:400px;
   overflow-y: scroll;
@@ -441,13 +443,6 @@ section#tandem_image_gallery {
     }
   }
 }
-
-
-
-/// Tandem Gallery
-
-
-
 
 /// Colorbox Overwrites
 
