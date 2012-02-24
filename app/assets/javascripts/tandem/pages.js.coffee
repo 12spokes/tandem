@@ -25,8 +25,7 @@ $(document).ready ->
         open: true
       return false
 
-reload_tandem_content = (resource_id,resource_url) ->
+window.reload_tandem_content = (resource_id,resource_url) ->
   $.fn.colorbox.close()
   resource_id = '#'+resource_id
-  $(resource_id).load resource_url+' '+resource_id, ->
-    bind_tandem_events($(resource_id))
+  $(resource_id).load resource_url+' '+resource_id
