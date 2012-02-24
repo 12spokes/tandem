@@ -19,9 +19,20 @@ $(document).ready ->
 
     start: (e, data) ->
       $('div#tandem-upload-image div.loader').show()
+      $(e.target).closest('form').find('section#error_explanation').hide()
 
     always: (e, data) ->
       $('div#tandem-upload-image div.loader').hide()
+
+    fail: (e, data) ->
+      errors = $.parseJSON(data.jqXHR.responseText)
+      errorSection = $(e.target).closest('form').find('section#error_explanation')
+      errorList = errorSection.find('ul')
+      errorList.html('')
+      errorSection.show()
+
+      $.each errors, (attribute, error) ->
+        errorList.append("<li>#{attribute} #{error}</li>")
 
   $('section#tandem_image_gallery ul').click (event) ->
     image = $(event.target)

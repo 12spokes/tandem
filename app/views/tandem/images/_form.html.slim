@@ -7,11 +7,18 @@
         ul
           - f.object.errors.full_messages.each do |msg|
             li= msg
+    
     span#upload-button
       | Upload a New Image
       = f.file_field :resource
+
     div.loader
       div.range 
         span 0%
-          
+
+    section#error_explanation
+      header
+        h1 Oops&mdash;there's been a problem
+
+      ul
 

@@ -410,8 +410,9 @@ section#tandem_image_gallery {
   input#upload-button:hover {
     background: #eee;
   }
-  #error_explanation {
+  section#error_explanation {
     @include errors;
+    display:none;
   }
   .loader {
     display:none;
