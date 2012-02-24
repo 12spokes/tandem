@@ -414,6 +414,7 @@ section#tandem_image_gallery {
     @include errors;
   }
   .loader {
+    display:none;
     width: 200px;
     height: 20px;
     background: $lightblue;
@@ -428,6 +429,8 @@ section#tandem_image_gallery {
     box-shadow: 0 0 5px #aaa;
     overflow: hidden;
     .range {
+      width: 0;
+      padding:0;
       height: 20px;
       background: transparent url(image_path('tandem/loader_stripe.png'));    
       span {
