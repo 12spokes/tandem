@@ -8,7 +8,7 @@ module Tandem
 
     validates_attachment_presence :resource
     validates_attachment_size :resource, :less_than => 200.kilobytes
-    validates_attachment_content_type :resource, :content_type => ['image/jpg', 'image/jpeg', 'image/png']
+    validates_attachment_content_type :resource, :content_type => ['image/gif', 'image/jpg', 'image/jpeg', 'image/png']
 
     has_many :content_images, class_name: 'Tandem::Content::Image'
 
