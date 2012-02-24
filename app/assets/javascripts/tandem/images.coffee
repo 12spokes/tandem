@@ -4,7 +4,7 @@
 #= require tandem/gallery_image
 
 $(document).ready ->
-  $("#new_tandem_iamge input[type=file][name='image[resource]']").fileupload
+  $("#new_tandem_image input[type=file][name='image[resource]']").fileupload
     dataType: 'json'
     url: $(this).closest('form').attr('action')
     done: (e, data) ->
