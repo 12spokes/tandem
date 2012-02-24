@@ -1,9 +1,4 @@
 section id='tandem_image_gallery'
   ul
     - ::Tandem::Image.all.each do |image|
-      li
-        span
-          = render image
-        p 
-          | Name of image
-          a.delete_image href="#" 
+      = render_eco_template 'gallery_image', image.as_json

@@ -14,16 +14,7 @@
 
 
     -if @content.is_a?(Tandem::Content::Image)
-      = f.hidden_field :image_id
-
-      #current-image.clearfix
-        h3#selected_image_title Current Image
-        #selected_image_viewpane.clearfix
-          = image_content_tag @content, {}, :thumb        
-        ul#tandem_image_attributes
-          li.image_name Name of Image
-          li 100px x 100px
-          li Last Modified: 10/12/11
+      = render_eco_template 'current_image', @content.image.as_json
 
     #tandem_advanced_settings
       h3.settings-toggle Advanced Settings

@@ -1,0 +1,17 @@
+<% @resource_updated_at = new Date @resource_updated_at %>
+<% @formatted_resource_updated_at = "#{@resource_updated_at.getMonth() + 1}/#{@resource_updated_at.getDate()}/#{@resource_updated_at.getFullYear()}" %>
+
+<div class="clearfix" id="current-image">
+  <input id="content_image_image_id" name="content_image[image_id]" type="hidden" value="<%= @id %>" />
+
+  <h3 id="selected_image_title">Current Image</h3>
+
+  <div class="clearfix" id="selected_image_viewpane">
+    <img alt="<%= @resource_file_name %>" src="<%= @thumb_url %>" style="" />
+  </div>
+
+  <ul id="tandem_image_attributes">
+    <li class="image_name"><%= @resource_file_name %></li>
+    <li>Last Modified: <%= @formatted_resource_updated_at %></li>
+  </ul>
+</div>

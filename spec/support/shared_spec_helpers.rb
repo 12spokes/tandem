@@ -10,6 +10,7 @@ module Tandem
       view.stub(:tandem_content_tag) {''}
       view.stub(:tandem_navigation_tag) {''}
       view.stub(:valid_layouts) {''}
+      view.stub(:render_eco_template) {''}
     end
   end
 

@@ -8,6 +8,10 @@ module Tandem
       end
     end
 
+    def render_eco_template(template, locals = {})
+      Eco.render(File.read("#{Tandem::Engine.config.root}/app/assets/javascripts/tandem/#{template}.jst.eco"), locals).html_safe
+    end
+
     private
       def self.main_app_url_helpers
         ::Rails.application.routes.url_helpers.methods.select{|method| method.match(/^(?!hash\_for).*_(path|url)$/)}

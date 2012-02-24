@@ -2,6 +2,7 @@ require "tandem/engine"
 require "cancan"
 require "slim-rails"
 require "paperclip"
+require "eco"
 
 module Tandem
   module Configuration
