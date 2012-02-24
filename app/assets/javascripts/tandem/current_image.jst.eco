@@ -7,11 +7,13 @@
   <h3 id="selected_image_title">Current Image</h3>
 
   <div class="clearfix" id="selected_image_viewpane">
-    <img alt="<%= @resource_file_name %>" src="<%= @thumb_url %>" style="" />
+    <img alt="<%= @resource_file_name %>" src="<%= if @thumb_url? then @thumb_url else '/assets/tandem/blank_image.jpg' %>" style="" />
   </div>
-
-  <ul id="tandem_image_attributes">
-    <li class="image_name"><%= @resource_file_name %></li>
-    <li>Last Modified: <%= @formatted_resource_updated_at %></li>
-  </ul>
+  
+  <% if @thumb_url?: %>
+    <ul id="tandem_image_attributes">
+      <li class="image_name"><%= @resource_file_name %></li>
+      <li>Last Modified: <%= @formatted_resource_updated_at %></li>
+    </ul>
+  <% end %>
 </div>
