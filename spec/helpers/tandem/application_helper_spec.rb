@@ -8,6 +8,12 @@ module Tandem
 
         it { should =~ /Current Image/ }
         it { should =~ /value=\"3\"/ }
+
+        it "should not not call Eco.render multiple times" do
+          Eco.should_receive(:context_for).once { mock(:compiled_template, :call => 'Seymour Butz') }
+          helper.render_eco_template('current_image')
+          helper.render_eco_template('current_image')
+        end
       end
     end
   end
