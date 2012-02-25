@@ -35,8 +35,8 @@ $(document).ready ->
         errorList.append("<li>#{attribute} #{error}</li>")
 
   $('section#tandem_image_gallery ul').click (event) ->
-    image = $(event.target)
+    image = $(event.target).closest('li').find('img')
 
-    if image.is('img')
+    if image.length > 0
       $('div#current-image').replaceWith(window.JST['tandem/current_image'](image.data()))
 
