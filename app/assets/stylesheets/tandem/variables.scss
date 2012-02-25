@@ -12,19 +12,21 @@
   border-radius: $radius;
 }
 @mixin errors {
-  background: $midblue;
+  background: $lightblue;
   padding: 5px;
-  margin-bottom: 5px;
-  h2 {
-    font-size: 15px;
+  margin: 5px 0;
+  h1, h2 {
+    font-size: 18px;
     @include goo;
-    color: #fff;        
+    color: $darkblue;        
     font-weight: normal;
+    margin-left: 15px;
   }
   ul {
     li {
-    color: #fff;
+    color: $darkblue;
     font-size: 13px;
+    margin: 7px 0;
     }
   }
 }
