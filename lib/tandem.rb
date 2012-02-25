@@ -2,15 +2,19 @@ require "tandem/engine"
 require "cancan"
 require "slim-rails"
 require "paperclip"
+require "eco"
 
 module Tandem
   module Configuration
-    mattr_accessor :unauthorized_path, :layouts_dir, :uploaded_images_dir, :uploaded_images_template
+    mattr_accessor :unauthorized_path, :layouts_dir, :uploaded_images_dir, :uploaded_images_template, :paperclip_options
 
     self.unauthorized_path = nil
     self.layouts_dir = "tandem"
     self.uploaded_images_dir = ":rails_root/public"
     self.uploaded_images_template = "/assets/images/:id/:style/:basename.:extension"
+    self.paperclip_options = { :styles => { :thumb => "150x150>" },
+                               :url  => Tandem::Configuration.uploaded_images_template,
+                               :path => Tandem::Configuration.uploaded_images_dir + Tandem::Configuration.uploaded_images_template }
 
     def self.current_user_proc(&block)
       @@current_user = block

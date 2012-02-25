@@ -1,0 +1,10 @@
+<li>
+  <span>
+    <img alt="<%= @resource_file_name %>" data-id="<%= @id %>" data-resource_file_name="<%= @resource_file_name %>" data-resource_updated_at="<%= @resource_updated_at %>" data-thumb_url="<%= @thumb_url %>" src="<%= @thumb_url %>" />
+  </span>
+
+  <p>
+    <%= @resource_file_name %>
+    <!--<a class="delete_image" href="#"></a> -->
+  </p>
+</li>

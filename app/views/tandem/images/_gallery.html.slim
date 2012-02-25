@@ -1,0 +1,4 @@
+section id='tandem_image_gallery'
+  ul
+    - ::Tandem::Image.all.each do |image|
+      = render_eco_template 'gallery_image', image.as_json

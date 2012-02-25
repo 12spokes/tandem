@@ -1,5 +1,5 @@
-#tandem-editor
-  h4.tandem-logo
+// This is the form that controls Image upload and Text Editor
+#tandem-editor-wym
   = form_for [@page, @content], url: page_content_path(@page.id,@content.id) do |f|
     -if @content.errors.any?
       #tandem_error_explanation
@@ -14,23 +14,10 @@
 
 
     -if @content.is_a?(Tandem::Content::Image)
-      .field
-        = f.hidden_field :image_id
-      div#tandem-image-editor.clearfix
-
-
-        / #current-image.clearfix
-        /   h3#selected_image_title Current Image
-        /   #selected_image_viewpane.clearfix{src=thumb_image_path(':id:')} =image_content_tag @content, {}, :thumb
-  
-        #gallery-image.clearfix
-          iframe{src=new_image_path}
-          h3 Gallery
-          iframe{src=images_path(selected: 1)}
-
+      = render_eco_template 'current_image', @content.image.as_json
 
     #tandem_advanced_settings
-      a href="/" Advanced Settings
+      h3.settings-toggle Advanced Settings
       .advanced-settings
         .field
           = f.label :link_url
@@ -40,4 +27,11 @@
           = f.text_field :link_target
 
     .actions
-      = f.submit 'Save', class: "wymupdate"
+      = f.submit 'Save Your Changes', class: "wymupdate"
+
+  - if @content.is_a?(Tandem::Content::Image)
+    div#tandem-image-editor.clearfix
+      = render '/tandem/images/form'
+
+      #gallery-image.clearfix
+        = render '/tandem/images/gallery'

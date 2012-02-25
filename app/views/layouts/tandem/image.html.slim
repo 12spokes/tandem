@@ -1,0 +1,19 @@
+doctype 5
+| <!--[if lt IE 7 ]> <html class="ie6 no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]--> 
+| <!--[if IE 7 ]>    <html class="ie7 no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]--> 
+| <!--[if IE 8 ]>    <html class="ie8 no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]--> 
+| <!--[if IE 9 ]>    <html class="ie9 no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]--> 
+| <!--[if !(IE)]><!--> <html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
+
+head
+  title Tandem Image Gallery
+
+  = stylesheet_link_tag "tandem"
+  = csrf_meta_tags
+
+body
+
+  = yield
+  = javascript_include_tag "tandem"
+  
+| </html>
