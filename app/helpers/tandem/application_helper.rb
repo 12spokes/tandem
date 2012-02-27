@@ -2,8 +2,8 @@ module Tandem
   module ApplicationHelper
     def self.included(base)
       main_app_url_helpers.each do |helper|
-        base.send(:define_method, helper) do
-          main_app.send(helper)
+        base.send(:define_method, helper) do |*arguments|
+          main_app.send(helper, arguments)
         end
       end
     end
