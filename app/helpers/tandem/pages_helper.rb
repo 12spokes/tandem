@@ -109,7 +109,7 @@ module Tandem
           id: "tandem_toolbar_#{identifier}",
           class: "tandem_toolbar #{options[:class]}".strip
       }) {
-        link_to("Edit",edit_page_content_path(page.id,tandem_content.id),{
+        link_to("Edit",tandem.edit_page_content_path(page.id,tandem_content.id),{
             id: "tandem_edit_link_#{identifier}",
             class: "tandem_edit_link #{options[:class]}".strip,
             title: "editing #{identifier}"
@@ -151,7 +151,7 @@ module Tandem
 
       generate = Proc.new do |page|
         content_tag_for(:li, page, :link, class: "#{page == active_page ? 'active' : ''}") do
-          link_to(page.link_label, page_path(page), class: "#{page == active_page ? 'active' : ''}") +
+          link_to(page.link_label, tandem.page_path(page), class: "#{page == active_page ? 'active' : ''}") +
           content_tag(:ul) do
             iterate.call(page.id)
           end
@@ -170,11 +170,11 @@ module Tandem
         links = []
         
         if can?(:create, @page)
-          links << link_to('New Page', new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link)
+          links << link_to('New Page', tandem.new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link)
         end
 
         if @page.persisted? && can?(:update, @page)
-          links << link_to('Edit Page', edit_page_path(@page), :class => :page_link, :id => :page_edit_link)
+          links << link_to('Edit Page', tandem.edit_page_path(@page), :class => :page_link, :id => :page_edit_link)
         end
 
         if @page.persisted? && can?(:destroy, @page)
@@ -182,7 +182,7 @@ module Tandem
         end
 
         if can?(:index, ::Tandem::Page)
-          links << link_to('Page Listing', pages_path)
+          links << link_to('Page Listing', tandem.pages_path)
         end
 
         links.collect! do |link|
