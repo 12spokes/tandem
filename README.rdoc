@@ -109,6 +109,22 @@ authentication and authorization.
       end
     }
 
+== Paperclip configuration
+
+Tandem uses paperclip for file uploads. If your application needs to modify its settings,
+simply set the Tandem::Configuration.paperclip_options in /config/initializers/tandem.rb
+
+For example, to store images on S3, add the aws-sdk gem to your Gemfile and set 
+paperclip_options to:
+
+    Tandem::Configuration.paperclip_options = { :styles => { :thumb => "150x150>" },
+                                                :storage => :s3,
+                                                :bucket => Proc.new { Rails.application.engine_name.gsub(/application$/, Rails.env) },
+                                                :s3_credentials => {
+                                                                     :access_key_id => ENV['S3_KEY'],
+                                                                     :secret_access_key => ENV['S3_SECRET']
+                                                } }
+
 == Other Options
 
 By default, Tandem mounts to the root of your application. We're not trying to be pushy, 

@@ -51,3 +51,12 @@ Tandem::Configuration.user_abilities_proc { |user|
 # Change this to modify your uploaded images directory structure & routing from /public/assets/images/1/original/...
 # Tandem::Configuration.uploaded_images_template = "/assets/images/:id/:style/:basename.:extension"
 
+# Override Tandem's default paperclip options
+# For example, to use S3, add the aws-sdk gem to your gemfile and uncomment the following
+# Tandem::Configuration.paperclip_options = { :styles => { :thumb => "150x150>" },
+                                             #:storage => :s3,
+                                             #:bucket => Proc.new { Rails.application.engine_name.gsub(/application$/, Rails.env) },
+                                             #:s3_credentials => {
+                                                                   #:access_key_id => ENV['S3_KEY'],
+                                                                   #:secret_access_key => ENV['S3_SECRET']
+                                             #} }

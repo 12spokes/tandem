@@ -1,3 +1,4 @@
+// This form controls New Page, Edit Page
 #tandem-editor
   = form_for @page do |f|
     -if @page.errors.any?
@@ -35,7 +36,7 @@
         = f.select :template, options_for_select(valid_templates, @page.template), :include_blank => true        
         
     #tandem_advanced_settings
-      a href="/" Advanced Settings
+      h3.settings-toggle Advanced Settings
       .advanced-settings
         .field
           = f.label :page_label

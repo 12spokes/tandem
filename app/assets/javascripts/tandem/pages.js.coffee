@@ -20,13 +20,12 @@ $(document).ready ->
       $.fn.colorbox
         href: $('a.tandem_edit_link', $(this)).attr('href')
         iframe: true
-        width: '80%'
-        height: '80%'
+        width: '95%'
+        height: '90%'
         open: true
       return false
 
-reload_tandem_content = (resource_id,resource_url) ->
+window.reload_tandem_content = (resource_id,resource_url) ->
   $.fn.colorbox.close()
   resource_id = '#'+resource_id
-  $(resource_id).load resource_url+' '+resource_id, ->
-    bind_tandem_events($(resource_id))
+  $(resource_id).load resource_url+' '+resource_id

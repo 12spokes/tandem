@@ -1,14 +1,24 @@
 #tandem-upload-image
-  h3.tandem-mod-title Upload a New Image
-  = form_for @image, :html => { :multipart => true } do |f|
-    -if @image.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(@image.errors.count, "error")} prohibited this image from being saved:"
-        ul
-          - @image.errors.full_messages.each do |msg|
-            li= msg
+  = form_for (@image || ::Tandem::Image.new), :html => { :multipart => true, :id => 'new_tandem_image' } do |f|
 
-    .field
+    -if f.object.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(f.object.errors.count, "error")} prohibited this image from being saved:"
+        ul
+          - f.object.errors.full_messages.each do |msg|
+            li= msg
+    
+    span#upload-button
+      | Upload a New Image
       = f.file_field :resource
-    .actions
-      = f.submit 'Upload'
+
+    div.loader
+      div.range 
+        span 0%
+
+    section#error_explanation
+      header
+        h1 Oops&mdash;there's been a problem
+
+      ul
+
