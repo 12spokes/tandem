@@ -72,7 +72,21 @@ module Tandem
       end
     end
 
-    describe "Get home" do
+    describe "GET home" do
+      context "when the user can only read Page" do
+        before(:each) do
+          ability = Object.new
+          ability.extend(CanCan::Ability)
+          ability.can :read, Page
+          controller.stub(:current_ability) { ability }
+        end
+        
+        subject { get :home }
+
+        it { should render_template("tandem/pages/show") }
+        its(:code) { should == '200' }
+      end
+
       context "page without a custom template set" do
         before(:each) { Factory(:tandem_page, is_default: true) }
         subject { get :home }
