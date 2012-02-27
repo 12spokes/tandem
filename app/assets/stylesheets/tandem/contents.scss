@@ -227,7 +227,7 @@ h4.tandem-logo {
 
 /// Image Upload Modal
 
-#tandem-editor-wym form.edit_content_image {
+#tandem-editor-wym form.tandem_content_editor {
 width: 24%;
 float: left;
 padding-left: 1%;
@@ -495,7 +495,7 @@ section#tandem_image_gallery {
     color: #333;
   }
 }
-form.edit_content_image div#tandem_advanced_settings .advanced-settings {
+form.tandem_content_editor div#tandem_advanced_settings .advanced-settings {
    display: none;
    .field {
      padding: none;
