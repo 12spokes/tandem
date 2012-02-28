@@ -18,45 +18,62 @@ module Tandem
       end
     end
 
-    describe "tandem_content_tag" do
-      it "should render a unique html element containing sub-content" do
-        helper.stub(:can?) {false}
-        @content = Factory(:tandem_content_text)
-        result = helper.tandem_content_tag(@content.page,@content.tag,:text)
-        result.should =~ /id="#{@content.tag}"/
-        result.should =~ /id="#{dom_class(@content)}_#{@content.tag}"/
+    describe "tandem_content_tag" do 
+      context "rendering text content" do
+        let(:content) { Factory(:tandem_content_text) }
+        subject { helper.tandem_content_tag(content.page, content.tag, :text) }
+
+        context "for a user who can't edit content" do
+          before(:each) do
+            helper.stub(:can?) { false }
+          end
+
+          it { should =~ /id="#{content.tag}"/ }
+          it { should =~ /id="#{dom_class(content)}_#{content.tag}"/ }
+          it { should_not =~ /class="tandem_content"/ }
+
+          it "should not render content specific to the image sub type" do
+            helper.should_not_receive(:image_content_tag)
+            helper.tandem_content_tag(content.page, content.tag, :text)
+          end
+
+          it "should include a link if present" do
+            helper.tandem_content_tag(content.page, content.tag, :text).should =~ /id="tandem_content_link_#{content.tag}"/
+            content.class.any_instance.stub(:link?) {false}
+            helper.tandem_content_tag(content.page, content.tag, :text).should_not =~ /id="tandem_content_link_#{content.tag}"/
+          end
+        end
+
+        context "for a user who can edit content" do
+          before(:each) do
+            helper.stub(:can?) { true }
+          end
+
+          it { should =~ /class="tandem_content"/ }
+
+          it "should include a toolbar if authorized" do
+            helper.should_receive(:can?).with(:update, content) { true }
+            helper.tandem_content_tag(content.page, content.tag, :text).should =~ /id="tandem_toolbar_#{content.tag}"/
+            helper.should_receive(:can?).with(:update, content) { false }
+            helper.tandem_content_tag(content.page, content.tag, :text).should_not =~ /id="tandem_toolbar_#{content.tag}"/
+          end
+        end
       end
 
-      it "should render content specific to the text sub type" do
-        helper.stub(:can?) {false}
-        @content = Factory(:tandem_content_text)
-        helper.should_receive(:image_content_tag).at_most(0)
-        helper.tandem_content_tag(@content.page,@content.tag,:text)
-      end
+      context "rendering image content" do
+        let(:content) { Factory(:tandem_content_image) }
 
-      it "should render content specific to the image sub type" do
-        helper.stub(:can?) {false}
-        @content = Factory(:tandem_content_image)
-        helper.should_receive(:image_content_tag).once.and_return('')
-        helper.tandem_content_tag(@content.page,@content.tag,:image)
-      end
+        context "for a user who can't edit content" do
+          before(:each) do
+            helper.stub(:can?) { false }
+          end
 
-      it "should include a link if present" do
-        helper.stub(:can?) {false}
-        @content = Factory(:tandem_content_text)
-        helper.tandem_content_tag(@content.page,@content.tag,:text).should =~ /id="tandem_content_link_#{@content.tag}"/
-        @content.class.any_instance.stub(:link?) {false}
-        helper.tandem_content_tag(@content.page,@content.tag,:text).should_not =~ /id="tandem_content_link_#{@content.tag}"/
+          it "should render content specific to the image sub type" do
+            helper.should_receive(:image_content_tag).once.and_return('')
+            helper.tandem_content_tag(content.page, content.tag, :image)
+          end
+        end
       end
-
-      it "should include a toolbar if authorized" do
-        @content = Factory(:tandem_content_text)
-        helper.should_receive(:can?).once.with(:update, @content) {true}
-        helper.tandem_content_tag(@content.page,@content.tag,:text).should =~ /id="tandem_toolbar_#{@content.tag}"/
-        helper.should_receive(:can?).once.with(:update, @content) {false}
-        helper.tandem_content_tag(@content.page,@content.tag,:text).should_not =~ /id="tandem_toolbar_#{@content.tag}"/
-      end
-
     end
 
     describe "tandem_navigation_tag" do
