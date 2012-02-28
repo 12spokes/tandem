@@ -1,10 +1,16 @@
 #tandem-defaults
   = tandem_page_links
-
-  p#notice = notice
-  = tandem_text_tag(@page, :sidebar_text)
-  = tandem_image_tag(@page, :image_test)
   
+  // Our built-in page uses classes for bootstrap or 960.gs
+
+  .container_12.row.clearfix
+    p#notice = notice
+    .grid_11.span12
+      = tandem_image_tag(@page, :default_image)
+    .grid_7.span7
+      = tandem_text_tag(@page, :tandem_text_block)
+    .grid_5.span5
+      = tandem_text_tag(@page, :tandem_sidebar)      
 
   - unless @page.persisted?
     | This is the default page content and should tell the user to go create a page
