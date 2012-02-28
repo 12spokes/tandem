@@ -4,6 +4,7 @@ module Tandem
   describe "tandem/pages/show.html.slim" do
     before(:each) do
       controller.stub(:can?).and_return(true)
+      controller.stub(:cannot?).and_return(false)
       view.stub(:tandem_text_tag).and_return(nil)
       view.stub(:tandem_image_tag).and_return(nil)
     end
