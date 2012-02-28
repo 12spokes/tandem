@@ -1,44 +1,16 @@
 #tandem-defaults
   = tandem_page_links
-
-  p#notice = notice
-  = tandem_text_tag(@page, :sidebar_text)
-  = tandem_image_tag(@page, :image_test)
-  .hero
-    h1 
-      | CONGRATULATIONS! You've set up a new Tandem page!
-    p Tandem is a content management system (CMS) for Rails 3.1+. We felt like it was needed because too many of the CMS options for Rails are either unpolished—something we wouldn’t want to put in front of our clients or bloated and heavy, causing many headaches when trying to integrate into existing applications.
-    p Tandem was designed to be as simple as can be to integrate into a larger application. It’s a mountable engine that allows you to easily specify how it fits into a larger application and doesn’t bring any opinions about how that application is architected.
-    p The simplicity doesn’t stop there, though. It also has the end user in mind. Through in-place editing, users simply navigate their site like they normally would. If they want to edit something, they simply click on it, edit it, and go on their merry way.
-    p It’s early in the life of Tandem and we have lots in store, but it’s something we find useful and hope you will too.
-          
-    h2 Ways you can get started using Tandem...
-    h3 Custom pages
-
-    p 
-      | With Tandem, you can easily insert editable content into your page by using the simple helpers, 
-      pre tandem_text_tag 
-      | and 
-      pre tandem_image_tag.
-    p 
-      | Simply insert those into your templates where you want the user to be able to edit content and Tandem will take care of the rest. 
-      pre <div id="sidebar"><%= tandem_image_tag(@page, :sidebar_image) %><%= tandem_text_tag(@page, :sidebar_text) %></div>
-    
-    h3 Navigation
-
-    p 
-      | Tandem comes with a helper method to add a navigation menu. It’s not included in the default views, since it will most likely be used in your app’s application layout. Adding it is easy, though.
-      pre <%= tandem_navigation_tag(@page) %>
-    p 
-      | By default, Tandem will produce a nested tree of all your pages. If you just want the top level:
-      pre <%= tandem_navigation_tag(@page, Tandem::Page.top_level) %>
-    p 
-      | If you want to show just the subnavigation for a given page:
-      pre <%= tandem_navigation_tag(@page, @page.children) %>
-    p 
-      | You can also create submenus easily by passing in a custom collection of pages, e.g.
-      pre <%= tandem_navigation_tag(@page, Tandem::Page.find_by_title('Services').children) %>
   
+  // Our built-in page uses classes for bootstrap or 960.gs
+
+  .container_12.row.clearfix
+    p#notice = notice
+    .grid_12.span12
+      = tandem_image_tag(@page, :default_image)
+    .grid_7.span7
+      = tandem_text_tag(@page, :tandem_text_block)
+    .grid_5.span5
+      = tandem_text_tag(@page, :tandem_sidebar)      
 
   - unless @page.persisted?
     | This is the default page content and should tell the user to go create a page
