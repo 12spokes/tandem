@@ -26,6 +26,7 @@ module Tandem
 
         it "renders '#{link}' link only with authorization" do
           controller.stub(:can?) { |action, target| !(action == action_val && (target == Page || target.kind_of?(Page))) }
+          controller.stub(:cannot?) { !controller.can? }
           render
           assert_select "a", :text => link.to_s, :count => 0
         end

@@ -116,12 +116,12 @@ module Tandem
         })
       } + content if can? :update, tandem_content
 
-      content_tag(:div, tandem_content, html_options.merge(
-          id: identifier,
-          class: "tandem_content #{html_options[:class]}".strip
-      )) do
-        content
-      end
+      html_options.merge! id: identifier
+      html_options[:class] ||= ''
+      html_options[:class] << ' tandem_content' if can? :update, tandem_content
+      html_options[:class].strip!
+
+      content_tag(:div, tandem_content, html_options) { content }
     end
 
     #todo... document this
@@ -164,6 +164,8 @@ module Tandem
     end
 
     def tandem_page_links(options ={})
+      return if cannot?(:create, @page) && cannot?(:update, @page) && cannot?(:destroy, @page)
+
       options[:id] ||= 'tandem_page_links'
 
       content_tag(:ul, options) do
