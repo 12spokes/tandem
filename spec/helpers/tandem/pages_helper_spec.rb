@@ -99,6 +99,7 @@ module Tandem
       context 'with full editing abilities' do
         before(:each) do
           helper.stub(:can?).and_return(true)
+          helper.stub(:cannot?).and_return(false)
         end
 
         context 'for a new page' do
@@ -126,6 +127,16 @@ module Tandem
           it { should match(/Destroy Page/) }
           it { should match(/Page Listing/) }
         end
+      end
+
+      context 'for a user who cannot manage content' do
+        before(:each) do
+          helper.stub(:cannot?).and_return(true)
+        end
+
+        subject { helper.tandem_page_links }
+
+        it { should be_nil }
       end
     end
 
