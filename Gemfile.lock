@@ -57,6 +57,9 @@ GEM
     childprocess (0.2.2)
       ffi (~> 1.0.6)
     cocaine (0.2.1)
+    coffee-rails (3.1.1)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -203,6 +206,12 @@ GEM
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
+    sass (3.1.15)
+    sass-rails (3.1.5)
+      actionpack (~> 3.1.0)
+      railties (~> 3.1.0)
+      sass (~> 3.1.10)
+      tilt (~> 1.3.2)
     selenium-webdriver (2.13.0)
       childprocess (>= 0.2.1)
       ffi (~> 1.0.9)
@@ -229,6 +238,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
+    uglifier (1.2.3)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
     warden (1.1.0)
       rack (>= 1.0)
     xpath (0.1.4)
@@ -240,6 +252,7 @@ PLATFORMS
 DEPENDENCIES
   cancan
   capybara-webkit
+  coffee-rails (~> 3.1.1)
   cucumber-rails
   database_cleaner
   devise
@@ -261,6 +274,8 @@ DEPENDENCIES
   rb-inotify
   rspec-rails
   ruby-debug19
+  sass-rails (~> 3.1.4)
   slim
   spork
   tandem!
+  uglifier (>= 1.0.3)

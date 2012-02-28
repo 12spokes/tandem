@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount Tandem::Engine => "/"
+
   resources :widgets
 
   devise_for :users

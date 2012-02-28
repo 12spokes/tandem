@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 30000000000000) do
+ActiveRecord::Schema.define(:version => 20120228202451) do
 
   create_table "tandem_contents", :force => true do |t|
     t.integer  "page_id",                                      :null => false
