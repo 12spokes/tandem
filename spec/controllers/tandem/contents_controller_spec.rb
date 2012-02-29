@@ -30,9 +30,8 @@ module Tandem
         # Content. As you add validations to Content, be sure to
         # update the return value of this method accordingly.
         before(:each) do
-          @page = Factory(:tandem_page)
           @factory = "tandem_content_#{sub_type.simple_type}"
-          @content = Factory(@factory, :page => @page)
+          @content = Factory(@factory)
           @param_key = ActiveModel::Naming.param_key(@content)
           @klass = @content.class
         end
@@ -68,7 +67,7 @@ module Tandem
 
         describe "GET edit" do
           it "assigns the requested content as @content" do
-            get :edit, :page_id => @page.id, :id => @content.id
+            get :edit, :id => @content.id
             assigns(:content).should eq(@content)
           end
         end
@@ -122,16 +121,16 @@ module Tandem
               # receives the :update_attributes message with whatever params are
               # submitted in the request.
               @klass.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-              put :update, :page_id => @page.id, :id => @content.id, @param_key => {'these' => 'params'}
+              put :update, :id => @content.id, @param_key => {'these' => 'params'}
             end
 
             it "assigns the requested content as @content" do
-              put :update, :page_id => @page.id, :id => @content.id, @param_key => valid_attributes
+              put :update, :id => @content.id, @param_key => valid_attributes
               assigns(:content).should eq(@content)
             end
 
             it "renders the 'edit' template" do
-              put :update, :page_id => @page.id, :id => @content.id, @param_key => valid_attributes
+              put :update, :id => @content.id, @param_key => valid_attributes
               response.should render_template("success")
             end
           end
@@ -140,14 +139,14 @@ module Tandem
             it "assigns the content as @content" do
               # Trigger the behavior that occurs when invalid params are submitted
               @klass.any_instance.stub(:save).and_return(false)
-              put :update, :page_id => @page.id, :id => @content.id, @param_key => {}
+              put :update, :id => @content.id, @param_key => {}
               assigns(:content).should eq(@content)
             end
 
             it "re-renders the 'edit' template" do
               # Trigger the behavior that occurs when invalid params are submitted
               @klass.any_instance.stub(:save).and_return(false)
-              put :update, :page_id => @page.id, :id => @content.id, @param_key => {}
+              put :update, :id => @content.id, @param_key => {}
               response.should render_template("edit")
             end
           end
