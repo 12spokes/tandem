@@ -99,7 +99,6 @@ module Tandem
             raise "Rendering behavior not defined for: #{tandem_content.class.name}"
         end
 
-        #didn't use link_to_if here for performance
         content = link_to(content,tandem_content.link_url,{
             id: "tandem_content_link_#{identifier}",
             class: "tandem_content_link",
