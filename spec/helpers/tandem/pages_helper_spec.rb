@@ -4,16 +4,9 @@ module Tandem
   describe PagesHelper do
     Tandem::Content.subclasses.each do |klass|
       describe "tandem_#{klass.simple_type}_tag" do
-
-        before(:each) do
-          @page = Factory(:tandem_page)
-          helper.stub(:image_content_tag) {''}
-          helper.stub(:can?) {false}
-        end
-
-        it "aliases tandem_content_tag(page, :#{klass.simple_type}, ..." do
-          helper.send("tandem_#{klass.simple_type}_tag".to_sym, @page, 'identifier', { value_attr: 'value' }, { html_attr: 'html value' }).should ==
-              helper.tandem_content_tag(@page, 'identifier', klass.simple_type, { value_attr: 'value' }, { html_attr: 'html value' })
+        it "aliases tandem_content_tag(:#{klass.simple_type}, ...)" do
+          helper.should_receive(:tandem_content_tag).with(:identifier, klass.simple_type, { value_attr: 'value' }, { html_attr: 'html value' }) { '' }
+          helper.send("tandem_#{klass.simple_type}_tag".to_sym, :identifier, { value_attr: 'value' }, { html_attr: 'html value' })
         end
       end
     end
@@ -21,7 +14,12 @@ module Tandem
     describe "tandem_content_tag" do 
       context "rendering text content" do
         let(:content) { Factory(:tandem_content_text) }
-        subject { helper.tandem_content_tag(content.page, content.tag, :text) }
+
+        before(:each) do
+          helper.stub(:request_key) { content.request_key }
+        end
+
+        subject { helper.tandem_content_tag(content.tag, :text) }
 
         context "for a user who can't edit content" do
           before(:each) do
@@ -34,13 +32,21 @@ module Tandem
 
           it "should not render content specific to the image sub type" do
             helper.should_not_receive(:image_content_tag)
-            helper.tandem_content_tag(content.page, content.tag, :text)
+            helper.tandem_content_tag(content.tag, :text)
           end
 
-          it "should include a link if present" do
-            helper.tandem_content_tag(content.page, content.tag, :text).should =~ /id="tandem_content_link_#{content.tag}"/
-            content.class.any_instance.stub(:link?) {false}
-            helper.tandem_content_tag(content.page, content.tag, :text).should_not =~ /id="tandem_content_link_#{content.tag}"/
+          context "without a link" do
+            let(:content) { Factory(:tandem_content_text, link_url: nil) }
+            subject { helper.tandem_content_tag(content.tag, :text) }
+
+            it { should_not =~ /id="tandem_content_link_#{content.tag}"/ }
+          end
+          
+          context "with a link" do
+            let(:content) { Factory(:tandem_content_text, link_url: 'http://www.12spokes.com') }
+            subject { helper.tandem_content_tag(content.tag, :text) }
+
+            it { should =~ /id="tandem_content_link_#{content.tag}"/ }
           end
         end
 
@@ -53,9 +59,9 @@ module Tandem
 
           it "should include a toolbar if authorized" do
             helper.should_receive(:can?).with(:update, content) { true }
-            helper.tandem_content_tag(content.page, content.tag, :text).should =~ /id="tandem_toolbar_#{content.tag}"/
+            helper.tandem_content_tag(content.tag, :text).should =~ /id="tandem_toolbar_#{content.tag}"/
             helper.should_receive(:can?).with(:update, content) { false }
-            helper.tandem_content_tag(content.page, content.tag, :text).should_not =~ /id="tandem_toolbar_#{content.tag}"/
+            helper.tandem_content_tag(content.tag, :text).should_not =~ /id="tandem_toolbar_#{content.tag}"/
           end
         end
       end
@@ -70,7 +76,7 @@ module Tandem
 
           it "should render content specific to the image sub type" do
             helper.should_receive(:image_content_tag).once.and_return('')
-            helper.tandem_content_tag(content.page, content.tag, :image)
+            helper.tandem_content_tag(content.tag, :image)
           end
         end
       end
@@ -211,6 +217,19 @@ module Tandem
 
       it "should not include any partials" do
         helper.valid_templates.select { |template| template[0] == '_' }.should be_empty
+      end
+    end
+
+    describe '#request_key' do
+      context "from tandem/pages#home" do
+        before(:each) do
+          helper.stub(:controller_path) { 'tandem_pages' }
+          helper.stub(:action_name) { 'home' }
+        end
+
+        subject { helper.send(:request_key) }
+
+        it { should == 'tandem-pages-home' }
       end
     end
   end

@@ -6,14 +6,14 @@ module Tandem
         # tandem_#{klass.simple_type}_tag is provided as an alias of tandem_content_tag,
         # specifying the type of content through the method name. For example:
         #
-        #    <%= tandem_image_tag(@page, :test_image) %>
+        #    <%= tandem_image_tag(:test_image) %>
         #
         # is equivalent to:
         #
-        #    <%= tandem_content_tag(@page, :test_image, :image) %>
+        #    <%= tandem_content_tag(:test_image, :image) %>
         #
-        base.send(:define_method, "tandem_#{klass.simple_type}_tag") do |page, identifier, options = {}, html_options = {}|
-          tandem_content_tag page, identifier, klass.simple_type, options, html_options
+        base.send(:define_method, "tandem_#{klass.simple_type}_tag") do |identifier, options = {}, html_options = {}|
+          tandem_content_tag identifier, klass.simple_type, options, html_options
         end
       end
     end
@@ -21,26 +21,24 @@ module Tandem
     # tandem_content_tag creates an HTML DIV element with id and class parameters that
     # relate to the specified Tandem Content object and contains an internal content element.
     # If a Tandem::Content record doesn't exist for the unique combination of:
-    # page, identifier and type, one will be created automatically. For example:
+    # request_key, identifier and type, one will be created automatically. For example:
     #
-    #    <%= tandem_content_tag(@page, :test_image, :image) %>
+    #    <%= tandem_content_tag(:test_image, :image) %>
     #
-    # would find_or_create a Tandem::Content::Image object and produce the following HTML
-    # (assuming @page is an instance of a Tandem::Page object):
+    # would find_or_create a Tandem::Content::Image object and produce the following HTML:
     #
     #    <div class="tandem_content" id="test_image">...<img id="tandem_content_image_test_image" class="tandem_content_image bar"...</div>
     #
     # If the user is authorized to update content then an edit link will be generated in
     # conjunction with the content. For example:
     #
-    #    <%= tandem_content_tag(@page, :test_text, :text) %>
+    #    <%= tandem_content_tag(:test_text, :text) %>
     #
-    # would produce the following HTML (assuming @page is an instance of a Tandem::Page object,
-    # with an id value of 123, and `can? :update, tandem_content` => true):
+    # would produce the following HTML (assuming `can? :update, tandem_content` => true):
     #
     #    <div class="tandem_content" id="test_text">
     #      <div class="tandem_toolbar" id="tandem_toolbar_test_text">
-    #        <a href="#" id="tandem_edit_link_test_text" title="Edit test_text" class="tandem_edit_link" editor_options="{&quot;page_id&quot;:123,&quot;identifier&quot;:&quot;test_text&quot;,&quot;type&quot;:&quot;text&quot;}">Edit</a>
+    #        <a href="#" id="tandem_edit_link_test_text" title="Edit test_text" class="tandem_edit_link" editor_options="{&quot;identifier&quot;:&quot;test_text&quot;,&quot;type&quot;:&quot;text&quot;}">Edit</a>
     #      </div>
     #      ....
     #    </div>
@@ -48,7 +46,7 @@ module Tandem
     # If a user specifies link information for the corresponding Tandem::Content object,
     # then an A HTML element will be generated surrounding the content. For example:
     #
-    #    <%= tandem_content_tag(@page, :test_image, :image) %>
+    #    <%= tandem_content_tag(:test_image, :image) %>
     #
     # produces (assuming that tandem_content.link? => true):
     #
@@ -63,7 +61,7 @@ module Tandem
     # additional HTML attributes of the generated container div. If you specify a <tt>:class</tt> value, it will be combined
     # with the default class name for your object. For example:
     #
-    #    <%= tandem_content_tag(@page, :test_image, :image, {}, :class => "bar", :style => 'display:none') %>...
+    #    <%= tandem_content_tag(:test_image, :image, {}, :class => "bar", :style => 'display:none') %>...
     #
     # produces:
     #
@@ -73,14 +71,16 @@ module Tandem
     # additional HTML attributes of the internal asset type. If you specify a <tt>:class</tt> value, it will be combined
     # with the default class name for your object. For example:
     #
-    #    <%= tandem_content_tag(@page, :test_image, :image, :class => "bar", :width => 80) %>...
+    #    <%= tandem_content_tag(:test_image, :image, :class => "bar", :width => 80) %>...
     #
     # produces:
     #
     #    ...<img id="tandem_content_image_test_image" class="tandem_content_image bar" width = "80"...
     #
-    def tandem_content_tag(page, identifier, type, options = {}, html_options = {})
-      content = case tandem_content = page.contents.find_or_create_by_tag_and_type(identifier,Content.scoped_type(type))
+    def tandem_content_tag(identifier, type, options = {}, html_options = {})
+      tandem_content = Content.scoped_type(type).constantize.find_or_create_by_request_key_and_tag(request_key, identifier)
+
+      content = case tandem_content
         when Content::Text
           content_tag(:div, tandem_content, options.merge(
               id: "#{dom_class(tandem_content)}_#{identifier}",
@@ -109,7 +109,7 @@ module Tandem
           id: "tandem_toolbar_#{identifier}",
           class: "tandem_toolbar #{options[:class]}".strip
       }) {
-        link_to("Edit",tandem.edit_page_content_path(page.id,tandem_content.id),{
+        link_to("Edit",tandem.edit_content_path(tandem_content.id),{
             id: "tandem_edit_link_#{identifier}",
             class: "tandem_edit_link #{options[:class]}".strip,
             title: "editing #{identifier}"
@@ -216,6 +216,10 @@ module Tandem
 
       def valid_custom_template?(template_name)
         template_name[0] != '_' && !invalid_templates.include?(template_name)
+      end
+
+      def request_key
+        "#{controller_path}-#{action_name}".gsub(/[^\w]|_/, '-')
       end
   end
 end
