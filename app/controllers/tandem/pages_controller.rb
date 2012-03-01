@@ -6,7 +6,7 @@ module Tandem
     # GET /pages/home
     # GET /pages.home.json
     def home
-      @page = Page.where(is_default: true).first || Page.first || Page.new
+      @page = Page.where(is_default: true).first || Page.first || create_default_page
       authorize!(:index, Page)
       respond_to do |format|
         format.html { render (@page.template.present? ? @page.template : 'show'), notice: @page.new_record? ? 'No Pages Found.' : '' }
@@ -96,6 +96,10 @@ module Tandem
         else
           'application'
       end
+    end
+
+    def create_default_page
+      Page.create!(link_label: 'Sample Page', slug: 'sample', is_default: true)
     end
   end
 end

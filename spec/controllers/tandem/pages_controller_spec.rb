@@ -101,6 +101,17 @@ module Tandem
         it { should render_template("tandem/pages/custom_template") }
       end
 
+      context "when there are no pages in the database" do
+        it "should create a page" do
+          lambda { get :home }.should change(Page, :count).by(1)
+        end
+
+        it "should create a page marked as default" do
+          get :home
+          Page.where(is_default: true).first.should be_a(Page)
+        end
+      end
+
     end
 
     describe "GET new" do
