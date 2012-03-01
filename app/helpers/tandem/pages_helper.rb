@@ -224,7 +224,7 @@ module Tandem
       end
 
       def using_tandem_abilities
-        controller.instance_variable_set :@current_ability, ::Tandem::Ability.new(current_user)
+        controller.instance_variable_set :@current_ability, ::Tandem::Ability.new(::Tandem::Configuration.current_user)
         yield.tap do
           controller.instance_variable_set :@current_ability, nil
         end
