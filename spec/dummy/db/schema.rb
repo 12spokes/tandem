@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229023256) do
+ActiveRecord::Schema.define(:version => 20120301201442) do
 
   create_table "tandem_contents", :force => true do |t|
     t.string   "type",                                         :null => false

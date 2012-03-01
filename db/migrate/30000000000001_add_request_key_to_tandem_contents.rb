@@ -3,10 +3,13 @@ class AddRequestKeyToTandemContents < ActiveRecord::Migration
     add_column :tandem_contents, :request_key, :string
     
     Tandem::Content.all.each do |content|
-      page = content.page
+      page = Tandem::Page.find(content.page_id)
       content.update_attributes!(:request_key => "tandem-pages-#{page.slug}")
     end
 
+    remove_index :tandem_contents, :page_id
+    remove_index :tandem_contents, [:page_id, :type, :tag]
+    
     remove_column :tandem_contents, :page_id
 
     add_index :tandem_contents, :request_key
@@ -28,6 +31,9 @@ class AddRequestKeyToTandemContents < ActiveRecord::Migration
       end
     end
 
+    remove_index :tandem_contents, :request_key
+    remove_index :tandem_contents, [:request_key, :type, :tag]
+    
     remove_column :tandem_contents, :request_key
 
     add_index :tandem_contents, :page_id
