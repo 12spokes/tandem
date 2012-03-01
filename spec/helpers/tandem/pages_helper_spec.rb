@@ -12,6 +12,10 @@ module Tandem
     end
 
     describe "tandem_content_tag" do 
+      before(:each) do
+        helper.stub(:current_user) { Factory.stub(:user) }
+      end
+
       context "rendering text content" do
         let(:content) { Factory(:tandem_content_text) }
 

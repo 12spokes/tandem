@@ -78,50 +78,52 @@ module Tandem
     #    ...<img id="tandem_content_image_test_image" class="tandem_content_image bar" width = "80"...
     #
     def tandem_content_tag(identifier, type, options = {}, html_options = {})
-      tandem_content = Content.scoped_type(type).constantize.find_or_create_by_request_key_and_tag(request_key, identifier)
+      using_tandem_abilities do
+        tandem_content = Content.scoped_type(type).constantize.find_or_create_by_request_key_and_tag(request_key, identifier)
 
-      content = case tandem_content
-        when Content::Text
-          content_tag(:div, tandem_content, options.merge(
-              id: "#{dom_class(tandem_content)}_#{identifier}",
-              class: "#{dom_class(tandem_content)} #{options[:class]}".strip
-          )) {
-            tandem_content.formatted_content.html_safe
-          }
-        when Content::Image
-          image_content_tag(tandem_content,options.merge(
-              id: "#{dom_class(tandem_content)}_#{identifier}",
-              class: "#{dom_class(tandem_content)} #{options[:class]}".strip
-          ))
-        else
-          raise "Unable to create #{tandem_content.class.name}: #{tandem_content.errors.inspect}" if tandem_content.new_record?
-          raise "Rendering behavior not defined for: #{tandem_content.class.name}"
+        content = case tandem_content
+          when Content::Text
+            content_tag(:div, tandem_content, options.merge(
+                id: "#{dom_class(tandem_content)}_#{identifier}",
+                class: "#{dom_class(tandem_content)} #{options[:class]}".strip
+            )) {
+              tandem_content.formatted_content.html_safe
+            }
+          when Content::Image
+            image_content_tag(tandem_content,options.merge(
+                id: "#{dom_class(tandem_content)}_#{identifier}",
+                class: "#{dom_class(tandem_content)} #{options[:class]}".strip
+            ))
+          else
+            raise "Unable to create #{tandem_content.class.name}: #{tandem_content.errors.inspect}" if tandem_content.new_record?
+            raise "Rendering behavior not defined for: #{tandem_content.class.name}"
+        end
+
+        #didn't use link_to_if here for performance
+        content = link_to(content,tandem_content.link_url,{
+            id: "tandem_content_link_#{identifier}",
+            class: "tandem_content_link",
+            target: tandem_content.link_target
+        }) if tandem_content.link?
+
+        content = content_tag(:div, tandem_content, {
+            id: "tandem_toolbar_#{identifier}",
+            class: "tandem_toolbar #{options[:class]}".strip
+        }) {
+          link_to("Edit",tandem.edit_content_path(tandem_content.id),{
+              id: "tandem_edit_link_#{identifier}",
+              class: "tandem_edit_link #{options[:class]}".strip,
+              title: "editing #{identifier}"
+          })
+        } + content if can? :update, tandem_content
+
+        html_options.merge! id: identifier
+        html_options[:class] ||= ''
+        html_options[:class] << ' tandem_content' if can? :update, tandem_content
+        html_options[:class].strip!
+
+        content_tag(:div, tandem_content, html_options) { content }
       end
-
-      #didn't use link_to_if here for performance
-      content = link_to(content,tandem_content.link_url,{
-          id: "tandem_content_link_#{identifier}",
-          class: "tandem_content_link",
-          target: tandem_content.link_target
-      }) if tandem_content.link?
-
-      content = content_tag(:div, tandem_content, {
-          id: "tandem_toolbar_#{identifier}",
-          class: "tandem_toolbar #{options[:class]}".strip
-      }) {
-        link_to("Edit",tandem.edit_content_path(tandem_content.id),{
-            id: "tandem_edit_link_#{identifier}",
-            class: "tandem_edit_link #{options[:class]}".strip,
-            title: "editing #{identifier}"
-        })
-      } + content if can? :update, tandem_content
-
-      html_options.merge! id: identifier
-      html_options[:class] ||= ''
-      html_options[:class] << ' tandem_content' if can? :update, tandem_content
-      html_options[:class].strip!
-
-      content_tag(:div, tandem_content, html_options) { content }
     end
 
     #todo... document this
@@ -220,6 +222,13 @@ module Tandem
 
       def request_key
         "#{controller_path}-#{action_name}".gsub(/[^\w]|_/, '-')
+      end
+
+      def using_tandem_abilities
+        controller.instance_variable_set :@current_ability, ::Tandem::Ability.new(current_user)
+        yield.tap do
+          controller.instance_variable_set :@current_ability, nil
+        end
       end
   end
 end
