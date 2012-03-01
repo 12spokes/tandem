@@ -10,8 +10,14 @@ module Tandem
 
     config.eager_load_paths << File.expand_path("../../../app/models/tandem/content", __FILE__)
 
-    config.to_prepare do
-      ActionController::Base.helper PagesHelper
+    initializer "tandem.include_page_helpers" do |app|
+      ActiveSupport.on_load(:action_controller) do
+        helper ::Tandem::PagesHelper
+      end
+
+      ActiveSupport.on_load(:action_view) do
+        include ::Tandem::PagesHelper
+      end
     end
   end
 
