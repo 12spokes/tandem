@@ -8,11 +8,14 @@
 </head>
 <body>
 
-<%= yield %>
+  <%= tandem_navigation_tag(@page) %>
 
-  <div id="footer">
+  <%= yield %>
+
+  <div>
     <%= link_to 'Custom route', custom_path %>
   </div>
 
+  <%= render "/shared/footer" %>
 </body>
 </html>
