@@ -24,8 +24,3 @@ $(document).ready ->
         height: '90%'
         open: true
       return false
-
-window.reload_tandem_content = (resource_id,resource_url) ->
-  $.fn.colorbox.close()
-  resource_id = '#'+resource_id
-  $(resource_id).load resource_url+' '+resource_id

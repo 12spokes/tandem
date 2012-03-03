@@ -43,7 +43,12 @@ group :test, :development do
   gem 'guard-livereload'
   gem 'growl_notify'
 
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
+
+  gem 'pry'
 end

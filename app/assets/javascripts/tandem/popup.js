@@ -2,6 +2,7 @@
 // All this logic will automatically be available in application.js.
 //
 //= require jquery
+//= require jquery_ujs
 //= require tandem/wymeditor/jquery.wymeditor.min
 //= require tandem/images
 //= require tandem/vendor/jquery.ui.widget
@@ -9,23 +10,17 @@
 //= require tandem/vendor/jquery-fileupload/jquery.fileupload.js
 
 $().ready(function () {
-  if($('#success_data').length != 0) {
-    resource_id = $('#success_data').attr('resource_id')
-    resource_url = $('#success_data').attr('resource_url')
-    if(typeof(resource_id)=='undefined') {
-      parent.location = resource_url
-    } else {
-      parent.reload_tandem_content(resource_id,resource_url)
-    }
-  }
+  $('form.tandem_content_editor').on('ajax:success', function(event, content, status, jqXHR){
+    $.get(parent.location.href, function(data, status, jqXHR){
+      var content_id = '#' + content.tag;
 
-  $('.wymeditor').wymeditor({
+      $(content_id, parent.document).html( $(content_id, data).html() );
+      parent.$.fn.colorbox.close();
+    });
   });
-})
 
+  $('.wymeditor').wymeditor({ wymPath: '/assets/tandem/wymeditor/' });
 
-
-$(document).ready (function() {
   $('h3.settings-toggle').live('click', function () {
     $('div.advanced-settings').slideToggle('slow');
   });

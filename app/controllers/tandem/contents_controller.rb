@@ -84,10 +84,8 @@ module Tandem
 
       respond_to do |format|
         if @content.update_attributes(params[param_key])
-          format.html { render action: "success", notice: 'Content was successfully updated.' }
-          format.json { head :ok }
+          format.json { render json: @content }
         else
-          format.html { render action: "edit" }
           format.json { render json: @content.errors, status: :unprocessable_entity }
         end
       end

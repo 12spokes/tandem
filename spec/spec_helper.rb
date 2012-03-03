@@ -22,6 +22,10 @@ Spork.prefork do
   require 'rspec/rails'
   require 'factory_girl'
   require 'database_cleaner'
+  require 'capybara-webkit'
+  require 'capybara/rspec'
+
+  Capybara.javascript_driver = :webkit
 
   ENGINE_RAILS_ROOT=File.join(File.dirname(__FILE__), '../')
 

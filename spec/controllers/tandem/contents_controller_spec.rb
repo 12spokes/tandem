@@ -31,9 +31,11 @@ module Tandem
         # update the return value of this method accordingly.
         before(:each) do
           @factory = "tandem_content_#{sub_type.simple_type}"
-          @content = Factory(@factory)
+          @content = Factory.stub(@factory)
           @param_key = ActiveModel::Naming.param_key(@content)
           @klass = @content.class
+
+          Tandem::Content.stub(:find).with(@content.to_param) { @content }
         end
 
         def valid_attributes
@@ -114,40 +116,42 @@ module Tandem
 =end
 
         describe "PUT update" do
+
           describe "with valid params" do
+            before(:each) do
+              @content.stub(:update_attributes) { true }
+            end
+
             it "updates the requested content" do
-              # Assuming there are no other contents in the database, this
-              # specifies that the Content created on the previous line
-              # receives the :update_attributes message with whatever params are
-              # submitted in the request.
-              @klass.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-              put :update, :id => @content.id, @param_key => {'these' => 'params'}
+              @content.should_receive(:update_attributes).with({'these' => 'params'}) { true }
+              put :update, :id => @content.id, @param_key => {'these' => 'params'}, format: :json
             end
 
             it "assigns the requested content as @content" do
-              put :update, :id => @content.id, @param_key => valid_attributes
-              assigns(:content).should eq(@content)
+              put :update, :id => @content.id, @param_key => valid_attributes, format: :json
+              assigns(:content).should eql(@content)
             end
 
-            it "renders the 'edit' template" do
-              put :update, :id => @content.id, @param_key => valid_attributes
-              response.should render_template("success")
+            it "renders the content as json" do
+              @content.should_receive(:to_json) { 'json_string' }
+              put :update, :id => @content.id, @param_key => valid_attributes, format: :json
+              response.body.should == 'json_string'
             end
           end
 
           describe "with invalid params" do
+            before(:each) do
+              @content.stub(:update_attributes) { false }
+            end
+
             it "assigns the content as @content" do
-              # Trigger the behavior that occurs when invalid params are submitted
-              @klass.any_instance.stub(:save).and_return(false)
-              put :update, :id => @content.id, @param_key => {}
+              put :update, :id => @content.id, @param_key => {}, format: :json
               assigns(:content).should eq(@content)
             end
 
-            it "re-renders the 'edit' template" do
-              # Trigger the behavior that occurs when invalid params are submitted
-              @klass.any_instance.stub(:save).and_return(false)
-              put :update, :id => @content.id, @param_key => {}
-              response.should render_template("edit")
+            it "return unprocessable_entity status" do
+              put :update, :id => @content.id, @param_key => {}, format: :json
+              response.status.should == 422
             end
           end
         end
