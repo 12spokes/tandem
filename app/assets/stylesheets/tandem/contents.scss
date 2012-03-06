@@ -235,6 +235,9 @@ padding-left: 1%;
 form.tandem_text_editor {
   width: 100%;
 }
+form.tandem_text_editor textarea#content_text_content {
+  width: 95%;
+}
 form.tandem_image_editor {
   width: 24%;
 }
