@@ -10,8 +10,7 @@
 
     -if @content.is_a?(Tandem::Content::Text)
       .field
-        = f.text_area :content, class: "wymeditor"
-
+        = f.text_area :content, text_content_text_area_options(params[:editor])
 
     -if @content.is_a?(Tandem::Content::Image)
       = render_eco_template 'current_image', @content.image.as_json

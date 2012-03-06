@@ -8,9 +8,9 @@
     .grid_12.span12
       = tandem_image_tag(:default_image)
     .grid_7.span7
-      = tandem_text_tag(:tandem_text_block)
+      = tandem_text_tag(:tandem_text_block, editor: :wysiwyg)
     .grid_5.span5
-      = tandem_text_tag(:tandem_sidebar)      
+      = tandem_text_tag(:tandem_sidebar)
 
   - unless @page.persisted?
     | This is the default page content and should tell the user to go create a page

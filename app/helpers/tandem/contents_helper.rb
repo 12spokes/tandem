@@ -9,5 +9,11 @@ module Tandem
       options = {style: ""}.merge(options) if format == :thumb
       image_tag image_content_url(image_content, format), options
     end
+
+    def text_content_text_area_options(editor = 'plain', options = {})
+      options.tap do |options|
+        options[:class] = 'wymeditor' if editor == 'wysiwyg'
+      end
+    end
   end
 end
