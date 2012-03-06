@@ -122,8 +122,8 @@ authentication and authorization.
 
 1. Tell Tandem how to find the current_user
 
-    Tandem::Configuration.current_user_proc {
-      User.find(session['user_id']) unless session['user_id'].blank?
+    Tandem::Configuration.current_user_proc { |request|
+      User.find(request.session['user_id']) unless request.session['user_id'].blank?
     }
 
 2. Define what each user can do using CanCan
