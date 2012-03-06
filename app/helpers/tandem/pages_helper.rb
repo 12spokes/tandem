@@ -77,7 +77,13 @@ module Tandem
     #
     #    ...<img id="tandem_content_image_test_image" class="tandem_content_image bar" width = "80"...
     #
+    # Finally, text tandem_content_tags support an <tt>:editor</tt> option, which defaults to <tt>:plain</tt>, but
+    # can also be changed to <tt>:wysiwyg</tt> to enable a WYSIWYG editor, e.g.
+    #
+    #     <%= tandem_content_tag(:main_body, :text, editor: :wysiwyg) %>
     def tandem_content_tag(identifier, type, options = {}, html_options = {})
+      options[:editor] ||= :plain
+
       using_tandem_abilities do
         tandem_content = Content.scoped_type(type).constantize.find_or_create_by_request_key_and_tag(request_key, identifier)
 
@@ -109,7 +115,7 @@ module Tandem
             id: "tandem_toolbar_#{identifier}",
             class: "tandem_toolbar #{options[:class]}".strip
         }) {
-          link_to("Edit",tandem.edit_content_path(tandem_content.id),{
+          link_to("Edit", tandem.edit_content_path(tandem_content.id, editor: options[:editor]),{
               id: "tandem_edit_link_#{identifier}",
               class: "tandem_edit_link #{options[:class]}".strip,
               title: "editing #{identifier}"
