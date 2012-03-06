@@ -1,2 +1,15 @@
 0.2
  * BREAKING CHANGE - tandem_content_tag no longer has a page passed in. Use tandem_content_tag(identifier, type, option = {}, html_options = {}).
+ * Added in some awesome design elements by Colleen Palmer
+ * Bug - Fix errors if main app is already using CanCan
+ * Bug - Ensure view helpers are shared correctly, and in both directions, between the main app and tandem
+ * Feature - Make sure all of tandem's CSS is namespaced, so it doesn't conflict with any of the main app's styles.
+ * Hide 'Advanced Settings' by default.
+ * Feature - Make the entire tandem content clickable to edit, not just the 'Edit' link.
+ * Feature - Paperclip is now able to be configured directly by the main app's tandem config initializer.
+ * Feature - Completely refactored the image gallery.
+ * Feature - Ajax image uploads.
+ * Feature - Allow .gif image uploads
+ * Feature - Create a tandem page automatically if you go to the root and there aren't any pages in the database.
+ * Feature - You can now add tandem content to any page in the main app, not just tandem pages.
+ * Feature - You can specify either :plain or :wysiwyg for the text editor.
