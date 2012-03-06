@@ -39,6 +39,10 @@ module Tandem
             helper.tandem_content_tag(content.tag, :text)
           end
 
+          it "should not include a toolbar" do
+            subject.should_not have_selector('div.tandem_toolbar')
+          end
+
           context "without a link" do
             let(:content) { Factory(:tandem_content_text, link_url: nil) }
             subject { helper.tandem_content_tag(content.tag, :text) }
@@ -61,14 +65,34 @@ module Tandem
 
           it { should =~ /class="tandem_content"/ }
 
-          it "should include a toolbar if authorized" do
+          it "should include a toolbar" do
             helper.should_receive(:can?).with(:update, content) { true }
-            helper.tandem_content_tag(content.tag, :text).should =~ /id="tandem_toolbar_#{content.tag}"/
-            helper.should_receive(:can?).with(:update, content) { false }
-            helper.tandem_content_tag(content.tag, :text).should_not =~ /id="tandem_toolbar_#{content.tag}"/
+            subject.should have_selector("#tandem_toolbar_#{content.tag}")
+            subject.should have_selector('div.tandem_toolbar')
+          end
+
+          it "should pass the default editor type to the content form through the edit link" do
+              subject.should have_selector("a[href='#{edit_content_path(content.id, editor: :plain)}']")
+            end
+
+          context "setting the editor to :wysiwyg" do
+            subject { helper.tandem_content_tag(content.tag, :text, editor: :wysiwyg) }
+
+            it "should pass the editor type to the content form through the edit link" do
+              subject.should have_selector("a[href='#{edit_content_path(content.id, editor: :wysiwyg)}']")
+            end
+          end
+
+          context "setting the editor to :plain" do
+            subject { helper.tandem_content_tag(content.tag, :text, editor: :plain) }
+
+            it "should pass the editor type to the content form through the edit link" do
+              subject.should have_selector("a[href='#{edit_content_path(content.id, editor: :plain)}']")
+            end
           end
         end
       end
+
 
       context "rendering image content" do
         let(:content) { Factory(:tandem_content_image) }
