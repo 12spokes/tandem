@@ -8,7 +8,6 @@ module Tandem
     # GET /images
     # GET /images.json
     def index
-      @update_current_image = params['update_current_image'].present?
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @images }
@@ -83,7 +82,7 @@ module Tandem
       @image.destroy
   
       respond_to do |format|
-        format.html { redirect_to images_url(update_current_image: true) }
+        format.html { redirect_to images_url }
         format.json { head :ok }
       end
     end

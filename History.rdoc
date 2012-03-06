@@ -1,0 +1,2 @@
+0.2
+ * BREAKING CHANGE - tandem_content_tag no longer has a page passed in. Use tandem_content_tag(identifier, type, option = {}, html_options = {}).

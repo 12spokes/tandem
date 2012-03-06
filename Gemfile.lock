@@ -52,11 +52,16 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    capybara-webkit (0.7.2)
+    capybara-webkit (0.10.1)
       capybara (>= 1.0.0, < 1.2)
-    childprocess (0.2.2)
+      json
+    childprocess (0.3.1)
       ffi (~> 1.0.6)
     cocaine (0.2.1)
+    coderay (1.0.5)
+    coffee-rails (3.1.1)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.1.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -126,7 +131,6 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.5)
-    json_pure (1.6.1)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     linecache19 (0.5.12)
@@ -135,6 +139,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.7.0)
     mime-types (1.17.2)
     multi_json (1.0.4)
     nokogiri (1.5.0)
@@ -146,6 +151,10 @@ GEM
       mime-types
     pg (0.13.1)
     polyglot (0.3.3)
+    pry (0.9.8.1)
+      coderay (~> 1.0.5)
+      method_source (~> 0.7)
+      slop (>= 2.4.3, < 3)
     rack (1.3.6)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -202,11 +211,17 @@ GEM
       ruby-debug-base19 (>= 0.11.19)
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
-    rubyzip (0.9.4)
-    selenium-webdriver (2.13.0)
-      childprocess (>= 0.2.1)
-      ffi (~> 1.0.9)
-      json_pure
+    rubyzip (0.9.6.1)
+    sass (3.1.15)
+    sass-rails (3.1.5)
+      actionpack (~> 3.1.0)
+      railties (~> 3.1.0)
+      sass (~> 3.1.10)
+      tilt (~> 1.3.2)
+    selenium-webdriver (2.20.0)
+      childprocess (>= 0.2.5)
+      ffi (~> 1.0)
+      multi_json (~> 1.0)
       rubyzip
     slim (1.0.4)
       temple (~> 0.3.4)
@@ -216,6 +231,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       slim (~> 1.0)
+    slop (2.4.3)
     spork (0.9.0)
     sprockets (2.0.3)
       hike (~> 1.2)
@@ -229,6 +245,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
+    uglifier (1.2.3)
+      execjs (>= 0.3.0)
+      multi_json (>= 1.0.2)
     warden (1.1.0)
       rack (>= 1.0)
     xpath (0.1.4)
@@ -240,6 +259,7 @@ PLATFORMS
 DEPENDENCIES
   cancan
   capybara-webkit
+  coffee-rails (~> 3.1.1)
   cucumber-rails
   database_cleaner
   devise
@@ -255,12 +275,15 @@ DEPENDENCIES
   launchy
   paperclip
   pg
+  pry
   rails (~> 3.1.3)
   rb-fchange
   rb-fsevent
   rb-inotify
   rspec-rails
   ruby-debug19
+  sass-rails (~> 3.1.4)
   slim
   spork
   tandem!
+  uglifier (>= 1.0.3)

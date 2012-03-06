@@ -152,7 +152,7 @@ module Tandem
       it "redirects to the images list" do
         image = Factory(:tandem_image)
         delete :destroy, :id => image.id
-        response.should redirect_to(images_path(update_current_image: true))
+        response.should redirect_to(images_path)
       end
     end
 

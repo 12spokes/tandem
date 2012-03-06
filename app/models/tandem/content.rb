@@ -1,9 +1,7 @@
 module Tandem
   class Content < ActiveRecord::Base
-    belongs_to :page
-
     validates :tag, presence: true
-    validates :page_id, presence: true, uniqueness: {:scope => [:tag, :type]}
+    validates :request_key, presence: true, uniqueness: {:scope => [:tag, :type]}
 
     #enforce abstract class architecture
     validates :type, presence: true, exclusion: ['Tandem::Content']

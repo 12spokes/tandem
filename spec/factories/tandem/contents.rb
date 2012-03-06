@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :tandem_content do
-    association :page, :factory => :tandem_page
-    tag "sample_tag"
+    request_key 'tandem-pages-sample'
+    tag "sample-tag"
     link_url "http://www.google.com"
     link_target "_blank"
   end
