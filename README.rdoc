@@ -151,6 +151,23 @@ By default, the uploaded images are stored and accessed via the default "papercl
 conventions (see paperclip gem). To change this behavior, supply a value to:
 
     Tandem::Configuration.uploaded_images_template
+    
+=== Styling
+
+Every new Tandem default page created has pre-defined classes setup to use either Bootstrap or 960.gs. 
+
+Here's a preview of what the html looks like:
+
+  .container_12.row.clearfix
+    p#notice = notice
+    .grid_12.span12
+      = tandem_image_tag(@page, :default_image)
+    .grid_7.span7
+      = tandem_text_tag(@page, :tandem_text_block)
+    .grid_5.span5
+      = tandem_text_tag(@page, :tandem_sidebar)
+    
+If either of those grid systems are being used those styles will pull in accordingly.
 
 == License
 
