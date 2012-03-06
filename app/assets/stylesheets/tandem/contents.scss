@@ -229,9 +229,24 @@ h4.tandem-logo {
 /// Image Upload Modal
 
 #tandem-editor-wym form.tandem_content_editor {
-width: 24%;
 float: left;
 padding-left: 1%;
+}
+form.tandem_text_editor {
+  width: 100%;
+}
+form.tandem_text_editor textarea#content_text_content {
+  width: 95%;
+}
+form.tandem_image_editor {
+  width: 24%;
+}
+iframe {
+  width: 90%;
+  padding: 0;
+  margin :0;
+  height: 300px;
+  overflow: scroll;   
 }
 div#tandem-image-editor {
   width:73%;
@@ -252,12 +267,7 @@ width: 100%;
 padding: 0;
 margin: 0;
 
-iframe {
-	width: 90%;
-	padding: 0;
-	margin :0;
-  overflow: visible;		
-}
+
   h3 {
     font-size: 15px;
     @include goo;
@@ -473,6 +483,7 @@ section#tandem_image_gallery {
 
 }
 
+
 /// Advanced Settings
 
 #tandem_advanced_settings {
@@ -510,6 +521,9 @@ form.tandem_content_editor div#tandem_advanced_settings .advanced-settings {
        width: 90%;
      }
    }
+}
+form.tandem_text_editor div#tandem_advanced_settings .advanced-settings .field input {
+      width: 200px;
 }
 
 /* new clearfix */
