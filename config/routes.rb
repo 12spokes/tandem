@@ -9,9 +9,9 @@ Tandem::Engine.routes.draw do
     collection do
       get :home
     end
-
-    resources :contents, :only => [:edit, :update]
   end
+
+  resources :contents, :only => [:edit, :update]
 
   root :to => 'pages#home'
 end

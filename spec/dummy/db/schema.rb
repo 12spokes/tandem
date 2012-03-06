@@ -11,10 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 30000000000000) do
+ActiveRecord::Schema.define(:version => 20120301201442) do
 
   create_table "tandem_contents", :force => true do |t|
-    t.integer  "page_id",                                      :null => false
     t.string   "type",                                         :null => false
     t.string   "tag",                                          :null => false
     t.text     "content"
@@ -26,10 +25,11 @@ ActiveRecord::Schema.define(:version => 30000000000000) do
     t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "request_key"
   end
 
-  add_index "tandem_contents", ["page_id", "type", "tag"], :name => "index_tandem_contents_on_page_id_and_type_and_tag", :unique => true
-  add_index "tandem_contents", ["page_id"], :name => "index_tandem_contents_on_page_id"
+  add_index "tandem_contents", ["request_key", "type", "tag"], :name => "index_tandem_contents_on_request_key_and_type_and_tag", :unique => true
+  add_index "tandem_contents", ["request_key"], :name => "index_tandem_contents_on_request_key"
 
   create_table "tandem_images", :force => true do |t|
     t.string   "resource_file_name"
@@ -74,5 +74,11 @@ ActiveRecord::Schema.define(:version => 30000000000000) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "widgets", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

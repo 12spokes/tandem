@@ -5,7 +5,6 @@ module Tandem
     include SharedSpecHelpers
 
     before(:each) do
-      @page = assign(:page, Factory(:tandem_page))
       stub_all_view_helpers
     end
 
@@ -18,7 +17,7 @@ module Tandem
         render
 
         # Run the generator again with the --webrat flag if you want to use webrat matchers
-        assert_select "form", :action => page_content_path(@page.id,@content.id), :method => "post" do
+        assert_select "form", :action => content_path(@content.id), :method => "post" do
           assert_select "textarea#content_text_content", :name => "content[content]"
           assert_select "input#content_text_link_url", :name => "content[link_url]"
           assert_select "input#content_text_link_target", :name => "content[link_target]"
@@ -35,7 +34,7 @@ module Tandem
         render
 
         # Run the generator again with the --webrat flag if you want to use webrat matchers
-        assert_select "form", :action => page_content_path(@page.id,@content.id), :method => "post" do
+        assert_select "form", :action => content_path(@content.id), :method => "post" do
           assert_select "input#content_image_link_url", :name => "content[link_url]"
           assert_select "input#content_image_link_target", :name => "content[link_target]"
         end

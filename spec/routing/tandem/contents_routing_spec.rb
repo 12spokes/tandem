@@ -29,11 +29,11 @@ module Tandem
 =end
 
       it "routes to #edit" do
-        get("/pages/1/contents/1/edit").should route_to("tandem/contents#edit", :page_id => "1", :id => "1")
+        get("contents/1/edit").should route_to("tandem/contents#edit", :id => "1")
       end
 
       it "routes to #update" do
-        put("/pages/1/contents/1").should route_to("tandem/contents#update", :page_id => "1", :id => "1")
+        put("contents/1").should route_to("tandem/contents#update", :id => "1")
       end
 
     end

@@ -4,9 +4,11 @@ FactoryGirl.define do
   sequence :link_label do |n|
     "link label #{n}"
   end
+
   sequence :slug do |n|
     "slug_#{n}"
   end
+
   factory :tandem_page, :class => Tandem::Page do
     title "value for title"
     page_label "value for page label"

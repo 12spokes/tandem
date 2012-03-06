@@ -19,7 +19,7 @@ on their merry way.
 It's early in the life of Tandem and we have lots in store, but it's something 
 we find useful and hope you will too.
 
-== Getting Started
+== Getting Started / Installation
 
 Has it ever been easier to check off that "CMS functionality" feature story?
 
@@ -42,6 +42,30 @@ This assumes you have a rails app already. If you don't, <tt>rails new tanem_app
     rake db:migrate
 
 5. Start your app and you're ready to go.
+
+    rails s
+
+== Upgrading
+
+Upgrade just like you would any other engine.
+
+1. Update the gem version to the latest version in your gemfile if you specify a version.
+
+    gem 'tandem', '~> 0.2'
+
+2. Install the updated gem
+
+    bundle update tandem
+
+3. Copy any new migrations from tandem
+
+    rake tandem:install:migrations
+
+4. Migrate
+
+    rake db:migrate
+
+5. Enjoy the new tandem goodness.
 
     rails s
 

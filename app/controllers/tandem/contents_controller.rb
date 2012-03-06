@@ -1,6 +1,6 @@
 module Tandem
   class ContentsController < ::Tandem::ApplicationController
-    load_and_authorize_resource :page, :class => "Tandem::Page"
+    load_and_authorize_resource
     layout 'tandem/popup'
 
 =begin ### default scaffold actions not currently used
@@ -75,32 +75,20 @@ module Tandem
 
     # GET /contents/1/edit
     def edit
-      @content = @page.contents.find(params[:id])
-      authorize_content!
     end
 
     # PUT /contents/1
     # PUT /contents/1.json
     def update
-      @content = @page.contents.find(params[:id])
       param_key = ActiveModel::Naming.param_key(@content)
-      authorize_content!
 
       respond_to do |format|
         if @content.update_attributes(params[param_key])
-          format.html { render action: "success", notice: 'Content was successfully updated.' }
-          format.json { head :ok }
+          format.json { render json: @content }
         else
-          format.html { render action: "edit" }
           format.json { render json: @content.errors, status: :unprocessable_entity }
         end
       end
-    end
-  
-    private
-
-    def authorize_content!
-      authorize!(params[:action], @content || Content)
     end
   end
 end
