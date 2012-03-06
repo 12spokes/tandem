@@ -83,8 +83,8 @@ Simply insert those into your templates where you want the user to be able to
 edit content and Tandem will take care of the rest.
 
     <div id="sidebar">
-      <%= tandem_image_tag(@page, :sidebar_image)
-      <%= tandem_text_tag(@page, :sidebar_text)
+      <%= tandem_image_tag(:sidebar_image)
+      <%= tandem_text_tag(:sidebar_text)
     </div>
 
 The tandem_text_tag defaults to a basic text area. If you'd like to offer a WYSIWYG editor,
