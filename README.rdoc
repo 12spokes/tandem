@@ -87,6 +87,11 @@ edit content and Tandem will take care of the rest.
       <%= tandem_text_tag(@page, :sidebar_text)
     </div>
 
+The tandem_text_tag defaults to a basic text area. If you'd like to offer a WYSIWYG editor,
+you can set the <tt>editor</tt> option to <tt>:wysiwyg</tt>:
+
+    <%= tandem_text_tag(:sidebar_text, editor: :wysiwyg) %>
+
 === Navigation
 
 Tandem comes with a helper method to add a navigation menu. It's not included in the default
