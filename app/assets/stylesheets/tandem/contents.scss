@@ -6,13 +6,13 @@
 @import "variables";
 
 body.tandem-admin-bar {
-  margin-top: 35px;
+  margin-top: 35px; // accounting for bootstrap navigation
 }
 #tandem_page_links {
-  z-index: 900;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
+  z-index: 1050;
   height: 35px;
   line-height: 35px;
   width: 100%;
@@ -20,12 +20,18 @@ body.tandem-admin-bar {
   margin: 0;  
   padding: 0 10px;  
   border-bottom: 1px solid $darkblue;
+  border-top: 1px solid $darkblue;
+  ul {
+    padding: 0;
+  }
   li {
     display: inline;    
     padding: 0 20px;
     a, a:active, a:visited {
-     color: $lightblue;
+     color: $darkblue;
      text-decoration: none; 
+     padding: 5px 0;
+     @include goo;
      &:hover {color: #aaa;}
     }
   }
