@@ -3,8 +3,10 @@ class AddRequestKeyToTandemContents < ActiveRecord::Migration
     add_column :tandem_contents, :request_key, :string
     
     Tandem::Content.all.each do |content|
-      page = Tandem::Page.find(content.page_id)
-      content.update_attributes!(:request_key => "tandem-pages-#{page.slug}")
+      if Tandem::Page.exists?(content.page_id)
+        page = Tandem::Page.find(content.page_id)
+        content.update_attributes!(:request_key => "tandem-pages-#{page.slug}")
+      end
     end
 
     remove_index :tandem_contents, :page_id
