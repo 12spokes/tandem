@@ -1,7 +1,15 @@
-Tandem::Configuration.current_user_proc {
+Tandem::Configuration.current_user_proc { |request|
   # Uncomment and/or modify the following line once your project has a user model to
-  # derive abilities from
-  # User.find(session['user_id']) unless session['user_id'].blank?
+  # derive abilities from.
+  #
+  # The request is passed in so you can access it directly to specify what the current
+  # user is, regardless of the context, e.g. main app or Tandem, the proc is called from.
+  #
+  # User.find(request.session['user_id']) unless request.session['user_id'].blank?
+  #
+  # Or, for devise:
+  #
+  # request.env['warden'].authenticate(:scope => :user)
 }
 Tandem::Configuration.user_abilities_proc { |user|
   # Define abilities for the passed in user here. For example:
