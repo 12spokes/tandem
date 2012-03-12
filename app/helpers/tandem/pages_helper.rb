@@ -1,6 +1,8 @@
 module Tandem
   module PagesHelper
 
+    include ContentsHelper
+
     def self.included(base)
       Tandem::Content.subclasses.each do |klass|
         # tandem_#{klass.simple_type}_tag is provided as an alias of tandem_content_tag,

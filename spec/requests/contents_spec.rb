@@ -17,7 +17,7 @@ end
 
 describe "Tandem Content on non-tandem pages" do
   describe "get /widgets" do
-    it "renders the widgets index and creates a tandem_content item called :widget_blurb" do
+    it "renders the widgets index and creates a tandem content items" do
       get '/widgets'
     end
   end
