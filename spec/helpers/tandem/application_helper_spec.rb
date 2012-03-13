@@ -16,5 +16,18 @@ module Tandem
         end
       end
     end
+
+    describe 'proxied url helpers' do
+      context 'calling a main app url helper with 0 arguments' do
+        subject { helper.new_widget_path }
+        it { should == '/widgets/new' }
+      end
+
+      context 'calling a main app url helper with arguments' do
+        subject { helper.widget_path(mock_model(Widget, id: 123)) }
+        it { should == '/widgets/123' }
+      end
+    end
+
   end
 end
