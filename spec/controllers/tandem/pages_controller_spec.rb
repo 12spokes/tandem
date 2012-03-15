@@ -25,7 +25,7 @@ module Tandem
     # Page. As you add validations to Page, be sure to
     # update the return value of this method accordingly.
     def valid_attributes
-      Factory.attributes_for(:tandem_page)
+      @valid_attributes ||= Factory.attributes_for(:tandem_page)
     end
 
     describe "GET index" do
@@ -143,9 +143,9 @@ module Tandem
           assigns(:page).should be_persisted
         end
 
-        it "render the 'success' template" do
+        it "should redirect to the page" do
           post :create, :page => valid_attributes
-          response.should render_template("success")
+          response.should redirect_to("/tandem/pages/#{valid_attributes[:slug]}")
         end
       end
 
@@ -184,10 +184,10 @@ module Tandem
           assigns(:page).should eq(page)
         end
 
-        it "render the 'success' template" do
+        it "should redirect to the page" do
           page = Factory(:tandem_page)
           put :update, :id => page.to_param, :page => valid_attributes
-          response.should render_template("success")
+          response.should redirect_to("/tandem/pages/#{valid_attributes[:slug]}")
         end
       end
 

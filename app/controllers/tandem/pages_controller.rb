@@ -51,7 +51,7 @@ module Tandem
     def create
       respond_to do |format|
         if @page.save
-          format.html { render action: "success", notice: 'Page was successfully created.' }
+          format.html { redirect_to @page, notice: 'Page was successfully created.' }
           format.json { render json: @page, status: :created, location: @page }
         else
           format.html { render action: "new" }
@@ -65,8 +65,8 @@ module Tandem
     def update
       respond_to do |format|
         if @page.update_attributes(params[:page])
-          format.html { render action: "success", notice: 'Page was successfully updated.' }
-          format.json { head :ok }
+          format.html { redirect_to @page, notice: 'Page was successfully updated.' }
+          format.json  { head :no_content }
         else
           format.html { render action: "edit" }
           format.json { render json: @page.errors, status: :unprocessable_entity }

@@ -1,6 +1,6 @@
 // This form controls New Page, Edit Page
 #tandem-editor
-  = form_for @page do |f|
+  = form_for @page, remote: true, html: { class: 'tandem-page-form' } do |f|
     -if @page.errors.any?
       #error_explanation
         h2 = "#{pluralize(@page.errors.count, "error")} prohibited this page from being saved:"

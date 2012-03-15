@@ -2,9 +2,7 @@
 # All this logic will automatically be available in application.js.
 
 $(document).ready ->
-  $('.page_link').colorbox
-    onCleanup: ->
-      location.reload()
+  $('.page_link').colorbox()
 
   if $('#tandem_page_links').length > 0
     $('body').addClass('tandem-admin-bar')
@@ -24,3 +22,11 @@ $(document).ready ->
         height: '90%'
         open: true
       return false
+
+  $(document).on 'ajax:success', 'form.tandem-page-form', (event, content, status, jqXHR) ->
+    returnedForm = $('form.tandem-page-form', content)
+
+    if returnedForm.find('#error_explanation').length > 0
+     $('form.tandem-page-form').replaceWith returnedForm
+    else
+      window.location.reload()
