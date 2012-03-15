@@ -251,13 +251,25 @@ module Tandem
     describe '#request_key' do
       context "from tandem/pages#home" do
         before(:each) do
-          helper.stub(:controller_path) { 'tandem_pages' }
+          helper.stub(:controller_path) { 'tandem/pages' }
           helper.stub(:action_name) { 'home' }
         end
 
         subject { helper.send(:request_key) }
 
         it { should == 'tandem-pages-home' }
+      end
+
+      context "from tandem/pages#show" do
+        before(:each) do
+          helper.stub(:controller_path) { 'tandem/pages' }
+          helper.stub(:action_name) { 'show' }
+          helper.stub(:params) { { id: 'bamboo' } }
+        end
+
+        subject { helper.send(:request_key) }
+
+        it { should == 'tandem-pages-show-bamboo' }
       end
     end
   end

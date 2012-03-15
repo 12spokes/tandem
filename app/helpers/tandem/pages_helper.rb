@@ -228,7 +228,9 @@ module Tandem
       end
 
       def request_key
-        "#{controller_path}-#{action_name}".gsub(/[^\w]|_/, '-')
+        key = "#{controller_path}-#{action_name}".gsub(/[^\w]|_/, '-')
+        key += "-#{params[:id]}" if key == 'tandem-pages-show'
+        key
       end
 
       def using_tandem_abilities
