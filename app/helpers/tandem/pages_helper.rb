@@ -220,7 +220,7 @@ module Tandem
 
     private
       def invalid_templates
-        ['show', 'edit', 'index', 'new', 'success']
+        ['show', 'edit', 'index', 'new']
       end
 
       def valid_custom_template?(template_name)
