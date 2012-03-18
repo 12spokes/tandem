@@ -11,7 +11,11 @@ $().ready(function () {
     });
   });
 
-  $('.wymeditor').wymeditor({ wymPath: '/assets/tandem/wymeditor/' });
+  $('.wymeditor').wymeditor({ wymPath: '/assets/tandem/wymeditor/jquery.wymeditor.min.js',
+                              basePath: '/assets/tandem/wymeditor/',
+                              skinPath: "/assets/tandem/wymeditor/skins/default/",
+                              jQueryPath: "/assets/jquery.js"
+  });
 
   $('h3.settings-toggle').live('click', function () {
     $('div.advanced-settings').slideToggle('slow');
