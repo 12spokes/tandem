@@ -37,13 +37,16 @@ module Tandem
     def new
       @page.parent ||= Page.where(id: params['parent_id']).first
       respond_to do |format|
-        format.html # new.html.erb
+        format.html { render layout: false if request.xhr? }
         format.json { render json: @page }
       end
     end
   
     # GET /pages/1/edit
     def edit
+      respond_to do |format|
+        format.html { render layout: false if request.xhr? }
+      end
     end
 
     # POST /pages
