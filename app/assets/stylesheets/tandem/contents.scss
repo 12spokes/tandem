@@ -46,9 +46,9 @@ body.tandem-admin-bar {
   font-size: 13px;
   @include goo;
 }
-a.tandem_edit_link,
-a.tandem_edit_link:active,
-a.tandem_edit_link:visited {
+.tandem_toolbar a.tandem_edit_link,
+.tandem_toolbar a.tandem_edit_link:active,
+.tandem_toolbar a.tandem_edit_link:visited {
   font-size: 13px;
   @include goo;  
   color: #333;
@@ -57,6 +57,7 @@ a.tandem_edit_link:visited {
   text-decoration: none;    
   text-transform: uppercase;
   @include radius(3px);
+  font-weight: normal;
   box-shadow: 0px 0px 5px #333;
   &:hover {
     color: #fff !important;
