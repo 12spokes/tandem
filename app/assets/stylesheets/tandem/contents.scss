@@ -92,6 +92,7 @@ h4.tandem-logo {
 #tandem-editor-wym {
   width: 100%;
 }
+
 #tandem-editor, #tandem-editor-wym {
   h1.tandem-title {
     font-size: 18px;
@@ -166,7 +167,7 @@ h4.tandem-logo {
      background: #fff;
      border: 1px solid #ccc;     
    }
-   .wym_skin_default .wym_iframe iframe {border:none;}
+   .wym_skin_default .wym_iframe iframe {border:none;height: 300px;}
    iframe .wym_iframe {background: transparent; border:none;}
   } // end form
   .wym_section {
