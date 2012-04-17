@@ -8,7 +8,7 @@ describe "Editing" do
       visit root_path
       edit_tandem_text_content(:tandem_text_block, 'I love tandem!')
 
-      within '#tandem_content_text_tandem_text_block' do
+      within '#content_text_tandem_text_block' do
         page.should have_content('I love tandem!')
       end
     end
