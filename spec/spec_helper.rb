@@ -73,6 +73,8 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.include Capybara, :example_group => { :file_path => /\bspec\/integration\// }
+
+    config.include Tandem::Engine.routes.url_helpers
   end
 end
 
