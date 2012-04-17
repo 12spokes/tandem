@@ -159,7 +159,7 @@ module Tandem
       end
 
       generate = Proc.new do |page|
-        content_tag_for(:li, page, :link, class: "#{page == active_page ? 'active' : ''}") do
+        content_tag_for(:li, page, :tandem, class: "#{page == active_page ? 'active' : ''}") do
           link_to(page.link_label, tandem.page_path(page), class: "#{page == active_page ? 'active' : ''}") +
           content_tag(:ul) do
             iterate.call(page.id)
@@ -189,7 +189,7 @@ module Tandem
         end
 
         if @page.persisted? && can?(:destroy, @page)
-          links << link_to('Destroy Page', @page, :confirm => 'Are you sure?', :method => :delete)
+          links << link_to('Destroy Page', tandem.page_path(@page), :confirm => 'Are you sure?', :method => :delete)
         end
 
         if can?(:index, ::Tandem::Page)

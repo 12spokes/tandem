@@ -24,6 +24,7 @@ Spork.prefork do
   require 'database_cleaner'
   require 'capybara-webkit'
   require 'capybara/rspec'
+  require 'pry'
 
   Capybara.javascript_driver = :webkit
 
@@ -73,6 +74,8 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.include Capybara, :example_group => { :file_path => /\bspec\/integration\// }
+
+    config.include Tandem::Engine.routes.url_helpers
   end
 end
 

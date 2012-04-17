@@ -1,5 +1,5 @@
 #tandem-upload-image
-  = form_for (@image || ::Tandem::Image.new), :html => { :multipart => true, :id => 'new_tandem_image' } do |f|
+  = form_for (@image ||= ::Tandem::Image.new), :url => (@image.new_record? ? tandem.images_path : tandem.image_path(@image)), :html => { :multipart => true, :id => 'new_tandem_image' } do |f|
 
     -if f.object.errors.any?
       #error_explanation
