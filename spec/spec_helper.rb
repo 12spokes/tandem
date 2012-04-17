@@ -24,6 +24,7 @@ Spork.prefork do
   require 'database_cleaner'
   require 'capybara-webkit'
   require 'capybara/rspec'
+  require 'pry'
 
   Capybara.javascript_driver = :webkit
 
