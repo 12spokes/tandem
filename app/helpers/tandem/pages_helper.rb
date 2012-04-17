@@ -189,7 +189,7 @@ module Tandem
         end
 
         if @page.persisted? && can?(:destroy, @page)
-          links << link_to('Destroy Page', @page, :confirm => 'Are you sure?', :method => :delete)
+          links << link_to('Destroy Page', tandem.page_path(@page), :confirm => 'Are you sure?', :method => :delete)
         end
 
         if can?(:index, ::Tandem::Page)
