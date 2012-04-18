@@ -7,7 +7,7 @@ module Tandem
     # GET /pages.home.json
     def home
       @page = Page.where(is_default: true).first || Page.first || create_default_page
-      authorize!(:index, Page)
+      authorize!(:show, Page)
       respond_to do |format|
         format.html { render (@page.template.present? ? @page.template : 'show'), notice: @page.new_record? ? 'No Pages Found.' : '' }
         format.json { render json: @page }
