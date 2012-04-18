@@ -116,11 +116,11 @@ module Tandem
         @page = @pages.first
         result = helper.tandem_navigation_tag(@page)
 
-        result =~ /<li ([^>]*)id="link_tandem_page_#{@page.id}"([^>]*)>/
-        ($1 + $2).should =~ /class="link_tandem_page active"/
+        result =~ /<li ([^>]*)id="tandem_page_#{@page.id}"([^>]*)>/
+        ($1 + $2).should =~ /class="tandem_page active"/
 
-        result =~ /<li ([^>]*)id="link_tandem_page_#{@pages.last.id}"([^>]*)>/
-        ($1 + $2).should =~ /class="link_tandem_page"/
+        result =~ /<li ([^>]*)id="tandem_page_#{@pages.last.id}"([^>]*)>/
+        ($1 + $2).should =~ /class="tandem_page"/
       end
 
       context "being called without a passed in collection" do

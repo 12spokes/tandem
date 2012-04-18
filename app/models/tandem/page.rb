@@ -13,6 +13,8 @@ module Tandem
 
     scope :top_level, where( parent_id: nil )
 
+    attr_accessible :parent_id, :title, :page_label, :link_label, :layout, :template, :keywords, :description, :slug, :is_default
+
     def to_param
       persisted? ? slug : nil
     end

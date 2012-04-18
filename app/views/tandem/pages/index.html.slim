@@ -23,13 +23,13 @@
 	      td= page.layout
 	      td= page.keywords
 	      td= page.description
-	      td= link_to 'Show', page
+	      td= link_to 'Show', tandem.page_path(page)
 	      - if can?(:update, page)
-	        td= link_to 'Edit', edit_page_path(page), :class => :page_link
+	        td= link_to 'Edit', tandem.edit_page_path(page), :class => :page_link
 	      - if can?(:destroy, page)
-	        td= link_to 'Delete', page, :confirm => 'Are you sure?', :method => :delete
+	        td= link_to 'Delete', tandem.page_path(page), :confirm => 'Are you sure?', :method => :delete
 
 	br
 
 	- if can?(:create, ::Tandem::Page)
-	  = link_to 'New Page', new_page_path, :class => :page_link, :id => :page_new_link
+	  = link_to 'New Page', tandem.new_page_path, :class => :page_link, :id => :page_new_link

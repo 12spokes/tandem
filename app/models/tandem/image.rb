@@ -14,6 +14,8 @@ module Tandem
 
     default_scope order('created_at DESC')
 
+    attr_accessible :resource
+
     def thumb_url
       resource.url(:thumb)
     end

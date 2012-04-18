@@ -3,8 +3,11 @@ module Tandem
     validates :tag, presence: true
     validates :request_key, presence: true, uniqueness: {:scope => [:tag, :type]}
 
+    
     #enforce abstract class architecture
     validates :type, presence: true, exclusion: ['Tandem::Content']
+
+    attr_accessible :tag, :content, :details, :link_url, :link_target, :attachment_id, :attachment_type, :image_id, :request_key
 
     def self.subclass_names
       @subclass_names ||= subclasses.map { |sc| sc.name }
