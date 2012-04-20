@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "tandem/pages/new.html.slim" do
+  describe "tandem/pages/new" do
     before(:each) do
       assign(:page, Factory.build(:tandem_page))
     end

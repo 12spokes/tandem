@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "tandem/images/edit.html.slim" do
+  describe "tandem/images/edit" do
     before(:each) do
       @image = assign(:image, stub_model(Image))
     end

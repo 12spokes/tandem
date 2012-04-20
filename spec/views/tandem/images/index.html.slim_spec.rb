@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "tandem/images/index.html.slim" do
+  describe "tandem/images/index" do
     before(:each) do
       assign(:images, [
         stub_model(Image),
