@@ -172,35 +172,39 @@ module Tandem
       end
     end
 
-    def tandem_page_links(options ={})
-      return if cannot?(:create, @page) && cannot?(:update, @page) && cannot?(:destroy, @page)
+    def tandem_page_links(options = {})
+      using_tandem_abilities do
+        return if cannot?(:create, @page) && cannot?(:update, @page) && cannot?(:destroy, @page)
 
-      options[:id] ||= 'tandem_page_links'
+        options[:id] ||= 'tandem_page_links'
 
-      content_tag(:ul, options) do
-        links = []
-        
-        if can?(:create, @page)
-          links << link_to('New Page', tandem.new_page_path(parent_id: @page.id), :class => :page_link, :id => :page_new_link)
+        content_tag(:ul, options) do
+          links = []
+          
+          if can?(:create, ::Tandem::Page)
+            links << link_to('New Page', tandem.new_page_path(parent_id: @page.try(:id)), :class => :page_link, :id => :page_new_link)
+          end
+
+          if @page.present?
+            if @page.persisted? && can?(:update, @page)
+              links << link_to('Edit Page', tandem.edit_page_path(@page), :class => :page_link, :id => :page_edit_link)
+            end
+
+            if @page.persisted? && can?(:destroy, @page)
+              links << link_to('Destroy Page', tandem.page_path(@page), :confirm => 'Are you sure?', :method => :delete)
+            end
+          end
+
+          if can?(:index, ::Tandem::Page)
+            links << link_to('Page Listing', tandem.pages_path)
+          end
+
+          links.collect! do |link|
+            content_tag(:li, link)
+          end
+
+          raw(links.join)
         end
-
-        if @page.persisted? && can?(:update, @page)
-          links << link_to('Edit Page', tandem.edit_page_path(@page), :class => :page_link, :id => :page_edit_link)
-        end
-
-        if @page.persisted? && can?(:destroy, @page)
-          links << link_to('Destroy Page', tandem.page_path(@page), :confirm => 'Are you sure?', :method => :delete)
-        end
-
-        if can?(:index, ::Tandem::Page)
-          links << link_to('Page Listing', tandem.pages_path)
-        end
-
-        links.collect! do |link|
-          content_tag(:li, link)
-        end
-
-        raw(links.join)
       end
     end
 
