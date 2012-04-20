@@ -174,7 +174,7 @@ module Tandem
 
     def tandem_page_links(options = {})
       using_tandem_abilities do
-        return if cannot?(:create, @page) && cannot?(:update, @page) && cannot?(:destroy, @page)
+        return if cannot?(:create, @page) && cannot?(:update, @page) && cannot?(:destroy, @page) && cannot?(:index, ::Tandem::Page)
 
         options[:id] ||= 'tandem_page_links'
 
