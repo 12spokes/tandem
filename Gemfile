@@ -38,7 +38,6 @@ group :test, :development do
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'guard-cucumber'
   gem 'guard-livereload'
   gem 'growl_notify'
 
