@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "tandem/pages/show.html.slim" do
+  describe "tandem/pages/show" do
     before(:each) do
       controller.stub(:can?).and_return(true)
       controller.stub(:cannot?).and_return(false)
