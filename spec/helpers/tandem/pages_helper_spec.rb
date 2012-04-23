@@ -178,6 +178,15 @@ module Tandem
           it { should match(/Destroy Page/) }
           it { should match(/Page Listing/) }
         end
+
+        context 'on a non-tandem page' do
+          subject { helper.tandem_page_links }
+
+          it { should match(/New Page/) }
+          it { should_not match(/Edit Page/) }
+          it { should_not match(/Destroy Page/) }
+          it { should match(/Page Listing/) }
+        end
       end
 
       context 'for a user who cannot manage content' do
