@@ -6,7 +6,6 @@ module Tandem
     end
 
     def image_content_tag(image_content, options = {}, format = :original)
-      options = {style: ""}.merge(options) if format == :thumb
       image_tag image_content_url(image_content, format), options
     end
 
