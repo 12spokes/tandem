@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "tandem/images/new.html.slim" do
+  describe "tandem/images/new" do
     before(:each) do
       assign(:image, stub_model(Image).as_new_record)
     end

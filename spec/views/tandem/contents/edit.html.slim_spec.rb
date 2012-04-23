@@ -1,7 +1,7 @@
 module Tandem
   require 'spec_helper'
 
-  describe "tandem/contents/edit.html.slim" do
+  describe "tandem/contents/edit" do
     include SharedSpecHelpers
 
     before(:each) do
