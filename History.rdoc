@@ -1,3 +1,9 @@
+0.2.1
+ * Chore - Removed a line from the image_content_tag that didn't do much.
+ * Chore - Remove cucumber dependency - We weren't using it. Using rspec integration specs instead
+ * Chore - Fix view spec warnings
+ * Bug - If you included tandem_page_links on a page, say the application layout, that's not a tandem page, you would  get a "uninitialized constant Ability" error
+
 0.2
  * BREAKING CHANGE - tandem_content_tag no longer has a page passed in. Use tandem_content_tag(identifier, type, option = {}, html_options = {}).
  * Added in some awesome design elements by Colleen Palmer
