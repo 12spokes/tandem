@@ -23,7 +23,7 @@ we find useful and hope you will too.
 
 Has it ever been easier to check off that "CMS functionality" feature story?
 
-This assumes you have a rails app already. If you don't, <tt>rails new tanem_app</tt>
+This assumes you have a rails app already. If you don't, <tt>rails new tandem_app</tt>
 
 1. Add the tandem gem to your Gemfile
 
