@@ -1,6 +1,8 @@
 #tandem-defaults
 	h1.tandem-title Pages Listing
-
+	- if can?(:create, ::Tandem::Page)
+	  p#tandem-new
+	    = link_to 'Create a New Page', tandem.new_page_path, :class => :page_link, :id => :page_new_link
 	table
 	  tr
 	    th Parent
@@ -29,7 +31,6 @@
 	      - if can?(:destroy, page)
 	        td= link_to 'Delete', tandem.page_path(page), :confirm => 'Are you sure?', :method => :delete
 
-	br
 
-	- if can?(:create, ::Tandem::Page)
-	  = link_to 'New Page', tandem.new_page_path, :class => :page_link, :id => :page_new_link
+
+
