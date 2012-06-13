@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'Glegoo';
-  src: url(image_path('tandem/glegoo-regular-webfont.eot'));
-  src: url(image_path('tandem/glegoo-regular-webfont.eot?#iefix')) format('embedded-opentype'),
-       url(image_path('tandem/glegoo-regular-webfont.woff')) format('woff'),
-       url(image_path('tandem/glegoo-regular-webfont.ttf')) format('truetype'),
-       url(image_path('tandem/glegoo-regular-webfont.svg#GlegooRegular')) format('svg');
+  src: url(asset_url ('glegoo-regular-webfont.eot'));
+  src: url(asset_url ('glegoo-regular-webfont.eot?#iefix')) format('embedded-opentype'),
+       url(asset_url ('glegoo-regular-webfont.woff')) format('woff'),
+       url(asset_url ('glegoo-regular-webfont.ttf')) format('truetype'),
+       url(asset_url ('glegoo-regular-webfont.svg#GlegooRegular')) format('svg');
   font-weight: normal;
   font-style: normal;
 }
