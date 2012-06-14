@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tandem (0.2.0)
+    tandem (0.2.1)
       cancan
       eco
       paperclip
@@ -90,6 +90,9 @@ GEM
       factory_girl (~> 2.5.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
+    generator_spec (0.8.5)
+      rails (>= 3.0, < 4.0)
+      rspec-rails
     growl_notify (0.0.3)
       rb-appscript
     guard (1.0.1)
@@ -245,6 +248,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails (~> 1.6.0)
+  generator_spec
   growl_notify
   guard
   guard-livereload
