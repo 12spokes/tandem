@@ -13,6 +13,10 @@ module Tandem
 		  def create_tandem_resource_controller
 		    template 'controller.rb', File.join('app/controllers/tandem', "#{controller_file_name}_controller.rb")
 		  end
+
+      def add_resource_route
+        route "resources :#{file_name.pluralize}, :module => 'tandem'"
+      end
 		end
   end
 end
