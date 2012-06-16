@@ -14,6 +14,10 @@ module Tandem
 		    template 'controller.rb', File.join('app/controllers/tandem', "#{controller_file_name}_controller.rb")
 		  end
 
+      def create_views
+        template 'index.html.slim', File.join('app/views/tandem', "#{file_name.pluralize}", 'index.html.slim')
+      end
+      
       def add_resource_route
         route "resources :#{file_name.pluralize}, :module => 'tandem'"
       end

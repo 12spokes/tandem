@@ -30,6 +30,16 @@ module Tandem
                 end
               end
             end
+
+            directory 'views' do
+              directory 'tandem' do
+                directory 'spokes' do
+                  file 'index.html.slim' do
+                    contains 'Spokes:'
+                  end
+                end
+              end
+            end
           end
 
           directory 'config' do
