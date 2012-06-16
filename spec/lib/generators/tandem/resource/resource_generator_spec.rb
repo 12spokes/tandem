@@ -37,6 +37,11 @@ module Tandem
                   file 'index.html.slim' do
                     contains 'Spokes:'
                   end
+
+                  file 'show.html.slim'
+                  file 'new.html.slim'
+                  file 'edit.html.slim'
+                  file '_form.html.slim'
                 end
               end
             end
