@@ -9,6 +9,7 @@ body.tandem-admin-bar {
   margin-top: 35px;
 }
 #tandem_page_links {
+body #tandem_page_links {
   z-index: 900;
   position: fixed;
   top: 0;
@@ -26,6 +27,7 @@ body.tandem-admin-bar {
     a, a:active, a:visited {
      color: $lightblue;
      text-decoration: none; 
+     @include goo;
      &:hover {color: #aaa;}
     }
   }
@@ -362,7 +364,7 @@ section#tandem_image_gallery {
          transform: rotate(0deg) scale(1.05);
          z-index: 300;
         }
-        
+      }  
     }
 
   }

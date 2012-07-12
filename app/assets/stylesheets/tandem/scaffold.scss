@@ -7,7 +7,6 @@
 #tandem-defaults { 
   width: 940px;
   margin: 0 auto;
-  @include goo;
   color: #333; 
   padding: 15px;
   .hero h1 {
@@ -51,6 +50,27 @@
   #error_explanation ul li {
     font-size: 12px;
     list-style: square;
+  }
+  p#tandem-new {
+   padding: 10px 0;
+   a, a:visited, a:active {
+     @include goo;
+     background: $lightblue;
+     padding: 5px 8px;
+     color: $darkblue;
+     @include radius(5px);
+     text-decoration: none;
+     border: 1px solid $darkblue;
+     &:hover {
+       background: $darkblue;
+       color: $lightblue;
+       border-color: $lightblue;
+     }
+   } 
+   
+  }
+  table {
+    margin: 10px 0;
   }
 } 
 
