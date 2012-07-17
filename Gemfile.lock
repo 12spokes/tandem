@@ -39,6 +39,11 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.7)
+    ammeter (0.2.8)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec (>= 2.2)
+      rspec-rails (>= 2.2)
     archive-tar-minitar (0.5.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
@@ -90,9 +95,6 @@ GEM
       factory_girl (~> 2.5.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
-    generator_spec (0.8.5)
-      rails (>= 3.0, < 4.0)
-      rspec-rails
     growl_notify (0.0.3)
       rb-appscript
     guard (1.0.1)
@@ -242,13 +244,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ammeter
   cancan
   capybara-webkit
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
   factory_girl_rails (~> 1.6.0)
-  generator_spec
   growl_notify
   guard
   guard-livereload

@@ -41,7 +41,7 @@ group :test, :development do
   gem 'guard-livereload'
   gem 'growl_notify'
 
-  gem 'generator_spec'
+  gem 'ammeter'
 
   gem 'capybara-webkit'
   gem 'database_cleaner'

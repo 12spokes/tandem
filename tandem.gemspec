@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'spork'
   s.add_development_dependency 'ruby-debug19'
+  s.add_development_dependency 'ammeter'
 end

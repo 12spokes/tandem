@@ -20,6 +20,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../dummy/config/environment", __FILE__)
   require 'rspec/rails'
+  require 'ammeter/init'
   require 'factory_girl'
   require 'database_cleaner'
   require 'capybara-webkit'
