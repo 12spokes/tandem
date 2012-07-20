@@ -27,6 +27,11 @@ module Tandem
         subject { helper.widget_path(mock_model(Widget, id: 123)) }
         it { should == '/widgets/123' }
       end
+
+      context 'calling a main app url helper with the optional options hash' do
+        subject { helper.widgets_path(format: :json) }
+        it { should == '/widgets.json' }
+      end
     end
 
   end

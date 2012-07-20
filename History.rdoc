@@ -1,3 +1,6 @@
+0.2.2 - June 28, 2012
+ * Bug - Bundled tandem-specific fonts instead of using Google's fonts so that it doesn't throw warnings if using https protocol.
+
 0.2.1
  * Chore - Removed a line from the image_content_tag that didn't do much.
  * Chore - Remove cucumber dependency - We weren't using it. Using rspec integration specs instead

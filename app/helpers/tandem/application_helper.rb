@@ -3,8 +3,8 @@ module Tandem
     def self.included(base)
       main_app_url_helpers.each do |helper|
         base.send(:define_method, helper) do |*arguments|
-          arguments = nil if arguments.empty?
-          main_app.send(helper, arguments)
+          arguments = [{}] if arguments.empty?
+          main_app.send(helper, *arguments)
         end
       end
     end

@@ -12,7 +12,7 @@ gem "devise"
 # the following gems are used by the engine, but for some reason must be explicitly required for the dummy to work
 gem 'pg'
 gem 'slim'
-gem 'cancan'
+gem 'cancan', '1.6.7'
 gem 'paperclip'
 
 group :assets do

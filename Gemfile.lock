@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    tandem (0.2.1)
-      cancan
+    tandem (0.2.2)
+      cancan (= 1.6.7)
       eco
       paperclip
       rails (>= 3.1.0)
@@ -245,7 +245,7 @@ PLATFORMS
 
 DEPENDENCIES
   ammeter
-  cancan
+  cancan (= 1.6.7)
   capybara-webkit
   coffee-rails (~> 3.2.1)
   database_cleaner
