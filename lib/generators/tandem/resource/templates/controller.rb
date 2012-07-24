@@ -1,4 +1,2 @@
-module Tandem
-  class <%= controller_class_name %>Controller < ::Tandem::ResourceController
-  end
+class <%= controller_class_name %>Controller < ::Tandem::ResourcesController
 end

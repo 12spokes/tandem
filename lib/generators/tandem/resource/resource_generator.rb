@@ -15,17 +15,17 @@ module Tandem
       source_root File.expand_path('../templates', __FILE__)
 
       def create_tandem_resource_controller
-        template 'controller.rb', File.join('app/controllers/tandem', "#{controller_file_name}_controller.rb")
+        template 'controller.rb', File.join('app/controllers', "#{controller_file_name}_controller.rb")
       end
 
       def create_views
         [:index, :show, :new, :edit, :_form].each do |view|
-          template "#{view}.html.slim", File.join('app/views/tandem', "#{file_name.pluralize}", "#{view}.html.slim")
+          template "#{view}.html.slim", File.join('app/views', "#{file_name.pluralize}", "#{view}.html.slim")
         end
       end
 
       def add_resource_route
-        route "resources :#{file_name.pluralize}, :module => 'tandem'"
+        route "resources :#{file_name.pluralize}"
       end
     end
   end

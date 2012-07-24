@@ -16,10 +16,9 @@ describe Tandem::Generators::ResourceGenerator do
       run_generator %w(Spoke) # Would like to figure out how to not specify --orm active_record 
     end
 
-    subject { file('app/controllers/tandem/spokes_controller.rb') }
+    subject { file('app/controllers/spokes_controller.rb') }
 
-    it { should contain(/module Tandem/) }
-    it { should contain(/class SpokesController < ::Tandem::ResourceController/) }
+    it { should contain(/class SpokesController < ::Tandem::ResourcesController/) }
   end
 
   describe 'tandem resource views' do
@@ -28,27 +27,27 @@ describe Tandem::Generators::ResourceGenerator do
     end
 
     describe 'index.html.slim' do
-      subject { file('app/views/tandem/spokes/index.html.slim') }
+      subject { file('app/views/spokes/index.html.slim') }
       it { should contain(/Spokes:/) }
     end
 
     describe 'show.html.slim' do
-      subject { file('app/views/tandem/spokes/show.html.slim') }
+      subject { file('app/views/spokes/show.html.slim') }
       it { should exist }
     end
 
     describe 'new.html.slim' do
-      subject { file('app/views/tandem/spokes/new.html.slim') }
+      subject { file('app/views/spokes/new.html.slim') }
       it { should exist }
     end
 
     describe 'edit.html.slim' do
-      subject { file('app/views/tandem/spokes/edit.html.slim') }
+      subject { file('app/views/spokes/edit.html.slim') }
       it { should exist }
     end
 
     describe '_form.html.slim' do
-      subject { file('app/views/tandem/spokes/_form.html.slim') }
+      subject { file('app/views/spokes/_form.html.slim') }
       it { should exist }
     end
   end
@@ -59,7 +58,7 @@ describe Tandem::Generators::ResourceGenerator do
     end
 
     subject { file('config/routes.rb') }
-    it { should contain(/resources :spokes, :module => 'tandem'/) }
+    it { should contain(/resources :spokes/) }
   end
 
   describe 'tandem resource migration' do
