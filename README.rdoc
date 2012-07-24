@@ -198,6 +198,18 @@ Here's a preview of what the html looks like:
     
 If either of those grid systems are being used those styles will pull in accordingly.
 
+== Tandem Resources
+
+Tandem realized that even the most basic site will often have pages that should be represented
+as resources with basic CRUD functionality, e.g. people, events, FAQs, etc. Tandem, therefore, 
+comes with a generator that allows you to create a Tandem resource that provides all of that
+functionality wrapped in the same Tandem interface your users are used to using for editing other 
+content in the application.
+
+To generate a tandem resource, simply call the tandem_resource generator:
+
+    rails generate tandem:resource Faq question:string answer:string position:integer
+
 == License
 
 Tandem is released under the MIT license:
