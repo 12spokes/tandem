@@ -1,1 +1,7 @@
 h2 <%= file_name.capitalize %>
+
+<% attributes.each do |attribute| -%>
+p
+  strong <%= attribute.human_name %>: 
+  = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>

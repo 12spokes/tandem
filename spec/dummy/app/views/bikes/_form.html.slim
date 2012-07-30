@@ -1,0 +1,20 @@
+= form_for @bike do |f|
+  - if @bike.errors.any?
+    #error_explanation
+      h2 #{pluralize(@bike.errors.count, "error")} prohibited this bike from being saved:
+
+      ul
+        - @bike.errors.full_messages.each do |msg|
+          li= msg
+
+  .field
+    = f.label :seats
+    br
+    = f.number_field :seats
+  .field
+    = f.label :color
+    br
+    = f.text_field :color
+
+  .actions
+    = f.submit

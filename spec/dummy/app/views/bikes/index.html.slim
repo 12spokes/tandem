@@ -1,0 +1,20 @@
+h2 Bikes:
+
+p= link_to 'New Bike', new_bike_path
+
+table
+  thead
+    tr
+      th Seats
+      th Color
+      th
+      th
+      th
+
+  tbody
+    = content_tag_for(:tr, @bikes) do |bike|
+      td= bike.seats
+      td= bike.color
+      td= link_to 'Show', bike
+      td= link_to 'Edit', edit_bike_path(bike)
+      td= link_to 'Destroy', bike, method: :delete, data: { confirm: 'Are you sure?' }
