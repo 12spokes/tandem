@@ -14,6 +14,17 @@
 
 @mixin goo {
   font-family: 'Glegoo', serif;
+  font-weight: 300;
+  text-transform: inherit;
+  font-size: 15px;
+  font-style: normal;
+}
+@mixin sans-serif {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  text-transform: capitalize;
+  font-style: normal;
 }
 
 @mixin radius($radius) {
