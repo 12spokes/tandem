@@ -520,9 +520,12 @@ section#tandem_image_gallery {
   font-size: 13px;
   bottom: 25px;
 }
+#cboxContent {
+ background: #fff url(image_path('tandem/tandem_logo.png')) 0 100%  no-repeat; 
+}
 #cboxLoadedContent{
   padding-bottom: 50px;
-  background: transparent url(image_path('tandem/tandem_logo.png')) 0 100%  no-repeat;
+  background: #fff;
 
 }
 
