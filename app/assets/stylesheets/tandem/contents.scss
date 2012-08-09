@@ -26,12 +26,15 @@ body.tandem-admin-bar {
     a, a:active, a:visited {
      color: $lightblue;
      text-decoration: none; 
-     &:hover {color: #aaa;}
+     @include goo;
+     &:hover {color: #aaa;@include goo;}
+
     }
   }
   a#page_new_link {
     background: transparent url(image_path('tandem/tandem_logo_nav.png')) left no-repeat;
     padding-left: 100px;
+    @include goo;
   }
 }
 .tandem_content:hover {
@@ -87,27 +90,35 @@ h4.tandem-logo {
 
 /////// Contents, Page, & Image Editor
 
-#tandem-editor {
-  width: 600px;
+#tandem-editor {  
+  width: 100%;
+  
 }
 #tandem-editor-wym {
   width: 100%;
 }
 
 #tandem-editor, #tandem-editor-wym {
-  h1.tandem-title {
-    font-size: 18px;
-    @include goo;
+  h1, h1.tandem-title {    
+    @include sans-serif;
+    font-size: 20px;
     color: $darkblue;
-    font-weight: none;
-    margin: 10px 0;
+    font-weight: 300 !important;
+    margin: 0 0 5px 0;
+    padding: 0 0 5px 0;
+    background: none;
+    line-height: normal;  
+    border: none;
+    border-bottom: 1px solid $lightblue;
+    background: none;  
   }
   h3#selected_image_title {
-    font-size: 20px;
     @include goo;
-    color: #407992;
-    font-weight: normal;
+    font-size: 20px;
+    color: #407992;    
     margin: 15px 0;
+    padding: 0;
+    border: none;
   }
   iframe{
     border:none;
@@ -119,6 +130,8 @@ h4.tandem-logo {
     color: $darkblue;
   }
   form {
+    margin: 0;
+    padding: 0;    
     div {
       padding: 5px;
     }
@@ -130,34 +143,62 @@ h4.tandem-logo {
       }
     }
     label {
-      @include goo;
+      @include goo;      
+      font-size: 15px !important;
       color: $darkblue;
       width: 100px;
-      padding: 0;
+      height: 100%;
+      padding: 3px 0 0 0;
+      margin:0;
+      line-height: normal;
       text-align: left;
-      font-size: 14px;
-      margin-left: 10px;  
+      font-size: 14px;        
       display:block;
-      float: left;
+      float: left;      
+      border: none;
+
     }
     input, textarea {
       border: 1px solid #ccc;
       @include radius(3px);
+      -webkit-box-shadow: 0 0 5px #aaa;
+      -moz-box-shadow: 0 0 5px #aaa;
       box-shadow: 0 0 5px #aaa;
       padding: 5px;
       position:relative;
+      width: auto;
+      background: white;
+      color: #333;
+      @include sans-serif;
+      border: none;
+      text-transform: inherit;
     }
-    input#page_is_default, input#page_parent_id_, input#page_parent_id_1 {top:5px;}
+    input[type="checkbox"], input[type="radio"] {
+      position: relative;
+      bottom: 5px;
+    }
+    textarea {
+      font-family: Times New Roman, serif;
+    }
+    select {
+      width: auto;
+      @include sans-serif;      
+    }
+    input#page_is_default, input#page_parent_id_, input#page_parent_id_1 {      
+      margin-right: 0;
+      vertical-align: none;
+    }
     .field {
       margin: 15px 0;
       @include goo;
+      width: auto;
     }
     .field span {
       font-size: 14px;
       color: $darkblue;
       padding: 0 10px 0 5px;
       position: relative;
-      top: 5px;
+      top: -5px;
     }
    .wym_box {
      background: none;
@@ -479,9 +520,12 @@ section#tandem_image_gallery {
   font-size: 13px;
   bottom: 25px;
 }
+#cboxContent {
+ background: #fff url(image_path('tandem/tandem_logo.png')) 0 100%  no-repeat; 
+}
 #cboxLoadedContent{
   padding-bottom: 50px;
-  background: transparent url(image_path('tandem/tandem_logo.png')) 0 100%  no-repeat;
+  background: #fff;
 
 }
 
