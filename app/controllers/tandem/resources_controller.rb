@@ -27,6 +27,15 @@ module Tandem
     end
     
     def update
+      respond_to do |format|
+        if instance_variable_get("@#{resource_name}").update_attributes(params[resource_name.to_sym])
+          format.html { redirect_to instance_variable_get("@#{resource_name}"), notice: "#{resource_name.capitalize} was successfully updated." }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: instance_variable_get("@#{resource_name}").errors, status: :unprocessable_entity }
+        end
+      end
     end
 
     def destroy
