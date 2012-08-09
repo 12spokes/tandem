@@ -2,7 +2,7 @@
  * Bug - Options passed to a main_app url_helper from within tandem get passed as an array
 
 0.2.3 - August 29th, 2012
-* Feature - CSS specification overhaul to have tandem styles override any exisiting website styles when Tandem UI is being used
+ * Feature - CSS specification overhaul to have tandem styles override any exisiting website styles when Tandem UI is being used
 
 0.2.2 - June 28, 2012
  * Bug - Bundled tandem-specific fonts instead of using Google's fonts so that it doesn't throw warnings if using https protocol.
