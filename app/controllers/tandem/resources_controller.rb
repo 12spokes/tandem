@@ -18,10 +18,10 @@ module Tandem
       respond_to do |format|
         if instance_variable_get("@#{resource_name}").save
           format.html { redirect_to instance_variable_get("@#{resource_name}"), notice: "#{resource_name.capitalize} was successfully created." }
-          #format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
+          format.json { render json: instance_variable_get("@#{resource_name}"), status: :created, location: instance_variable_get("@#{resource_name}") }
         else
           format.html { render action: "new" }
-          #format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
+          format.json { render json: instance_variable_get("@#{resource_name}").errors, status: :unprocessable_entity }
         end
       end
     end
