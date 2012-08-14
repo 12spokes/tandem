@@ -8,13 +8,13 @@ table
       th Seats
       th Color
       th
-      th
-      th
 
   tbody
-    = content_tag_for(:tr, @bikes) do |bike|
+    = content_tag_for(:tr, @bikes, class: 'tandem_resource') do |bike|
       td= bike.seats
       td= bike.color
-      td= link_to 'Show', bike
-      td= link_to 'Edit', edit_bike_path(bike), class: 'tandem_edit_resource'
-      td= link_to 'Delete', bike, method: :delete, data: { confirm: 'Are you sure?' }
+      td
+        .tandem_toolbar
+          = link_to 'Show', bike
+          = link_to 'Edit', edit_bike_path(bike), class: 'tandem_edit_resource'
+          = link_to 'Delete', bike, method: :delete, data: { confirm: 'Are you sure?' }

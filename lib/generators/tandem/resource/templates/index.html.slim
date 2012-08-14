@@ -9,14 +9,14 @@ table
       th <%= attribute.human_name %>
 <% end -%>
       th
-      th
-      th
 
   tbody
-    = content_tag_for(:tr, @<%= plural_table_name %>) do |<%= singular_table_name %>|
+    = content_tag_for(:tr, @<%= plural_table_name %>, class: 'tandem_resource') do |<%= singular_table_name %>|
 <% attributes.each do |attribute| -%>
       td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-      td= link_to 'Show', <%= singular_table_name %>
-      td= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'tandem_edit_resource'
-      td= link_to 'Delete', <%= singular_table_name %>, method: :delete, data: { confirm: 'Are you sure?' }
+      td
+        .tandem_toolbar
+          = link_to 'Show', <%= singular_table_name %>
+          = link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'tandem_edit_resource'
+          = link_to 'Delete', <%= singular_table_name %>, method: :delete, data: { confirm: 'Are you sure?' }
