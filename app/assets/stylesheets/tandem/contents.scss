@@ -48,7 +48,17 @@ body.tandem-admin-bar {
 }
 .tandem_toolbar a.tandem_edit_link,
 .tandem_toolbar a.tandem_edit_link:active,
-.tandem_toolbar a.tandem_edit_link:visited {
+.tandem_toolbar a.tandem_edit_link:visited,
+.tandem_toolbar a.tandem_edit_resource,
+.tandem_toolbar a.tandem_edit_resource:active,
+.tandem_toolbar a.tandem_edit_resource:visited,
+.tandem_toolbar a.tandem_show_resource,
+.tandem_toolbar a.tandem_show_resource:active,
+.tandem_toolbar a.tandem_show_resource:visited,
+.tandem_toolbar a.tandem_delete_resource,
+.tandem_toolbar a.tandem_delete_resource:active,
+.tandem_toolbar a.tandem_delete_resource:visited
+{
   font-size: 13px;
   @include goo;  
   color: #333;
@@ -63,6 +73,17 @@ body.tandem-admin-bar {
     color: #fff !important;
     background: $darkblue;
   }
+}
+.tandem_toolbar.tandem_toolbar_resource a.tandem_show_resource {
+  background: $lowblue;
+
+}
+.tandem_toolbar.tandem_toolbar_resource a.tandem_delete_resource {
+  background: #f8e8e8;
+  color: $red;
+}
+.tandem_toolbar.tandem_toolbar_resource a {
+ margin: 0 5px;
 }
 
 

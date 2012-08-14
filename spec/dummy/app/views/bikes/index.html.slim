@@ -14,7 +14,7 @@ table
       td= bike.seats
       td= bike.color
       td
-        .tandem_toolbar
-          = link_to 'Show', bike
+        .tandem_toolbar.tandem_toolbar_resource
+          = link_to 'Show', bike, class: 'tandem_show_resource'
           = link_to 'Edit', edit_bike_path(bike), class: 'tandem_edit_resource'
-          = link_to 'Delete', bike, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Delete', bike, class: 'tandem_delete_resource', method: :delete, data: { confirm: 'Are you sure?' }
