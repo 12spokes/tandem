@@ -11,6 +11,7 @@ module Tandem
       Resource.stub(:new) { resource }
       Resource.stub(:find).with('1') { resource }
       controller.stub(:url_for).with(resource) { '/resources/1' }
+      controller.stub(:resources_url) { '/resources' }
     end
 
     describe 'create' do
@@ -85,6 +86,24 @@ module Tandem
           subject
         end
       end
+    end
+
+    describe 'destroy' do
+      before do
+        resource.stub(:destroy) { true }
+      end
+      
+      subject do
+        delete :destroy, id: 1
+        response
+      end
+
+      it 'should destroy the resource' do
+        resource.should_receive(:destroy) { true }
+        subject
+      end
+
+      it { should redirect_to("/resources") }
     end
   end
 end

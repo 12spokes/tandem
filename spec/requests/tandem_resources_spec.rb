@@ -16,4 +16,12 @@ describe "tandem resources" do
     when_i_edit_the_yellow_two_seat_bike
     then_i_should_see_my_updated_changes
   end
+
+  it "should be able to delete a resource", :js => true do
+    given_a_yellow_two_seat_bike
+    when_i_go_to_the_resources_index_page
+    then_i_should_see_the_yellow_two_seat_bike
+    when_i_delete_the_yellow_two_seat_bike
+    then_i_should_not_see_the_yellow_two_seat_bike
+  end
 end

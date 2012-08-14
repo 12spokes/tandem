@@ -2,6 +2,8 @@ module Tandem
 	class ResourcesController < ::Tandem::ApplicationController
     load_and_authorize_resource
 
+    layout 'application'
+
     def index
     end
 
@@ -39,6 +41,12 @@ module Tandem
     end
 
     def destroy
+      instance_variable_get("@#{resource_name}").destroy
+
+      respond_to do |format|
+        format.html { redirect_to send("#{resource_name.pluralize}_url".to_sym) }
+        format.json { head :no_content }
+      end
     end
 
     private
