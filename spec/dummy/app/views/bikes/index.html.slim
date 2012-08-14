@@ -1,6 +1,6 @@
 h2 Bikes:
 
-p= link_to 'New Bike', new_bike_path
+p= link_to 'New Bike', new_bike_path, class: 'tandem_new_resource'
 
 table
   thead
@@ -16,5 +16,5 @@ table
       td= bike.seats
       td= bike.color
       td= link_to 'Show', bike
-      td= link_to 'Edit', edit_bike_path(bike)
+      td= link_to 'Edit', edit_bike_path(bike), class: 'tandem_edit_resource'
       td= link_to 'Delete', bike, method: :delete, data: { confirm: 'Are you sure?' }

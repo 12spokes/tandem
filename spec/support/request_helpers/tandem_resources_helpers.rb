@@ -9,6 +9,8 @@ module RequestHelpers
 
       click_link 'New Bike'
       
+      sleep 0.5
+
       within '#new_bike' do
         fill_in 'Seats', :with => seats
         fill_in 'Color', :with => color

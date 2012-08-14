@@ -14,3 +14,4 @@
 //= require tandem/pages
 //= require tandem/images
 //= require tandem/popup
+//= require tandem/resources

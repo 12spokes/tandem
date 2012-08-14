@@ -11,9 +11,15 @@ module Tandem
     end
     
     def new
+      respond_to do |format|
+        format.html { render layout: false if request.xhr? }
+      end
     end
     
     def edit
+      respond_to do |format|
+        format.html { render layout: false if request.xhr? }
+      end
     end
 
     def create
