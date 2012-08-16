@@ -34,7 +34,7 @@ body.tandem-admin-bar {
     padding-left: 100px;
   }
 }
-.tandem_content:hover {
+.tandem_content:hover, .tandem_resource:hover {
   outline: 1px solid $midblue;
   cursor: pointer;
 }
