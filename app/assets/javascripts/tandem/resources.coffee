@@ -11,7 +11,8 @@ $(document).ready ->
     'mouseleave': ->
       $('div.tandem_toolbar', $(this)).fadeOut('slow')
 
-    'click': ->
-      $.fn.colorbox
-        href: $('a.tandem_edit_resource', $(this)).attr('href')
-      return false
+    'click': (event) ->
+      if event.target.tagName != 'A'
+        $.fn.colorbox
+          href: $('a.tandem_edit_resource', $(this)).attr('href')
+        return false
