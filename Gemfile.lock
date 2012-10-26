@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tandem (0.2.2)
+    tandem (0.2.3)
       cancan (= 1.6.7)
       eco
       paperclip
