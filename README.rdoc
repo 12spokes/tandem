@@ -212,19 +212,23 @@ We are big believers in testing, so every pull request needs to be tested.
 
 1. Run Bundle
 
-	```bundle install```
+    bundle install
+
 2. Create the Database
 
-	```rake db:create```
-3. Migrate the Database
+    rake db:create
 
-	```rake db:migrate```
+3. Run the Migrations
+
+    rake db:migrate
+
 4. Prepare the Test Database
 
-	```rake app:db:test:prepare```
-5. Run the Tests
+    rake app:db:test:prepare
 
-	```rake spec```
+5. See all the Green.
+
+    rake
 
 
 == License
