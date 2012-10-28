@@ -36,6 +36,7 @@ development:
  adapter: postgresql
  database: tandem_development
  username: #{ENV['USER']}
+ password:
  host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -45,6 +46,7 @@ test: &test
  adapter: postgresql
  database: tandem_test
  username: #{ENV['USER']}
+ password:
  host: localhost
 
 cucumber:
