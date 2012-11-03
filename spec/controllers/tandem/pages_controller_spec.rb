@@ -20,7 +20,7 @@ module Tandem
   # Message expectations are only used when there is no simpler way to specify
   # that an instance is receiving a specific message.
 
-  describe Tandem::PagesController do
+  describe PagesController do
     # This should return the minimal set of attributes required to create a valid
     # Page. As you add validations to Page, be sure to
     # update the return value of this method accordingly.
