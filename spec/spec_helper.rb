@@ -76,6 +76,8 @@ Spork.prefork do
     config.include Capybara, :example_group => { :file_path => /\bspec\/integration\// }
 
     config.include Tandem::Engine.routes.url_helpers
+
+    config.include Tandem::ControllerRequests, :type => :controller
   end
 end
 
