@@ -4,7 +4,7 @@ describe "Pages" do
   include RequestHelpers::PagesHelpers
 
   before(:each) do
-    Factory(:tandem_page)
+    FactoryGirl.create(:tandem_page)
   end
 
   describe "get /tandem" do

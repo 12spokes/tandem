@@ -13,11 +13,11 @@ module Tandem
 
     describe "tandem_content_tag" do 
       before(:each) do
-        helper.stub(:current_user) { Factory.stub(:user) }
+        helper.stub(:current_user) { FactoryGirl.stub(:user) }
       end
 
       context "rendering text content" do
-        let(:content) { Factory(:tandem_content_text) }
+        let(:content) { FactoryGirl.create(:tandem_content_text) }
 
         before(:each) do
           helper.stub(:request_key) { content.request_key }
@@ -44,14 +44,14 @@ module Tandem
           end
 
           context "without a link" do
-            let(:content) { Factory(:tandem_content_text, link_url: nil) }
+            let(:content) { FactoryGirl.create(:tandem_content_text, link_url: nil) }
             subject { helper.tandem_content_tag(content.tag, :text) }
 
             it { should_not =~ /id="tandem_content_link_#{content.tag}"/ }
           end
           
           context "with a link" do
-            let(:content) { Factory(:tandem_content_text, link_url: 'http://www.12spokes.com') }
+            let(:content) { FactoryGirl.create(:tandem_content_text, link_url: 'http://www.12spokes.com') }
             subject { helper.tandem_content_tag(content.tag, :text) }
 
             it { should =~ /id="tandem_content_link_#{content.tag}"/ }
@@ -95,7 +95,7 @@ module Tandem
 
 
       context "rendering image content" do
-        let(:content) { Factory(:tandem_content_image) }
+        let(:content) { FactoryGirl.create(:tandem_content_image) }
 
         context "for a user who can't edit content" do
           before(:each) do
@@ -112,7 +112,7 @@ module Tandem
 
     describe "tandem_navigation_tag" do
       it "should select the selected page" do
-        @pages = [Factory(:tandem_page),Factory(:tandem_page)]
+        @pages = [FactoryGirl.create(:tandem_page),FactoryGirl.create(:tandem_page)]
         @page = @pages.first
         result = helper.tandem_navigation_tag(@page)
 
@@ -124,9 +124,9 @@ module Tandem
       end
 
       context "being called without a passed in collection" do
-        let(:top_level_page) { Factory(:tandem_page) }
-        let(:child_1) { Factory(:tandem_page, :parent => top_level_page) }
-        let(:top_level_page2) { Factory(:tandem_page) }
+        let(:top_level_page) { FactoryGirl.create(:tandem_page) }
+        let(:child_1) { FactoryGirl.create(:tandem_page, :parent => top_level_page) }
+        let(:top_level_page2) { FactoryGirl.create(:tandem_page) }
 
         subject { helper.tandem_navigation_tag(top_level_page) }
 
@@ -136,8 +136,8 @@ module Tandem
       end
 
       context "being called with a passed in collection" do
-        let(:page) { Factory(:tandem_page) }
-        let(:child_1) { Factory(:tandem_page, :parent => page) }
+        let(:page) { FactoryGirl.create(:tandem_page) }
+        let(:child_1) { FactoryGirl.create(:tandem_page, :parent => page) }
 
         subject { helper.tandem_navigation_tag(page, page.children) }
 
@@ -155,7 +155,7 @@ module Tandem
 
         context 'for a new page' do
           before(:each) do
-            assign(:page, Factory.build(:tandem_page))
+            assign(:page, FactoryGirl.build(:tandem_page))
           end
 
           subject { helper.tandem_page_links }
@@ -168,7 +168,7 @@ module Tandem
 
         context 'for a persisted page' do
           before(:each) do
-            assign(:page, Factory(:tandem_page))
+            assign(:page, FactoryGirl.create(:tandem_page))
           end
 
           subject { helper.tandem_page_links }

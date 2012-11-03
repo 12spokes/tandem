@@ -10,7 +10,7 @@ module Tandem
 
     describe "Sub Type - Tandem::Content::Text" do
       before(:each) do
-        @content = assign(:content, Factory(:tandem_content_text))
+        @content = assign(:content, FactoryGirl.create(:tandem_content_text))
       end
 
       it "renders the edit content text form" do
@@ -27,7 +27,7 @@ module Tandem
 
     describe "Sub Type - Tandem::Content::Image" do
       before(:each) do
-        @content = assign(:content, Factory(:tandem_content_image))
+        @content = assign(:content, FactoryGirl.create(:tandem_content_image))
       end
 
       it "renders the edit content image form" do

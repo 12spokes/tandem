@@ -3,7 +3,7 @@ module Tandem
 
   describe "tandem/pages/new" do
     before(:each) do
-      assign(:page, Factory.build(:tandem_page))
+      assign(:page, FactoryGirl.build(:tandem_page))
     end
 
     it "renders new page form" do
