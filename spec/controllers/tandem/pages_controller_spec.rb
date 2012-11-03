@@ -31,7 +31,7 @@ module Tandem
     describe "GET index" do
       it "assigns all pages as @pages" do
         page = FactoryGirl.create(:tandem_page)
-        get :index, use_route: 'tandem'
+        get :index
         assigns(:pages).should eq([page])
       end
     end
