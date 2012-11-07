@@ -11,7 +11,7 @@ module Tandem
 
     context 'new page' do
       before(:each) do
-        @page = assign(:page, Factory.build(:tandem_page))
+        @page = assign(:page, FactoryGirl.build(:tandem_page))
       end
 
       it "renders home page unless persisted" do
@@ -22,7 +22,7 @@ module Tandem
 
     context 'persisted page' do
       before(:each) do
-        @page = assign(:page, Factory(:tandem_page))
+        @page = assign(:page, FactoryGirl.create(:tandem_page))
       end
 
       it_behaves_like "tandem/pages/view"

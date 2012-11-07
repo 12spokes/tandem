@@ -31,7 +31,7 @@ module Tandem
         # update the return value of this method accordingly.
         before(:each) do
           @factory = "tandem_content_#{sub_type.simple_type}"
-          @content = Factory.stub(@factory)
+          @content = FactoryGirl.build_stubbed(@factory)
           @param_key = ActiveModel::Naming.param_key(@content)
           @klass = @content.class
 
@@ -39,7 +39,7 @@ module Tandem
         end
 
         def valid_attributes
-          Factory.attributes_for(@factory)
+          FactoryGirl.attributes_for(@factory)
         end
 
 =begin ### default scaffold actions not currently used
@@ -69,7 +69,7 @@ module Tandem
 
         describe "GET edit" do
           it "assigns the requested content as @content" do
-            get :edit, :id => @content.id
+            get :edit, :id => @content.to_param
             assigns(:content).should eq(@content)
           end
         end
@@ -124,17 +124,17 @@ module Tandem
 
             it "updates the requested content" do
               @content.should_receive(:update_attributes).with({'these' => 'params'}) { true }
-              put :update, :id => @content.id, @param_key => {'these' => 'params'}, format: :json
+              put :update, :id => @content.to_param, @param_key => {'these' => 'params'}, format: :json
             end
 
             it "assigns the requested content as @content" do
-              put :update, :id => @content.id, @param_key => valid_attributes, format: :json
+              put :update, :id => @content.to_param, @param_key => valid_attributes, format: :json
               assigns(:content).should eql(@content)
             end
 
             it "renders the content as json" do
               @content.should_receive(:to_json) { 'json_string' }
-              put :update, :id => @content.id, @param_key => valid_attributes, format: :json
+              put :update, :id => @content.to_param, @param_key => valid_attributes, format: :json
               response.body.should == 'json_string'
             end
           end
@@ -145,12 +145,12 @@ module Tandem
             end
 
             it "assigns the content as @content" do
-              put :update, :id => @content.id, @param_key => {}, format: :json
+              put :update, :id => @content.to_param, @param_key => {}, format: :json
               assigns(:content).should eq(@content)
             end
 
             it "return unprocessable_entity status" do
-              put :update, :id => @content.id, @param_key => {}, format: :json
+              put :update, :id => @content.to_param, @param_key => {}, format: :json
               response.status.should == 422
             end
           end

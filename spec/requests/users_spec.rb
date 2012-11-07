@@ -3,7 +3,7 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 describe "Users" do
-  let(:user) { Factory(:user) }
+  let(:user) { FactoryGirl.create(:user) }
 
   describe "logging in" do
     it "logs the user in" do

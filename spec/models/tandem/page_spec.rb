@@ -38,8 +38,8 @@ module Tandem
       subject { Page.top_level }
 
       before(:each) do
-        @top_page = Factory(:tandem_page)
-        @child_page = Factory(:tandem_page, :parent => @top_page)
+        @top_page = FactoryGirl.create(:tandem_page)
+        @child_page = FactoryGirl.create(:tandem_page, :parent => @top_page)
       end
 
       it { should include(@top_page) }
@@ -50,9 +50,9 @@ module Tandem
       subject { @top_page }
 
       before(:each) do
-        @top_page = Factory(:tandem_page)
-        @child_page = Factory(:tandem_page, :parent => @top_page)
-        @other_page = Factory(:tandem_page)
+        @top_page = FactoryGirl.create(:tandem_page)
+        @child_page = FactoryGirl.create(:tandem_page, :parent => @top_page)
+        @other_page = FactoryGirl.create(:tandem_page)
       end
 
       its(:children) { should include(@child_page) }
