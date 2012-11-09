@@ -34,8 +34,9 @@
 
 development:
  adapter: postgresql
- database: tandem_development
- username: #{ENV['USER']}
+ database: #{ENV['DATABASE_NAME_DEVELOPMENT'] || 'tandem_development'}
+ username: #{ENV['DATABASE_USERNAME'] || ENV['USER']}
+ password: #{ENV['DATABASE_PASSWORD']}
  host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -43,8 +44,9 @@ development:
 # Do not set this db to the same as development or production.
 test: &test
  adapter: postgresql
- database: tandem_test
- username: #{ENV['USER']}
+ database: #{ENV['DATABASE_NAME_TEST'] || 'tandem_test'}
+ username: #{ENV['DATABASE_USERNAME'] || ENV['USER']}
+ password: #{ENV['DATABASE_PASSWORD']}
  host: localhost
 
 cucumber:

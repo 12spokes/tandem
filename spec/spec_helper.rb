@@ -57,8 +57,15 @@ Spork.prefork do
     # config.use_transactional_fixtures = true
 
     config.before(:suite) do
-      DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.strategy = :transaction
+    end
+
+    config.before(:each, :js => true) do
+      DatabaseCleaner.strategy = :truncation
     end
 
     config.before(:each) do
@@ -77,6 +84,8 @@ Spork.prefork do
     config.include Capybara, :example_group => { :file_path => /\bspec\/integration\// }
 
     config.include Tandem::Engine.routes.url_helpers
+
+    config.include Tandem::ControllerRequests, :type => :controller
   end
 end
 

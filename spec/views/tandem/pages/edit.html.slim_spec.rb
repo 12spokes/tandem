@@ -3,7 +3,7 @@ module Tandem
 
   describe "tandem/pages/edit" do
     before(:each) do
-      @page = assign(:page, Factory(:tandem_page))
+      @page = assign(:page, FactoryGirl.create(:tandem_page))
     end
 
     it "renders the edit page form" do

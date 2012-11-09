@@ -3,7 +3,7 @@ module Tandem
 
   describe "tandem/pages/index" do
     before(:each) do
-      assign(:pages, [Factory(:tandem_page),Factory(:tandem_page)])
+      assign(:pages, [FactoryGirl.create(:tandem_page),FactoryGirl.create(:tandem_page)])
     end
 
     it_behaves_like "tandem/pages/view", ['Edit','Destroy']
