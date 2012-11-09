@@ -24,14 +24,14 @@ module Tandem
     # Image. As you add validations to Image, be sure to
     # update the return value of this method accordingly.
     def valid_attributes
-      attrs = Factory.attributes_for(:tandem_image)
+      attrs = FactoryGirl.attributes_for(:tandem_image)
       attrs[:resource] = Rack::Test::UploadedFile.new(ENGINE_RAILS_ROOT + 'spec/fixtures/tandem/images/test.jpg', 'image/jpeg')
       attrs
     end
 
     describe "GET index" do
       it "assigns all images as @images" do
-        image = Factory(:tandem_image)
+        image = FactoryGirl.create(:tandem_image)
         get :index
         assigns(:images).should eq([image])
       end
@@ -39,7 +39,7 @@ module Tandem
 
     describe "GET show" do
       it "assigns the requested image as @image" do
-        image = Factory(:tandem_image)
+        image = FactoryGirl.create(:tandem_image)
         get :show, :id => image.id
         assigns(:image).should eq(image)
       end
@@ -54,7 +54,7 @@ module Tandem
 
     describe "GET edit" do
       it "assigns the requested image as @image" do
-        image = Factory(:tandem_image)
+        image = FactoryGirl.create(:tandem_image)
         get :edit, :id => image.id
         assigns(:image).should eq(image)
       end
@@ -100,7 +100,7 @@ module Tandem
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested image" do
-          image = Factory(:tandem_image)
+          image = FactoryGirl.create(:tandem_image)
           # Assuming there are no other images in the database, this
           # specifies that the Image created on the previous line
           # receives the :update_attributes message with whatever params are
@@ -110,13 +110,13 @@ module Tandem
         end
 
         it "assigns the requested image as @image" do
-          image = Factory(:tandem_image)
+          image = FactoryGirl.create(:tandem_image)
           put :update, :id => image.id, :image => valid_attributes
           assigns(:image).should eq(image)
         end
 
         it "redirects to the image" do
-          image = Factory(:tandem_image)
+          image = FactoryGirl.create(:tandem_image)
           put :update, :id => image.id, :image => valid_attributes
           response.should redirect_to(image)
         end
@@ -124,7 +124,7 @@ module Tandem
 
       describe "with invalid params" do
         it "assigns the image as @image" do
-          image = Factory(:tandem_image)
+          image = FactoryGirl.create(:tandem_image)
           # Trigger the behavior that occurs when invalid params are submitted
           Image.any_instance.stub(:save).and_return(false)
           put :update, :id => image.id, :image => {}
@@ -132,7 +132,7 @@ module Tandem
         end
 
         it "re-renders the 'edit' template" do
-          image = Factory(:tandem_image)
+          image = FactoryGirl.create(:tandem_image)
           # Trigger the behavior that occurs when invalid params are submitted
           Image.any_instance.stub(:save).and_return(false)
           put :update, :id => image.id, :image => {}
@@ -143,14 +143,14 @@ module Tandem
 
     describe "DELETE destroy" do
       it "destroys the requested image" do
-        image = Factory(:tandem_image)
+        image = FactoryGirl.create(:tandem_image)
         expect {
           delete :destroy, :id => image.id
         }.to change(Image, :count).by(-1)
       end
 
       it "redirects to the images list" do
-        image = Factory(:tandem_image)
+        image = FactoryGirl.create(:tandem_image)
         delete :destroy, :id => image.id
         response.should redirect_to(images_path)
       end

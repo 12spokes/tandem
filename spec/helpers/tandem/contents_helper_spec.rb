@@ -9,12 +9,12 @@ module Tandem
       end
 
       it "accepts a Tandem::Content::Image and returns a relative url an associated Tandem::Image" do
-        content = Factory.build(:tandem_content_image)
+        content = FactoryGirl.build(:tandem_content_image)
         helper.image_content_url(content).should == content.image.resource.url
       end
 
       it "accepts a Tandem::Content::Image and format and returns a relative url an associated Tandem::Image" do
-        content = Factory.build(:tandem_content_image)
+        content = FactoryGirl.build(:tandem_content_image)
         helper.image_content_url(content, :thumb).should == content.image.resource.url(:thumb)
       end
     end
@@ -27,7 +27,7 @@ module Tandem
       end
 
       it "accepts a Tandem::Content::Image (with associatated Tandem::Image) and html options and returns an image_tag" do
-        content = Factory.build(:tandem_content_image)
+        content = FactoryGirl.build(:tandem_content_image)
         result = helper.image_content_tag(content, :attr => 'this value')
         result.should =~ /^<img/
         result.should =~ /attr="this value"/
@@ -36,7 +36,7 @@ module Tandem
       end
 
       it "accepts a Tandem::Content::Image and format and returns an image_tag" do
-        content = Factory.build(:tandem_content_image)
+        content = FactoryGirl.build(:tandem_content_image)
         result = helper.image_content_tag(content, {}, :thumb)
         result.should =~ /^<img/
         result =~ /src="([^"]*)"/

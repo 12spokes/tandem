@@ -34,19 +34,20 @@ end
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test, :development do
+group :development do
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-livereload'
-  gem 'growl_notify'
-
-  gem 'capybara-webkit'
-  gem 'database_cleaner'
+  gem 'growl_notify' if RUBY_PLATFORM.include?('darwin')
 
   gem 'rb-inotify', :require => false
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
+end
 
+group :test, :development do
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'pry'
 end
