@@ -9,6 +9,7 @@
 //= require tandem/modernizr-2.5.3.min
 //= require tandem/jquery.colorbox
 //= require tandem/wymeditor/jquery.wymeditor.min
+//= require tandem/wymeditor/plugins/embed/jquery.wymeditor.embed.js
 //= require tandem/jquery.ui.widget
 //= require tandem/jquery-fileupload
 //= require tandem/pages
