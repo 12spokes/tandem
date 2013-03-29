@@ -18,7 +18,7 @@ end
 describe "Tandem Content on non-tandem pages" do
   describe "get /widgets" do
     it "renders the widgets index and creates a tandem content items" do
-      get '/widgets'
+      visit '/widgets'
     end
   end
 end
