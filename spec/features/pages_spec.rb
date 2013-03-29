@@ -9,7 +9,7 @@ describe "Pages" do
 
   describe "get /tandem" do
     it "renders the home page" do
-      get '/tandem'
+      visit '/tandem'
     end
   end
 

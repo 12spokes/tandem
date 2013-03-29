@@ -92,6 +92,11 @@ you can set the <tt>editor</tt> option to <tt>:wysiwyg</tt>:
 
     <%= tandem_text_tag(:sidebar_text, editor: :wysiwyg) %>
 
+By default, tandem wraps content in a div tag. If you'd prefer a different tag, simply
+specify it with the tag option.
+
+    <%= tandem_text_tag(:sidebar_text, tag: :h1) %>
+
 === Navigation
 
 Tandem comes with a helper method to add a navigation menu. It's not included in the default

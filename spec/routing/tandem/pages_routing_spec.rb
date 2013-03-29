@@ -2,8 +2,9 @@ module Tandem
   require "spec_helper"
 
   describe PagesController do
-    #http://stackoverflow.com/questions/7691594/how-to-test-routes-in-a-rails-3-1-mountable-engine
-    before(:each) { @routes = Engine.routes }
+    # Will update after rspec-rails 2.14 is released
+    # https://github.com/rspec/rspec-rails/pull/668#issuecomment-13997339
+    before(:each) { assertion_instance.instance_variable_set(:@routes, Engine.routes) }
 
     describe "routing" do
 

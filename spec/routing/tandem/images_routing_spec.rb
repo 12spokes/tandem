@@ -2,7 +2,7 @@ module Tandem
   require "spec_helper"
 
   describe ImagesController do
-    before(:each) { @routes = Engine.routes }
+    before(:each) { assertion_instance.instance_variable_set(:@routes, Engine.routes) }
 
     describe "routing" do
 
