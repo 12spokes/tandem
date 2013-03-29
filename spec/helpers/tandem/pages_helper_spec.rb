@@ -56,6 +56,20 @@ module Tandem
 
             it { should =~ /id="tandem_content_link_#{content.tag}"/ }
           end
+
+          describe 'the content tag' do
+            it 'should default to using a div' do
+              subject.should have_selector('div')
+            end
+
+            context 'when specifying a tag' do
+              subject { helper.tandem_content_tag(content.tag, :text, tag: :h1) }
+              
+              it 'should use the tag specified in the options hash' do
+                subject.should have_selector("h1#content_text_#{content.tag}")
+              end
+            end
+          end
         end
 
         context "for a user who can edit content" do

@@ -85,13 +85,14 @@ module Tandem
     #     <%= tandem_content_tag(:main_body, :text, editor: :wysiwyg) %>
     def tandem_content_tag(identifier, type, options = {}, html_options = {})
       options[:editor] ||= :plain
+      options[:tag] ||= :div
 
       using_tandem_abilities do
         tandem_content = Content.scoped_type(type).constantize.find_or_create_by_request_key_and_tag(request_key, identifier)
 
         content = case tandem_content
           when Content::Text
-            content_tag(:div, tandem_content, options.merge(
+            content_tag(options[:tag], tandem_content, options.merge(
                 id: "#{dom_class(tandem_content)}_#{identifier}",
                 class: "#{dom_class(tandem_content)} #{options[:class]}".strip
             )) {
