@@ -1,3 +1,9 @@
+0.2.5
+ * Feature - As a developer, I should be able to specify the html tag I want my tandem tag wrapped in, so I have more control over the generated markup.
+
+0.2.4 - January 3rd, 2013
+ * Feature - A user should be able to embed Youtube videos to a page
+
 0.2.3 - August 9th, 2012
  * Bug - Options passed to a main_app url_helper from within tandem get passed as an array
  * Feature - CSS specification overhaul to have tandem styles override any exisiting website styles when Tandem UI is being used
