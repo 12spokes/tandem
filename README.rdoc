@@ -1,4 +1,4 @@
-= Tandem CMS
+= Tandem CMS {<img src="https://semaphoreapp.com/api/v1/projects/a874f3463236b31a6d200ab6cba7b5de94f3b2ad/9178/badge.png" />}[https://semaphoreapp.com/projects/920/branches/9178]
 
 Tandem is a content management system (CMS) for Rails 3.1+. We felt like it was 
 needed because too many of the CMS options for Rails are either 

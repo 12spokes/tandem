@@ -213,6 +213,9 @@ module Tandem
         helper.valid_layouts.should include('custom_layout')
       end
 
+      it 'doesnt include things that dont match the regex' do
+        helper.valid_layouts.should_not include('_logo.svg')
+      end
     end
 
     describe "valid_templates" do
