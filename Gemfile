@@ -39,6 +39,7 @@ group :development do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-livereload'
+  gem 'ammeter'
   gem 'growl_notify' if RUBY_PLATFORM.include?('darwin')
 
   gem 'rb-inotify', :require => false

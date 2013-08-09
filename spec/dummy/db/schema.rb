@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(:version => 30000000000001) do
 
+  create_table "bikes", :force => true do |t|
+    t.integer  "seats"
+    t.string   "color"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "tandem_contents", :force => true do |t|
     t.string   "type",                                         :null => false
     t.string   "tag",                                          :null => false
