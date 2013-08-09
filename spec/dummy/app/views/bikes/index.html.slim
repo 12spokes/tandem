@@ -1,0 +1,20 @@
+h2 Bikes:
+
+p= link_to 'New Bike', new_bike_path, class: 'tandem_new_resource'
+
+table
+  thead
+    tr
+      th Seats
+      th Color
+      th
+
+  tbody
+    = content_tag_for(:tr, @bikes, class: 'tandem_resource') do |bike|
+      td= bike.seats
+      td= bike.color
+      td
+        .tandem_toolbar.tandem_toolbar_resource
+          = link_to 'Show', bike, class: 'tandem_show_resource'
+          = link_to 'Edit', edit_bike_path(bike), class: 'tandem_edit_resource'
+          = link_to 'Delete', bike, class: 'tandem_delete_resource', method: :delete, data: { confirm: 'Are you sure?' }
