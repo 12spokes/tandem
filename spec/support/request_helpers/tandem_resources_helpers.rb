@@ -60,6 +60,7 @@ module RequestHelpers
     end
 
     def when_i_delete_the_yellow_two_seat_bike
+      page.find('.bike').trigger(:mouseover)
       within '.bike' do
         handle_js_confirm do
           click_link 'Delete'
