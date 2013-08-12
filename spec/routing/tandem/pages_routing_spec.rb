@@ -2,8 +2,7 @@ module Tandem
   require "spec_helper"
 
   describe PagesController do
-    #http://stackoverflow.com/questions/7691594/how-to-test-routes-in-a-rails-3-1-mountable-engine
-    before(:each) { @routes = Engine.routes }
+    routes { Engine.routes }
 
     describe "routing" do
 

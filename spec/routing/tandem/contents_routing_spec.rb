@@ -2,7 +2,7 @@ module Tandem
   require "spec_helper"
 
   describe ContentsController do
-    before(:each) { @routes = Engine.routes }
+    routes { Engine.routes }
 
     describe "routing" do
 
