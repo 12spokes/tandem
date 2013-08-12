@@ -27,7 +27,7 @@ ListPlugin.prototype.bindEvents = function() {
 
     // Bind a key listener so we can handle tabs
     // With jQuery 1.3, live() can be used to simplify handler logic
-    $(wym._doc).bind('keydown', listPlugin.handleKeyDown);
+    jQuery(wym._doc).bind('keydown', listPlugin.handleKeyDown);
 };
 
 /**
@@ -46,7 +46,7 @@ ListPlugin.prototype.handleKeyDown = function(evt) {
     }
 
     // Handle tab presses
-    if (evt.keyCode == WYMeditor.KEY.TAB) {
+    if (evt.which == WYMeditor.KEY.TAB) {
         if (evt.shiftKey) {
             wym.exec(WYMeditor.OUTDENT);
             return false; // Short-circuit normal tab behavior

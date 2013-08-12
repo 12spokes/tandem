@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require tandem/modernizr-2.5.3.min
+//= require tandem/jquery-migrate.min
 //= require tandem/jquery.colorbox
 //= require tandem/wymeditor/jquery.wymeditor.min
 //= require tandem/wymeditor/plugins/embed/jquery.wymeditor.embed.js
