@@ -18,3 +18,4 @@ spec/dummy/public/assets/images
 *.rbc
 .sass-cache
 .DS_Store
+gemfiles/vendor
