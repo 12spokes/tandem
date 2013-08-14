@@ -20,7 +20,6 @@ gem 'paperclip'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -30,23 +29,14 @@ end
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-group :development do
-  gem 'guard'
-  gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'growl_notify' if RUBY_PLATFORM.include?('darwin')
-
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
-end
-
 group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
   gem 'capybara-webkit'
   gem 'database_cleaner'
-  gem 'pry'
+end
+
+group :test do
+  gem 'ammeter'
+  gem 'factory_girl_rails'
+  gem 'spork'
 end
