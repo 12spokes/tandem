@@ -80,11 +80,7 @@ Spork.prefork do
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = false
-
-    config.include Capybara, :example_group => { :file_path => /\bspec\/integration\// }
-
     config.include Tandem::Engine.routes.url_helpers
-
     config.include Tandem::ControllerRequests, :type => :controller
   end
 end
