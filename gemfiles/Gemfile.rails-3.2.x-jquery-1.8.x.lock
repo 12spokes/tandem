@@ -38,8 +38,11 @@ GEM
     activesupport (3.2.14)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    addressable (2.3.5)
-    archive-tar-minitar (0.5.2)
+    ammeter (0.2.9)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec (>= 2.2)
+      rspec-rails (>= 2.2)
     arel (3.0.2)
     bcrypt-ruby (3.1.1)
     builder (3.0.4)
@@ -53,8 +56,6 @@ GEM
     capybara-webkit (1.0.0)
       capybara (~> 2.0, >= 2.0.2)
       json
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -67,7 +68,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    columnize (0.3.6)
     database_cleaner (1.1.1)
     devise (3.0.2)
       bcrypt-ruby (~> 3.0)
@@ -80,11 +80,7 @@ GEM
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
-    em-websocket (0.5.0)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
-    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -92,50 +88,13 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    ffi (1.9.0)
-    formatador (0.2.4)
-    growl_notify (0.0.3)
-      rb-appscript
-    guard (1.8.2)
-      formatador (>= 0.2.4)
-      listen (>= 1.0.0)
-      lumberjack (>= 1.0.2)
-      pry (>= 0.9.10)
-      thor (>= 0.14.6)
-    guard-livereload (1.4.0)
-      em-websocket (>= 0.5.0)
-      guard (>= 1.8.0)
-      multi_json (~> 1.7)
-    guard-rspec (3.0.2)
-      guard (>= 1.8)
-      rspec (~> 2.13)
-    guard-spork (1.5.1)
-      childprocess (>= 0.2.3)
-      guard (>= 1.1)
-      spork (>= 0.8.4)
     hike (1.2.3)
-    http_parser.rb (0.5.3)
     i18n (0.6.4)
-    jasmine (1.3.2)
-      jasmine-core (~> 1.3.1)
-      rack (~> 1.0)
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
-    jasmine-core (1.3.1)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.0)
-    launchy (2.3.0)
-      addressable (~> 2.3)
-    linecache19 (0.5.12)
-      ruby_core_source (>= 0.1.4)
-    listen (1.2.3)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      rb-kqueue (>= 0.2)
-    lumberjack (1.0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -180,14 +139,6 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.1.0)
-    rb-appscript (0.6.1)
-    rb-fchange (0.0.6)
-      ffi
-    rb-fsevent (0.9.3)
-    rb-inotify (0.9.1)
-      ffi (>= 0.5.0)
-    rb-kqueue (0.2.0)
-      ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
     rspec (2.14.1)
@@ -205,27 +156,11 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    ruby-debug-base19 (0.11.25)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
-    ruby_core_source (0.1.5)
-      archive-tar-minitar (>= 0.5.2)
-    rubyzip (0.9.9)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.34.0)
-      childprocess (>= 0.2.5)
-      multi_json (~> 1.0)
-      rubyzip
-      websocket (~> 1.0.4)
     slim (2.0.1)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -253,7 +188,6 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket (1.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -261,29 +195,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ammeter
   cancan (= 1.6.7)
   capybara-webkit
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
   factory_girl_rails
-  growl_notify
-  guard
-  guard-livereload
-  guard-rspec
-  guard-spork
-  jasmine
   jquery-rails (= 2.1.4)
-  launchy
   paperclip
   pg
   pry
   rails (~> 3.2.14)
-  rb-fchange
-  rb-fsevent
-  rb-inotify
-  rspec-rails
-  ruby-debug19
+  rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
   slim
   spork

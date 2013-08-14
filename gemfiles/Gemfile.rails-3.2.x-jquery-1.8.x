@@ -7,12 +7,10 @@ gemspec :path => '..'
 
 gem "rails", "~> 3.2.14"
 
-# jquery-rails is used by the dummy application
+gem 'pg'
+
 gem "jquery-rails", '2.1.4'
 gem "devise"
-
-# the following gems are used by the engine, but for some reason must be explicitly required for the dummy to work
-gem 'pg'
 gem 'slim'
 gem 'cancan', '1.6.7'
 gem 'paperclip'
@@ -33,23 +31,15 @@ end
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-group :development do
-  gem 'guard'
-  gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'growl_notify' if RUBY_PLATFORM.include?('darwin')
-
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
-end
-
 group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'pry'
+end
+
+group :test do
+  gem 'ammeter'
+  gem 'factory_girl_rails'
+  gem 'spork'
 end
