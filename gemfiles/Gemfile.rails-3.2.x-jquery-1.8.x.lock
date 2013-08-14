@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/treybean/Sites/tandem
+  remote: ..
   specs:
     tandem (0.2.5)
       cancan (= 1.6.7)
@@ -9,7 +9,7 @@ PATH
       slim-rails
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (3.2.14)
       actionpack (= 3.2.14)
@@ -89,7 +89,7 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     hike (1.2.3)
-    i18n (0.6.4)
+    i18n (0.6.5)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -101,7 +101,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.23)
     mini_portile (0.5.1)
-    multi_json (1.7.8)
+    multi_json (1.7.9)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
