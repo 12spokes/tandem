@@ -1,11 +1,11 @@
 module RequestHelpers
   module TandemResourcesHelpers
     def when_i_go_to_the_resources_index_page
-      visit bikes_path
+      visit '/bikes'
     end
 
     def when_i_add_a_new_resource(seats = 2, color = 'Pink')
-      visit bikes_path
+      visit '/bikes'
 
       click_link 'New Bike'
       
@@ -22,7 +22,7 @@ module RequestHelpers
       page.should have_content('2')
       page.should have_content('Pink')
 
-      visit bikes_path
+      visit '/bikes'
 
       page.should have_content('2')
       page.should have_content('Pink')
@@ -53,7 +53,7 @@ module RequestHelpers
       page.should have_content('3')
       page.should have_content('Pink')
 
-      visit bikes_path
+      visit '/bikes'
 
       page.should have_content('3')
       page.should have_content('Pink')
@@ -69,7 +69,7 @@ module RequestHelpers
     end
 
     def then_i_should_not_see_the_yellow_two_seat_bike
-      visit bikes_path
+      visit '/bikes'
       page.should_not have_content('2')
       page.should_not have_content('Yellow')
     end
