@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
   resources :bikes
-
-  mount Tandem::Engine => "/"
-
   resources :widgets
 
   devise_for :users
