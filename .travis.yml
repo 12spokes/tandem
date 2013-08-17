@@ -8,6 +8,7 @@ env:
 
 before_script:
   - rake app:db:create
+  - rake app:db:migrate
   - rake app:db:test:prepare
 
 gemfile:
