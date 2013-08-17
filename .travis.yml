@@ -7,8 +7,8 @@ env:
   - DATABASE_USERNAME=postgres
 
 before_script:
-  - rake db:create
-  - rake db:test:prepare
+  - rake app:db:create
+  - rake app:db:test:prepare
 
 gemfile:
   - Gemfile
