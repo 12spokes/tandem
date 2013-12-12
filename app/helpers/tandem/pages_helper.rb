@@ -87,7 +87,7 @@ module Tandem
       options[:editor] ||= :plain
 
       using_tandem_abilities do
-        tandem_content = Content.scoped_type(type).constantize.find_or_create_by_request_key_and_tag(request_key, identifier)
+        tandem_content = Content.scoped_type(type).constantize.where(request_key: request_key, tag: identifier).first_or_create
 
         content = case tandem_content
           when Content::Text
@@ -180,7 +180,7 @@ module Tandem
 
         content_tag(:ul, options) do
           links = []
-          
+
           if can?(:create, ::Tandem::Page)
             links << link_to('New Page', tandem.new_page_path(parent_id: @page.try(:id)), :class => :page_link, :id => :page_new_link)
           end
@@ -191,7 +191,7 @@ module Tandem
             end
 
             if @page.persisted? && can?(:destroy, @page)
-              links << link_to('Destroy Page', tandem.page_path(@page), :confirm => 'Are you sure?', :method => :delete)
+              links << link_to('Destroy Page', tandem.page_path(@page), data: { confirm: 'Are you sure?' }, :method => :delete)
             end
           end
 
