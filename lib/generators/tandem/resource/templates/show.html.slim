@@ -5,3 +5,9 @@ p
   strong <%= attribute.human_name %>: 
   = @<%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
+
+<% if options.with_image -%>
+- if @<%= file_name %>.image?
+  p
+    = image_tag @<%= file_name %>.image.url
+<% end -%>

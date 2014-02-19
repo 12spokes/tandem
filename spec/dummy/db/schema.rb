@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(:version => 30000000000001) do
     t.datetime "resource_updated_at"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
   end
 
   create_table "tandem_pages", :force => true do |t|
