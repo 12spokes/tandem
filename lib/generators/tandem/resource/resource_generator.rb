@@ -49,6 +49,10 @@ module Tandem
             content += "    self.image.clear if @image_delete == '1'\n"
             content += "  end\n"
           end
+          insert_into_file "app/views/#{file_name}s/_form.html.slim", :after => "form_for @#{file_name}" do
+            content = ""
+            content += ", :html => { :multipart => true } "
+          end
           generate "paperclip #{file_name} image"
         end
       end
