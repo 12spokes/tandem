@@ -70,4 +70,24 @@ describe Tandem::Generators::ResourceGenerator do
     
     it { should be_a_migration }
   end
+
+  describe '#add_image_to_model' do
+    context 'no image flag on command line' do
+      before do 
+        run_generator %w(Spoke)
+      end
+
+      subject { file('app/models/spoke.rb') }
+      it { should_not contain(/has_attached_file :image/) }
+    end
+
+    context 'image flag on command line' do
+      before do 
+        run_generator %w(Spoke --with_image)
+      end
+
+      subject { file('app/models/spoke.rb') }
+      it { should contain(/has_attached_file :image/) }
+    end
+  end
 end
