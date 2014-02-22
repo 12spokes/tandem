@@ -70,4 +70,58 @@ describe Tandem::Generators::ResourceGenerator do
     
     it { should be_a_migration }
   end
+
+  describe '#add_image_to_model' do
+    context 'no image flag on command line' do
+      before do 
+        run_generator %w(Spoke)
+      end
+
+      it 'should not add image handling to the model' do
+        text = file('app/models/spoke.rb')
+        text.should_not contain(/has_attached_file :image/)
+      end
+    
+      it 'should not add image handling to the show page' do
+        text = file('app/views/spokes/show.html.slim')
+        text.should_not contain(/image_tag @spoke.image.url/)
+      end
+
+      it 'should not add image handling to the edit form' do
+        text = file('app/views/spokes/_form.html.slim')
+        text.should_not contain(/f.file_field :image/)
+      end
+
+      it 'should not add html flag to _form.html.slim' do
+        text = file('app/views/spokes/_form.html.slim')
+        text.should_not contain(/:html => { :multipart => true }/)
+      end
+    end
+
+    context 'image flag on command line' do
+      before do 
+        run_generator %w(Spoke --with_image)
+      end
+
+      it 'should add image handling to the model' do
+        text = file('app/models/spoke.rb')
+        text.should contain(/has_attached_file :image/)
+      end
+    
+      it 'should add image handling to the show page' do
+        text = file('app/views/spokes/show.html.slim')
+        text.should contain(/image_tag @spoke.image.url/)
+      end
+
+      it 'should add image handling to the edit form' do
+        text = file('app/views/spokes/_form.html.slim')
+        text.should contain(/f.file_field :image/)
+      end
+      
+      it 'should add html flag to _form.html.slim' do
+        text = file('app/views/spokes/_form.html.slim')
+        text.should contain(/:html => { :multipart => true }/)
+      end
+    end
+  end
 end

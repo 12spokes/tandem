@@ -14,5 +14,16 @@
     = f.<%= attribute.field_type %> :<%= attribute.name %>
 <% end -%>
 
+<% if options.with_image -%>
+  .field
+    = f.label "Image"
+    = f.file_field :image
+    br
+    - if @<%= file_name %>.image?
+      = image_tag @<%= file_name %>.image.url
+      = f.label "Delete Image"
+      = f.check_box :image_delete
+<% end -%>
+
   .actions
     = f.submit
