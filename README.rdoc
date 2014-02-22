@@ -209,7 +209,19 @@ content in the application.
 To generate a tandem resource, simply call the tandem_resource generator:
 
     rails generate tandem:resource Faq question:string answer:string position:integer
-    
+
+To generate a tandem resource with an image, append --with_image to the end of your generator line
+
+    rails generate tandem:resource Faq question:string answer:string position:integer --with_image
+
+If you want to see the resource in the browser you must migrate the database as the generator will
+create a migration for both the image and the resource itself.
+
+Navigating to the resource is then as easy as navigating to your app and appending the pluralized version
+of the name of the resource to the url. In the case of the current "Faq" example it would be:
+
+    www.app-url.com/faqs
+
 == Contributing
 
 1. Fork it.
