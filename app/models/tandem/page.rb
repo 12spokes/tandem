@@ -21,6 +21,7 @@ module Tandem
 
     private
 
+    #auto increment slug until it is unique
     def do_before_validation
       prim_slug, i = slug, 0
       prim_slug, i = $1, $2.to_i if slug =~ /^(.*)_([0-9]+)$/
@@ -34,7 +35,6 @@ module Tandem
     end
 
     def do_after_save
-     # self.class.update_all({is_default: false}, ['id != ?',id]) if is_default?
       self.class.where(['id != ?',id]).update_all(is_default: false) if is_default?
     end
   end
