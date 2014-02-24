@@ -11,7 +11,6 @@ module Tandem
     before_validation :do_before_validation
     after_save :do_after_save
 
-    #scope :top_level, where( parent_id: nil )
     scope :top_level, -> { where(parent_id: nil) }
     
     attr_accessible :parent_id, :title, :page_label, :link_label, :layout, :template, :keywords, :description, :slug, :is_default
@@ -22,7 +21,6 @@ module Tandem
 
     private
 
-    #auto increment slug until it is unique
     def do_before_validation
       prim_slug, i = slug, 0
       prim_slug, i = $1, $2.to_i if slug =~ /^(.*)_([0-9]+)$/
