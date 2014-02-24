@@ -11,8 +11,9 @@ module Tandem
     before_validation :do_before_validation
     after_save :do_after_save
 
-    scope :top_level, where( parent_id: nil )
-
+    #scope :top_level, where( parent_id: nil )
+    scope :top_level, -> { where(parent_id: nil) }
+    
     attr_accessible :parent_id, :title, :page_label, :link_label, :layout, :template, :keywords, :description, :slug, :is_default
 
     def to_param
@@ -35,7 +36,8 @@ module Tandem
     end
 
     def do_after_save
-      self.class.update_all({is_default: false}, ['id != ?',id]) if is_default?
+     # self.class.update_all({is_default: false}, ['id != ?',id]) if is_default?
+      self.class.where(['id != ?',id]).update_all(is_default: false) if is_default?
     end
   end
 end
